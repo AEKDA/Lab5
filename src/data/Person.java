@@ -26,4 +26,24 @@ public class Person {
     public void setLocation(Location location) {
         this.location = location;
     }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public Integer getHeight() {
+        return this.height;
+    }
+
+    public Color getEveColor() {
+        return this.eyeColor;
+    }
+
+    public Country getNationality() {
+        return this.nationality;
+    }
+
+    public Location geLocation() {
+        return this.location;
+    }
 }
