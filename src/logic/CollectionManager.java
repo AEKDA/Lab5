@@ -1,4 +1,5 @@
-package collectionManager;
+package logic;
+
 
 public class CollectionManager {
     
