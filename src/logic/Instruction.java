@@ -1,5 +1,7 @@
 package logic;
 
+import data.Movie;
+
 public abstract class Instruction {
     private String name;
     private boolean arg;
@@ -11,7 +13,7 @@ public abstract class Instruction {
         element = hasElement;
     }
 
-    public abstract void execute();
+    public abstract void execute(CollectionManager collectionManager);
 
     public Instruction(String name) {
         this.name = name;
@@ -28,4 +30,6 @@ public abstract class Instruction {
     public boolean hasElement() {
         return element;
     }
+    public void setMovie(Movie movie) {}
+    public void setArg(int movie) {}
 }
