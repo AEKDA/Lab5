@@ -3,102 +3,82 @@ package logic;
 import java.util.Scanner;
 import exception.IncorrectInstructionException;
 
+import java.util.Stack;
+
+class HelpInstruction extends Instruction{
+    public HelpInstruction() {
+        super("help", false, false);
+    }
+    @Override
+    public void execute() {
+        System.out.println("It's help");
+    }
+}
+
 public class InstructionListener {
     
-    private CollectionManager collectionManager;
     private Scanner in;
-
-    private class Instruction {
-        private String name;
-        private int arg;
-        private Type type;
-        
-
-        public Instruction(String name, int arg) {
-            this.name = name;
-            this.arg = arg;
-            this.type = Type.WithArg;
-        }
-
-        public Instruction(String name) {
-            this.name = name;
-            this.type = Type.WithoutArg;
-        }
-        public String getName() {
-            return this.name;
-        }
-        public int getArg() {
-            return this.arg;
-        }
-        public Type getType() {
-            return this.type;
-        }
-
-        public enum Type {
-            WithArg,
-            WithoutArg
-        }
-    }
-
-    private enum InstructionWithArgList {
-        add,
-        update,
-        remove_by_id,
-        execute_script,
-        insert_at,
-        add_if_max,
-        filter_contains_name
-    }
-    private enum InstructionWithoutArgList {
-        help,
-        info,
-        show,
-        clear,
-        save,
-        exit,
-        shuffle,
-        average_of_oscars_count,
-        print_descending
-    }
+    private Stack<Instruction> instructionStack;
 
 
     public InstructionListener() {
         in = new Scanner(System.in);
+        instructionStack = new Stack<>();
     }
 
-
-    public InstructionListener(CollectionManager collectionManager) {
-        this.collectionManager = collectionManager;
+    public Stack<Instruction> addInstruction(Instruction instruction) {
+        instructionStack.push(instruction);
+        return this.instructionStack;
     }
 
     public void start() {
-        try {
-            getCommand();
-        }
-        catch (IncorrectInstructionException e) {
-           System.out.println(e.getMessage());
+        addInstruction(new HelpInstruction());
+        while(true) {
+            try {
+                Instruction current = getInstruction();
+                current.execute();
+            }
+            catch (IncorrectInstructionException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
-    private Instruction getCommand() throws IncorrectInstructionException {
-        String tmp = in.next();
-        for (InstructionWithArgList c : InstructionWithArgList.values()) {
-            if (c.name().equals(tmp)) {
-                if (!in.hasNextInt()) {
-                    throw new IncorrectInstructionException("Error! The argument must be required and must be a number");
+    private Instruction getInstruction() throws IncorrectInstructionException {
+        String tmp = in.nextLine();
+        String[] input = tmp.split(" +");
+        int arg;
+        for(Instruction instruction : instructionStack) {
+            if(instruction.getName().equals(input[0])) {
+                if(instruction.hasArg() && input.length == 2) {
+                    if(instruction.hasElement()) {
+                        getElement();
+                    }
+                    if(instruction.hasArg() ) {
+                        try {
+                        arg = Integer.parseInt(input[1]);
+                        }
+                        catch(NumberFormatException e) {
+                            System.out.println("Error! The argument must be a number");
+                        }
+                    }
+                    return instruction;
                 }
-                int arg = in.nextInt();
-                return new Instruction(tmp, arg);
-            }
-        }
-        for (InstructionWithoutArgList c : InstructionWithoutArgList.values()) {
-            if (c.name().equals(tmp)) {
-                if (in.hasNextInt()) {
-                    throw new IncorrectInstructionException("Error! ");
+                else if (!instruction.hasArg() && input.length == 1) {
+                    if(instruction.hasElement()){
+                        getElement();
+                    }
+                    return instruction;
                 }
-                return new Instruction(tmp);
+                else {
+                    throw new IncorrectInstructionException("Error! The entered instruction incorrect");
+                }
             }
         }
         throw new IncorrectInstructionException("Error! The entered instruction is undefined");
+    }
+
+    private void getElement() {
+
     }
 }
