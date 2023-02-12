@@ -1,0 +1,25 @@
+[
+    {
+        "name": "The Hateful Eight",
+        "coordinates": {
+            "x": 1, 
+            "y": 12
+        },
+        "oscarsCount": 1,
+        "budget": 5,
+        "totalBoxOffice": 155760117,
+        "director": {
+            "name": "Quentin Tarantino",
+            "height": 176,
+            "Color": "BROWN",
+            "nationality": "North America",
+            "location": {
+                "x": 123,
+                "y": 4231,
+                "z": 123.123,
+                "name": "USA"
+            },
+            "genre": "THRILLER"
+        }
+    }
+]

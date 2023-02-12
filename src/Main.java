@@ -14,7 +14,7 @@ public class Main {
         // Loader<Movie> loader = new Loader<>();
         // loader.readJSONFile(args[0]);
 
-        CollectionManager collectionManager = new CollectionManager();
+        CollectionManager<Movie> collectionManager = new CollectionManager<>();
         // collectionManager.setData(loader.getData());
 
         InstructionListener instructionListener = new InstructionListener(collectionManager);

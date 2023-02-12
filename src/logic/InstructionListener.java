@@ -1,9 +1,10 @@
 package logic;
 
 import java.util.Scanner;
+
+import exception.IncorrectArgument;
 import exception.IncorrectInstructionException;
 import java.util.Stack;
-import data.Movie;
 import logic.instruction.*;
 
 public class InstructionListener {
@@ -25,12 +26,12 @@ public class InstructionListener {
     }
 
     public void start() {
-        addInstruction(new HelpInstruction());
-        addInstruction(new ClearInstruction());
+        setBaseInstruction();
         while(true) {
             try {
-                Instruction current = getInstruction();
-                current.execute(collectionManager);
+                String[] args = inputInstructionArgs();
+                Instruction current = getInstruction(args);
+                current.execute(args);
             }
             catch (IncorrectInstructionException e) {
                 System.out.println(e.getMessage());
@@ -38,43 +39,32 @@ public class InstructionListener {
             catch(NumberFormatException e) {
                 System.out.println("Error! The argument must be a number");
             }
+            catch(IncorrectArgument e) {
+                System.out.println(e);
+            }
         }
     }
 
-    private Instruction getInstruction() throws IncorrectInstructionException, NumberFormatException {
-        String tmp = in.nextLine();
-        if(tmp.isEmpty()) {throw new IncorrectInstructionException("Error! You have not entered the instructions");}
-        String[] input = tmp.split(" +");
-        int arg;
+    private void setBaseInstruction() {
+        addInstruction(new HelpInstruction(collectionManager));
+        addInstruction(new ClearInstruction(collectionManager));
+        addInstruction(new InfoInstruction(collectionManager));
+    }
+
+    private String[] inputInstructionArgs() {
+        String text = in.nextLine().strip();
+        String[] input = text.split(" +");
+        return input;
+    }
+
+    private Instruction getInstruction(String[] text) throws IncorrectInstructionException {
+        if(text.length == 0) {throw new IncorrectInstructionException("Error! You have not entered the instructions");}
+
         for(Instruction instruction : instructionStack) {
-            if(instruction.getName().equals(input[0])) {
-                if(instruction.hasArg() && input.length == 2) {
-                    if(instruction.hasElement()) {
-                        Movie movie = getElement();
-                        instruction.setMovie(movie);
-                    }
-                    if(instruction.hasArg() ) {
-                        arg = Integer.parseInt(input[1]);
-                        instruction.setArg(arg);
-                    }
-                    return instruction;
-                }
-                else if (!instruction.hasArg() && input.length == 1) {
-                    if(instruction.hasElement()){
-                        Movie movie = getElement();
-                        instruction.setMovie(movie);
-                    }
-                    return instruction;
-                }
-                else {
-                    throw new IncorrectInstructionException("Error! The entered instruction incorrect");
-                }
+            if(instruction.getName().equals(text[0])) {
+                return instruction;
             }
         }
         throw new IncorrectInstructionException("Error! The entered instruction is undefined");
-    }
-
-    private Movie getElement() {
-        return null;
     }
 }

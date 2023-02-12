@@ -1,23 +1,25 @@
 package logic.instruction;
 
-import logic.CollectionManager;
 import logic.Instruction;
+import logic.CollectionManager;
 
-public class HelpInstruction implements Instruction{
+public class InfoInstruction implements Instruction{
+
     private String name;
-    private CollectionManager collectionManager;
+    private CollectionManager<?> collectionManager;
 
-    public HelpInstruction(CollectionManager collectionManager) {
-        name = "help";
+    public InfoInstruction(CollectionManager<?> collectionManager) {
+        this.name = "info";
         this.collectionManager = collectionManager;
     }
     @Override
     public void execute(String[] args) {
-        System.out.println("It's help");
-
+        
     }
     @Override
     public String getName() {
         return name;
     }
+
 }
+
