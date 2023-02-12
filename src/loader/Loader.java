@@ -1,4 +1,4 @@
-package fileLoader;
+package loader;
 
 import java.util.Stack;
 
@@ -12,7 +12,7 @@ public class Loader<T> {
     public void readJSONFile(String path) {
 
     }
-    
+
     public Stack<T> getData() {
         return data;
     }

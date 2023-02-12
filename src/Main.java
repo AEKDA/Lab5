@@ -1,5 +1,5 @@
 import data.Movie;
-import fileLoader.Loader;
+import loader.Loader;
 import logic.CollectionManager;
 import logic.InstructionListener;
 
@@ -12,7 +12,7 @@ public class Main {
         //     return;
         // }
         // Loader<Movie> loader = new Loader<>();
-        // loader.readJSONFile(args[0]);
+        // loader.readJSONFile(args[0], Movie.class);
 
         CollectionManager<Movie> collectionManager = new CollectionManager<>();
         // collectionManager.setData(loader.getData());

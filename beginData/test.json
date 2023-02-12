@@ -6,7 +6,7 @@
             "y": 12
         },
         "oscarsCount": 1,
-        "budget": 5,
+        "budget": 500000,
         "totalBoxOffice": 155760117,
         "director": {
             "name": "Quentin Tarantino",
@@ -17,6 +17,29 @@
                 "x": 123,
                 "y": 4231,
                 "z": 123.123,
+                "name": "USA"
+            },
+            "genre": "THRILLER"
+        }
+    },
+    {
+        "name": "Pulp Fiction",
+        "coordinates": {
+            "x": 5, 
+            "y": 1122
+        },
+        "oscarsCount": 2,
+        "budget": 8000000,
+        "totalBoxOffice": 213928762,
+        "director": {
+            "name": "Quentin Tarantino",
+            "height": 176,
+            "Color": "BROWN",
+            "nationality": "North America",
+            "location": {
+                "x": 112323,
+                "y": 423121,
+                "z": 154.2123,
                 "name": "USA"
             },
             "genre": "THRILLER"
