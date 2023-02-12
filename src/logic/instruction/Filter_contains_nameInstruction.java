@@ -9,10 +9,10 @@ public class Filter_contains_nameInstruction implements Instruction {
     }
     @Override 
     public String getName() {
-        return "";
+        return "filter_contains_name";
     }
     @Override
     public String about() {
-        return "";
+        return "filter_contains_name name : вывести элементы, значение поля name которых содержит заданную подстроку";
     }
 }

@@ -10,10 +10,10 @@ public class AddInstruction implements Instruction {
     }
     @Override 
     public String getName() {
-        return "";
+        return "add";
     }
     @Override
     public String about() {
-        return "";
+        return "add {element} : добавить новый элемент в коллекцию";
     }
 }

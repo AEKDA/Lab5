@@ -9,10 +9,10 @@ public class UpdateInstruction implements Instruction {
     }
     @Override 
     public String getName() {
-        return "";
+        return "update";
     }
     @Override
     public String about() {
-        return "";
+        return "update id {element} : обновить значение элемента коллекции, id которого равен заданному";
     }
 }

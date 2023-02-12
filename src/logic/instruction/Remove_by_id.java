@@ -9,10 +9,10 @@ public class Remove_by_id implements Instruction {
     }
     @Override 
     public String getName() {
-        return "";
+        return "remove_by_id";
     }
     @Override
     public String about() {
-        return "";
+        return "remove_by_id id : удалить элемент из коллекции по его id";
     }
 }

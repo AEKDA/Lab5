@@ -9,10 +9,10 @@ public class Insert_adInstruction implements Instruction {
     }
     @Override 
     public String getName() {
-        return "";
+        return "insert_at";
     }
     @Override
     public String about() {
-        return "";
+        return "insert_at index {element} : добавить новый элемент в заданную позицию";
     }
 }

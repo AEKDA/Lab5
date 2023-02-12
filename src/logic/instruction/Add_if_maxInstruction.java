@@ -9,10 +9,10 @@ public class Add_if_maxInstruction implements Instruction {
     }
     @Override 
     public String getName() {
-        return "";
+        return "add_if_max";
     }
     @Override
     public String about() {
-        return "";
+        return "add_if_max {element} : добавить новый элемент в коллекцию, если его значение превышает значение наибольшего элемента этой коллекции";
     }
 }

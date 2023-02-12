@@ -26,7 +26,7 @@ public class ShuffleInstruction implements Instruction {
     }
     @Override 
     public String getName() {
-        return "shuffle ";
+        return "shuffle";
     }
     @Override
     public String about() {

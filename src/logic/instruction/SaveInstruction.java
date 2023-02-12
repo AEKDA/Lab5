@@ -9,10 +9,10 @@ public class SaveInstruction implements Instruction {
     }
     @Override 
     public String getName() {
-        return "";
+        return "save";
     }
     @Override
     public String about() {
-        return "";
+        return "save : сохранить коллекцию в файл";
     }
 }

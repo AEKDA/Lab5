@@ -9,10 +9,10 @@ public class Print_descendingInstruction implements Instruction {
     }
     @Override 
     public String getName() {
-        return "";
+        return "print_descending";
     }
     @Override
     public String about() {
-        return "";
+        return "print_descending : вывести элементы коллекции в порядке убывания";
     }
 }
