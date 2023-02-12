@@ -12,9 +12,11 @@ public class InstructionListener {
     private Scanner in;
     private Stack<Instruction> instructionStack;
     private CollectionManager<?> collectionManager;
+    private boolean isWork;
 
 
     public InstructionListener(CollectionManager<?> collectionManager) {
+        isWork = true;
         in = new Scanner(System.in);
         instructionStack = new Stack<>();
         this.collectionManager = collectionManager;
@@ -27,7 +29,7 @@ public class InstructionListener {
 
     public void start() {
         setBaseInstruction();
-        while(true) {
+        while(isWork) {
             try {
                 String[] args = inputInstructionArgs();
                 Instruction current = getInstruction(args);
@@ -43,6 +45,9 @@ public class InstructionListener {
                 System.out.println(e);
             }
         }
+    }
+    public void stop() {
+        isWork = false;
     }
 
     private void setBaseInstruction() {

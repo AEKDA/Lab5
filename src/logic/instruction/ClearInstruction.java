@@ -4,11 +4,9 @@ import logic.CollectionManager;
 import logic.Instruction;
 
 public class ClearInstruction implements Instruction{
-    private String name;
     private CollectionManager<?> collectionManager;
 
     public ClearInstruction(CollectionManager<?> collectionManager) {
-        this.name = "clear";
         this.collectionManager = collectionManager;
     }
 
@@ -19,7 +17,7 @@ public class ClearInstruction implements Instruction{
 
     @Override
     public String getName() {
-        return name;
+        return "clear";
     }
     @Override
     public String about() {
