@@ -5,17 +5,15 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public abstract class BaseReader {
+public class BaseReader {
     private BufferedInputStream bufferedInputStream;
 
-    BaseReader(String path) throws FileNotFoundException {
+    public BaseReader(String path) throws FileNotFoundException {
         FileInputStream fileInputStream = new FileInputStream(path);
         bufferedInputStream = new BufferedInputStream(fileInputStream);
-
-        read();
     }
 
-    private String read() {
+    public String read() {
         StringBuilder sb = new StringBuilder();
         byte[] byteData = new byte[2048];
         
@@ -37,6 +35,4 @@ public abstract class BaseReader {
         return sb.toString();
 
     }
-
-    public abstract void parse(Class<?> c);
 }

@@ -7,4 +7,6 @@ public interface Instruction {
     public void execute(String[] args) throws IncorrectArgument;
 
     public String getName();
+
+    public String about();
 }

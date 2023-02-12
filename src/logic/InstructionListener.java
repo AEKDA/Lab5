@@ -11,10 +11,10 @@ public class InstructionListener {
     
     private Scanner in;
     private Stack<Instruction> instructionStack;
-    private CollectionManager collectionManager;
+    private CollectionManager<?> collectionManager;
 
 
-    public InstructionListener(CollectionManager collectionManager) {
+    public InstructionListener(CollectionManager<?> collectionManager) {
         in = new Scanner(System.in);
         instructionStack = new Stack<>();
         this.collectionManager = collectionManager;
@@ -46,12 +46,13 @@ public class InstructionListener {
     }
 
     private void setBaseInstruction() {
-        addInstruction(new HelpInstruction(collectionManager));
+        addInstruction(new HelpInstruction(instructionStack));
         addInstruction(new ClearInstruction(collectionManager));
         addInstruction(new InfoInstruction(collectionManager));
     }
 
     private String[] inputInstructionArgs() {
+        System.out.printf("-> ");
         String text = in.nextLine().strip();
         String[] input = text.split(" +");
         return input;

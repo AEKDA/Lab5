@@ -1,21 +1,23 @@
 package loader;
 
-import java.util.Stack;
+import java.io.FileNotFoundException;
+import java.util.LinkedList;
 
-public class Loader<T> {
-    private Stack<T> data;
+public abstract class Loader<T> {
+    private BaseReader baseReader;
 
-    public Loader() {
-        data = new Stack<>();
+    public void read(String path) {
+        try {
+            baseReader = new BaseReader(path);
+        } catch (FileNotFoundException e) {
+            System.out.println("Файл не был найден");
+        }
+        parse(baseReader.read());
+    }
+    public void write(String path) {
+        
     }
 
-    public void readJSONFile(String path) {
-
-    }
-
-    public Stack<T> getData() {
-        return data;
-    }
-
-
+    public abstract void parse(String data);
+    public abstract LinkedList<T> getData();
 }
