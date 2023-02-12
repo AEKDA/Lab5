@@ -5,22 +5,21 @@ import logic.CollectionManager;
 
 public class InfoInstruction implements Instruction{
 
-    private String name;
     private CollectionManager<?> collectionManager;
 
     public InfoInstruction(CollectionManager<?> collectionManager) {
-        this.name = "info";
         this.collectionManager = collectionManager;
     }
     @Override
     public void execute(String[] args) {
-        for(Object element: collectionManager.getData()) {
-            element.toString();
-        }
+        System.out.println("Information about the collection:");
+        System.out.println("Type: " + collectionManager.getData().getClass().toString());
+        System.out.println("Date of creation: " + collectionManager.getInitDate().toString());
+        System.out.println("Elements count: " + Integer.toString(collectionManager.getData().size()));
     }
     @Override
     public String getName() {
-        return name;
+        return "info";
     }
     @Override
     public String about() {
