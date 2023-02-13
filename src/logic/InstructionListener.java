@@ -2,7 +2,7 @@ package logic;
 
 import java.util.Scanner;
 
-import exception.IncorrectArgument;
+import exception.IncorrectArgumentException;
 import exception.IncorrectInstructionException;
 import java.util.Stack;
 import logic.instruction.*;
@@ -41,7 +41,7 @@ public class InstructionListener {
             catch(NumberFormatException e) {
                 System.out.println("Error! The argument must be a number");
             }
-            catch(IncorrectArgument e) {
+            catch(IncorrectArgumentException e) {
                 System.out.println(e);
             }
         }
@@ -54,6 +54,19 @@ public class InstructionListener {
         addInstruction(new HelpInstruction(instructionStack));
         addInstruction(new ClearInstruction(collectionManager));
         addInstruction(new InfoInstruction(collectionManager));
+        addInstruction(new ShowInstruction(collectionManager));
+        addInstruction(new AddInstruction(System.in));
+        addInstruction(new UpdateInstruction());
+        addInstruction(new Remove_by_idInstruction());
+        addInstruction(new SaveInstruction(collectionManager));
+        addInstruction(new Execution_scriptInstruction(collectionManager));
+        addInstruction(new ExitInstruction(this));
+        addInstruction(new Insert_adInstruction(collectionManager));
+        addInstruction(new Add_if_maxInstruction(collectionManager));
+        addInstruction(new ShuffleInstruction(collectionManager));
+        addInstruction(new Filter_contains_nameInstruction(this));
+        addInstruction(new Average_of_oscars_countInstruction(collectionManager));
+        addInstruction(new Print_descendingInstruction(collectionManager));
     }
 
     private String[] inputInstructionArgs() {
