@@ -1,11 +1,28 @@
 package logic.instruction;
 
+import logic.CollectionManager;
 import logic.Instruction;
 
-public class Remove_by_id implements Instruction {
-    @Override
-    public void execute(String[] args) {
+import java.util.function.Predicate;
 
+import data.Movie;
+
+public class Remove_by_idInstruction implements Instruction {
+    private CollectionManager<Movie> collectionManager;
+    
+    public Remove_by_idInstruction(CollectionManager<Movie> collectionManager) {
+        this.collectionManager = collectionManager;
+    }
+    @Override
+    public void execute(String[] args) throws IllegalArgumentException {
+        if(args.length != 2) {
+            throw new IllegalArgumentException("");
+        }
+        collectionManager.getData().removeIf(new Predicate<Movie>() {
+            public boolean test(Movie m) {
+                return m.getId() == Integer.parseInt(args[1]);
+            }
+        });
     }
     @Override 
     public String getName() {

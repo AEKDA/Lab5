@@ -1,6 +1,11 @@
 package data;
 
-public class Movie {
+import java.io.InputStream;
+import java.util.Scanner;
+
+import logic.CollectionElement;
+
+public class Movie implements CollectionElement {
     private int id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
@@ -39,7 +44,7 @@ public class Movie {
         this.id = id;
     }
 
-    public int setId() {
+    public int getId() {
         return this.id;
     }
     
@@ -77,5 +82,11 @@ public class Movie {
 
     public Person getDirector() {
         return director;
+    }
+    @Override
+    public Movie getElement(InputStream is) {
+        Scanner scan = new Scanner(is);
+        String s = scan.nextLine();
+        return new Movie();
     }
 }

@@ -4,7 +4,7 @@ import java.util.Stack;
 import java.util.Date;
 import java.time.Instant;
 
-public class CollectionManager<T> {
+public class CollectionManager<T extends CollectionElement> {
     private Stack<T> collectionStack;
     private final Date initDate;
     
