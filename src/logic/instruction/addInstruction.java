@@ -23,6 +23,6 @@ public class AddInstruction implements Instruction {
     }
     @Override
     public String about() {
-        return "add {element} : добавить новый элемент в коллекцию";
+        return "добавить новый элемент в коллекцию";
     }
 }

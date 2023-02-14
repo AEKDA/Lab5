@@ -14,7 +14,7 @@ public class HelpInstruction implements Instruction{
     @Override
     public void execute(String[] args) {
         for(Instruction inst: instructionStack) {
-            System.out.println("--->  " + inst.about());
+            System.out.println("--->  " + inst.getName() + ": "+ inst.about());
         }
 
     }
@@ -24,7 +24,7 @@ public class HelpInstruction implements Instruction{
     }
     @Override
     public String about() {
-        return "help : вывести справку по доступным командам";
+        return "вывести справку по доступным командам";
     }
 
 }

@@ -5,7 +5,7 @@ import logic.Instruction;
 public class SaveInstruction implements Instruction {
     @Override
     public void execute(String[] args) {
-        
+
     }
     @Override 
     public String getName() {
@@ -13,6 +13,6 @@ public class SaveInstruction implements Instruction {
     }
     @Override
     public String about() {
-        return "save : сохранить коллекцию в файл";
+        return "сохранить коллекцию в файл";
     }
 }

@@ -7,22 +7,22 @@ import exception.IncorrectInstructionException;
 import java.util.Stack;
 import logic.instruction.*;
 
-public class InstructionListener {
+public class InstructionListener<T extends CollectionElement> {
     
     private Scanner in;
     private Stack<Instruction> instructionStack;
-    private CollectionManager<?> collectionManager;
+    private CollectionManager<T> collectionManager;
     private boolean isWork;
 
 
-    public InstructionListener(CollectionManager<?> collectionManager) {
+    public InstructionListener(CollectionManager<T> collectionManager) {
         isWork = true;
         in = new Scanner(System.in);
         instructionStack = new Stack<>();
         this.collectionManager = collectionManager;
     }
 
-    public InstructionListener addInstruction(Instruction instruction) {
+    public InstructionListener<T> addInstruction(Instruction instruction) {
         instructionStack.push(instruction);
         return this;
     }
@@ -57,15 +57,15 @@ public class InstructionListener {
         addInstruction(new ShowInstruction(collectionManager));
         addInstruction(new AddInstruction(System.in));
         addInstruction(new UpdateInstruction());
-        addInstruction(new Remove_by_idInstruction());
+        addInstruction(new ExitInstruction(this));
+        addInstruction(new ShuffleInstruction(collectionManager));
+        addInstruction(new Average_of_oscars_countInstruction(collectionManager));
         addInstruction(new SaveInstruction(collectionManager));
         addInstruction(new Execution_scriptInstruction(collectionManager));
-        addInstruction(new ExitInstruction(this));
+        addInstruction(new Remove_by_idInstruction(collectionManager));
         addInstruction(new Insert_adInstruction(collectionManager));
         addInstruction(new Add_if_maxInstruction(collectionManager));
-        addInstruction(new ShuffleInstruction(collectionManager));
         addInstruction(new Filter_contains_nameInstruction(this));
-        addInstruction(new Average_of_oscars_countInstruction(collectionManager));
         addInstruction(new Print_descendingInstruction(collectionManager));
     }
 

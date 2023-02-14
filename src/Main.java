@@ -18,7 +18,7 @@ public class Main {
         CollectionManager<Movie> collectionManager = new CollectionManager<>();
         // collectionManager.setData(loader.getData());
 
-        InstructionListener instructionListener = new InstructionListener(collectionManager);
+        InstructionListener<Movie> instructionListener = new InstructionListener<>(collectionManager);
         instructionListener.start();
     }
 

@@ -16,7 +16,7 @@ public class ShowInstruction implements Instruction{
 
     @Override
     public String about() {
-        return "show : вывести в стандартный поток вывода все элементы коллекции в строковом представлении";
+        return "вывести в стандартный поток вывода все элементы коллекции в строковом представлении";
     }
 
     @Override

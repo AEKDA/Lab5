@@ -30,6 +30,6 @@ public class ShuffleInstruction implements Instruction {
     }
     @Override
     public String about() {
-        return "shuffle : перемешать элементы коллекции в случайном порядке";
+        return "перемешать элементы коллекции в случайном порядке";
     }
 }

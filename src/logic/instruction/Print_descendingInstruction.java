@@ -31,6 +31,6 @@ public class Print_descendingInstruction implements Instruction {
     }
     @Override
     public String about() {
-        return "print_descending : вывести элементы коллекции в порядке убывания";
+        return "вывести элементы коллекции в порядке убывания";
     }
 }

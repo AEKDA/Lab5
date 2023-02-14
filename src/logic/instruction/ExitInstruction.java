@@ -4,8 +4,8 @@ import logic.Instruction;
 import logic.InstructionListener;
 
 public class ExitInstruction implements Instruction {
-    InstructionListener instructionListener;
-    public ExitInstruction(InstructionListener instructionListener) {
+    InstructionListener<?> instructionListener;
+    public ExitInstruction(InstructionListener<?> instructionListener) {
         this.instructionListener = instructionListener;
     }
 
@@ -19,6 +19,6 @@ public class ExitInstruction implements Instruction {
     }
     @Override
     public String about() {
-        return "exit : завершить программу (без сохранения в файл)";
+        return "завершить программу (без сохранения в файл)";
     }
 }

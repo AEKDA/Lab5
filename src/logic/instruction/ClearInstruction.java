@@ -21,6 +21,6 @@ public class ClearInstruction implements Instruction{
     }
     @Override
     public String about() {
-        return "clear : очистить коллекцию";
+        return "очистить коллекцию";
     }
 }

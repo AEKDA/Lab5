@@ -7,23 +7,33 @@ public class Person {
     private Country nationality; //Поле может быть null
     private Location location; //Поле не может быть null
 
-    public void setName(String name) {
+    public void setName(String name) throws IllegalArgumentException {
+        if(name == null || name.isEmpty())
+            throw new IllegalArgumentException("Error! a name cannot take a value of zero or null");   
         this.name = name;
     }
 
-    public void setHeight(Integer height) {
-        this.height = height;
+    public void setHeight(Integer height) throws IllegalArgumentException {
+        if(height == null || height < 1)
+            throw new IllegalArgumentException("Error! a height cannot take a value of zero or be less than zero");
+        this.height = height; 
     }
 
-    public void setEyeColor(Color color) {
+    public void setEyeColor(Color color) throws IllegalArgumentException {
+        if(color == null)
+            throw new IllegalArgumentException("Error! a color cannot take a value of null");   
         this.eyeColor = color;
     }
 
-    public void setNationality(Country country) {
+    public void setNationality(Country country)  throws IllegalArgumentException {
+        if(country == null)
+            throw new IllegalArgumentException("Error! a country cannot take a value of null");   
         this.nationality = country;
     }
 
-    public void setLocation(Location location) {
+    public void setLocation(Location location) throws IllegalArgumentException {
+        if(location == null)
+            throw new IllegalArgumentException("Error! a location cannot take a value of null");   
         this.location = location;
     }
 

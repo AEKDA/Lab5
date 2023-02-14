@@ -23,7 +23,7 @@ public class InfoInstruction implements Instruction{
     }
     @Override
     public String about() {
-        return "info : вывести в стандартный поток вывода информацию о коллекции";
+        return "вывести в стандартный поток вывода информацию о коллекции";
     }
 
 }

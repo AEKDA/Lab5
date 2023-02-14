@@ -29,6 +29,6 @@ public class Average_of_oscars_countInstruction implements Instruction {
     }
     @Override
     public String about() {
-        return "average_of_oscars_count : вывести среднее значение поля oscarsCount для всех элементов коллекции";
+        return "вывести среднее значение поля oscarsCount для всех элементов коллекции";
     }
 }

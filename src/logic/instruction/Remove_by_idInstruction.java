@@ -30,6 +30,6 @@ public class Remove_by_idInstruction implements Instruction {
     }
     @Override
     public String about() {
-        return "remove_by_id id : удалить элемент из коллекции по его id";
+        return "удалить элемент из коллекции по его id";
     }
 }

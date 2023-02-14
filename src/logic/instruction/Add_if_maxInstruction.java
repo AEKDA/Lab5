@@ -13,6 +13,6 @@ public class Add_if_maxInstruction implements Instruction {
     }
     @Override
     public String about() {
-        return "add_if_max {element} : добавить новый элемент в коллекцию, если его значение превышает значение наибольшего элемента этой коллекции";
+        return "добавить новый элемент в коллекцию, если его значение превышает значение наибольшего элемента этой коллекции";
     }
 }

@@ -18,7 +18,9 @@ public class Location {
         this.z = z;
     }
 
-    public void setName(String name) {
+    public void setName(String name) throws IllegalArgumentException {
+        if(name == null || name.isEmpty())
+            throw new IllegalArgumentException("Error! a string cannot take a value of zero or null");    
         this.name = name;
     }
 

@@ -13,6 +13,6 @@ public class Insert_adInstruction implements Instruction {
     }
     @Override
     public String about() {
-        return "insert_at index {element} : добавить новый элемент в заданную позицию";
+        return "добавить новый элемент в заданную позицию";
     }
 }

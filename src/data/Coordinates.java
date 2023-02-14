@@ -8,7 +8,9 @@ public class Coordinates {
         this.x = x;
     }
 
-    public void setY(double y) {
+    public void setY(double y) throws IllegalArgumentException {
+        if(y > 777) 
+            throw new IllegalArgumentException("Error! the y value cannot be greater than 777");
         this.y = y;
     }
 
