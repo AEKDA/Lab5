@@ -1,5 +1,7 @@
 package data;
 
+import java.util.Objects;
+
 public class Person {
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Integer height; //Поле не может быть null, Значение поля должно быть больше 0
@@ -55,5 +57,20 @@ public class Person {
 
     public Location geLocation() {
         return this.location;
+    }
+
+    @Override
+    public String toString() {
+        return "{\n  " + 
+                "  name = " + this.name + "\n  " +
+                "  height = " + this.height.toString() + "\n  " + 
+                "  eyeColor = " + this.eyeColor.toString() + "\n  " + 
+                "  nationality = " + this.nationality.toString() + "\n  " + 
+                "  location = " + this.location.toString() + "\n  }";
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.name, this.eyeColor, this.height, this.location, this.nationality);
     }
 }

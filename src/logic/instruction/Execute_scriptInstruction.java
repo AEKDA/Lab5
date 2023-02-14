@@ -1,20 +1,17 @@
 package logic.instruction;
 
-import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.Scanner;
 
 import loader.BaseReader;
 import logic.Instruction;
 import logic.InstructionListener;
 
-public class Execution_scriptInstruction implements Instruction {
+public class Execute_scriptInstruction implements Instruction {
     private InstructionListener instructionListener;
     
-    public Execution_scriptInstruction(InstructionListener instructionListener) {
+    public Execute_scriptInstruction(InstructionListener instructionListener) {
         this.instructionListener = instructionListener;
     }
     @Override
@@ -23,7 +20,7 @@ public class Execution_scriptInstruction implements Instruction {
             throw new IllegalArgumentException("Error! The arguments are not correct");
         try {
         String script;
-        BaseReader br = new BaseReader(args[2]);
+        BaseReader br = new BaseReader(args[1]);
         script = br.read();
         instructionListener.start(new ByteArrayInputStream(script.getBytes(StandardCharsets.UTF_8)));
         } catch(FileNotFoundException e) {

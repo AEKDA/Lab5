@@ -17,7 +17,11 @@ public class Average_of_oscars_countInstruction implements Instruction {
         for (Object movie :collectionManager.getData()) {
             oscarsCount += ((Movie)movie).getOscarCount();
         }
-        System.out.printf("Middle count Oscars:%d\n", oscarsCount/collectionManager.getData().size());
+        try {
+            System.out.printf("Middle count Oscars:%d\n", oscarsCount/collectionManager.getData().size());
+        } catch(ArithmeticException e) {
+            System.out.printf("Middle count Oscars:%d\n", 0);
+        }
     }
     @Override 
     public String getName() {

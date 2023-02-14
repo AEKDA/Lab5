@@ -20,6 +20,7 @@ public class InstructionListener {
         isWork = true;
         instructionStack = new Stack<>();
         this.collectionManager = collectionManager;
+        setBaseInstruction();
     }
 
     public InstructionListener addInstruction(Instruction instruction) {
@@ -48,6 +49,7 @@ public class InstructionListener {
                 System.out.println(e);
             }
         }
+        in.close();
     }
     public void stop() {
         isWork = false;
@@ -67,7 +69,7 @@ public class InstructionListener {
         addInstruction(new SaveInstruction(collectionManager)).
         addInstruction(new Remove_by_idInstruction(collectionManager)).
         addInstruction(new Print_descendingInstruction(collectionManager));
-        // addInstruction(new Execution_scriptInstruction(collectionManager));
+        addInstruction(new Execute_scriptInstruction(this));
         // addInstruction(new Insert_adInstruction(collectionManager)).
         // addInstruction(new Add_if_maxInstruction(collectionManager)).
         // addInstruction(new Filter_contains_nameInstruction(this));

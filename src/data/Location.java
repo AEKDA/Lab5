@@ -6,6 +6,13 @@ public class Location {
     private float z;
     private String name; //Строка не может быть пустой, Поле не может быть null
 
+    public Location() {}
+    public Location(long x, double y, float z, String name) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.name = name;
+    }
     public void setX(long x) {
         this.x = x;
     }
@@ -38,5 +45,10 @@ public class Location {
 
     public String getName() {
         return this.name;
+    }
+
+    @Override
+    public String toString() {
+        return "{ name = " + this.name + ";  x = " + Long.toString(this.x) + ";  y = " + Double.toString(y) + ";  z = " + Float.toString(z) + "  }";
     }
 }

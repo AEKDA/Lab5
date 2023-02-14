@@ -20,6 +20,7 @@ public class Movie implements CollectionElement {
 
     {
         creationDate = ZonedDateTime.now();
+        id = hashCode();
     }
 
     public void setName(String name) throws IllegalArgumentException {
@@ -106,32 +107,72 @@ public class Movie implements CollectionElement {
         return director;
     }
     @Override
-    public Movie getElementFromFile(InputStream is) {
-        Scanner scan = new Scanner(is);
-        String s = scan.nextLine();
+    public Movie getElement(InputStream is) {
         Movie movie = new Movie();
+        Scanner scan = new Scanner(is);
+        if(is == System.in) {
+            String input;
+            
+            do{System.out.println("Введите название фильма:"); input = scan.nextLine();}while(input.matches("\s"));
+            movie.setName(input);
 
-        return movie;
-    }
-    @Override
-    public Movie getElementFromConsole(InputStream is) {
-        Scanner scan = new Scanner(is);
-        String s = scan.nextLine();
-        Movie movie = new Movie();
+            String[] input_arr;
+            do {
+                System.out.println("Введите координаты в формате - x y:");
+                input = scan.nextLine(); 
+                input_arr = input.split(" +");
+            } while(input_arr[0] == null || input_arr[1] == null || Double.parseDouble(input_arr[1]) > 777.0d);
+            movie.setCoordinates(new Coordinates(Float.parseFloat(input_arr[0]), Double.parseDouble(input_arr[1])));
+            
+            do {
+                System.out.println("Введите количество оскаров:");
+                input = scan.nextLine();
+            } while(input.isEmpty() || input == null || Long.parseLong(input) < 0);
+            movie.setOscarCount(Long.parseLong(input));
+            
+            do { 
+                System.out.println("Введите бюджет фильма:");
+                input = scan.nextLine();
+            } while(Float.parseFloat(input) > 0.0f);
+            movie.setBudget(Float.parseFloat(input));
+
+            do {
+                System.out.println("Введите кассовые сборы фильма:");
+                input = scan.nextLine(); MovieGenre.valueOf(input);
+            } while(Double.parseDouble(input) > 0.0d);
+            movie.setTotalBoxOffice(Float.parseFloat(input));
+
+            boolean isDone;
+            MovieGenre mg = null;
+            do {
+                System.out.println("Введите Жанр фильма из следующих: DRAMA, COMEDY, ADVENTURE, THRILLER, SCIENCE_FICTION:");
+                input = scan.nextLine();
+                isDone = false;
+                try {
+                    mg = MovieGenre.valueOf(input);
+                    isDone = true;
+                } catch(IllegalCallerException | NullPointerException e) {}
+            } while(isDone);
+            movie.setMovieGenre(mg);
+        }
+        else {
+
+        }
+        scan.close();
 
         return movie;
     }
     @Override
     public String toString() {
-        return Integer.toString(getId()) + ":\n  " + 
-        getName() + "\n  " + 
-        this.coordinates.toString() + "\n  " + 
-        this.creationDate.toString() + "\n  " +
-        Long.toString(getOscarCount()) +"\n  " +
-        Float.toString(getBudget()) +"\n  " +
-        Double.toString(getTotalBoxOffice()) + "\n  " +
-        this.genre.toString() + "\n  " +
-        this.director.toString();
+        return "{\n id = " +        Integer.toString(getId()) + ":\n  " + 
+        "name = " +             getName() + "\n  " + 
+        "coordinates = " +      this.coordinates.toString() + "\n  " + 
+        "creation date = " +    this.creationDate.toString() + "\n  " +
+        "Oscar Count = " +      Long.toString(getOscarCount()) +"\n  " +
+        "Budget = " +           Float.toString(getBudget()) +"\n  " +
+        "Total Box Office = " + Double.toString(getTotalBoxOffice()) + "\n  " +
+        "Genre = " +            this.genre.toString() + "\n  " +
+        "Director = " +         this.director.toString() + "\n}";
     }
 
     @Override
