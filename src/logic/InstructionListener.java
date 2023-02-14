@@ -1,37 +1,40 @@
 package logic;
 
 import java.util.Scanner;
+import java.io.InputStream;
 
 import exception.IncorrectArgumentException;
 import exception.IncorrectInstructionException;
 import java.util.Stack;
+import data.Movie;
 import logic.instruction.*;
 
-public class InstructionListener<T extends CollectionElement> {
+public class InstructionListener {
     
-    private Scanner in;
     private Stack<Instruction> instructionStack;
-    private CollectionManager<T> collectionManager;
+    private CollectionManager<Movie> collectionManager;
     private boolean isWork;
 
 
-    public InstructionListener(CollectionManager<T> collectionManager) {
+    public InstructionListener(CollectionManager<Movie> collectionManager) {
         isWork = true;
-        in = new Scanner(System.in);
         instructionStack = new Stack<>();
         this.collectionManager = collectionManager;
     }
 
-    public InstructionListener<T> addInstruction(Instruction instruction) {
+    public InstructionListener addInstruction(Instruction instruction) {
         instructionStack.push(instruction);
         return this;
     }
+    public Stack<Instruction> getInstructionStack() {
+        return instructionStack;
+    }
 
-    public void start() {
-        setBaseInstruction();
+    public void start(InputStream is) {
+        Scanner in = new Scanner(is);
         while(isWork) {
             try {
-                String[] args = inputInstructionArgs();
+                String[] args = inputInstructionArgs(in);
                 Instruction current = getInstruction(args);
                 current.execute(args);
             }
@@ -50,37 +53,38 @@ public class InstructionListener<T extends CollectionElement> {
         isWork = false;
     }
 
+
     private void setBaseInstruction() {
-        addInstruction(new HelpInstruction(instructionStack));
-        addInstruction(new ClearInstruction(collectionManager));
-        addInstruction(new InfoInstruction(collectionManager));
-        addInstruction(new ShowInstruction(collectionManager));
-        addInstruction(new AddInstruction(System.in));
-        addInstruction(new UpdateInstruction());
-        addInstruction(new ExitInstruction(this));
-        addInstruction(new ShuffleInstruction(collectionManager));
-        addInstruction(new Average_of_oscars_countInstruction(collectionManager));
-        addInstruction(new SaveInstruction(collectionManager));
-        addInstruction(new Execution_scriptInstruction(collectionManager));
-        addInstruction(new Remove_by_idInstruction(collectionManager));
-        addInstruction(new Insert_adInstruction(collectionManager));
-        addInstruction(new Add_if_maxInstruction(collectionManager));
-        addInstruction(new Filter_contains_nameInstruction(this));
+        addInstruction(new HelpInstruction(getInstructionStack())).
+        addInstruction(new ClearInstruction(collectionManager)).
+        addInstruction(new InfoInstruction(collectionManager)).
+        addInstruction(new ShowInstruction(collectionManager)).
+        addInstruction(new AddInstruction(System.in)).
+        addInstruction(new UpdateInstruction()).
+        addInstruction(new ExitInstruction(this)).
+        addInstruction(new ShuffleInstruction(collectionManager)).
+        addInstruction(new Average_of_oscars_countInstruction(collectionManager)).
+        addInstruction(new SaveInstruction(collectionManager)).
+        addInstruction(new Remove_by_idInstruction(collectionManager)).
         addInstruction(new Print_descendingInstruction(collectionManager));
+        // addInstruction(new Execution_scriptInstruction(collectionManager));
+        // addInstruction(new Insert_adInstruction(collectionManager)).
+        // addInstruction(new Add_if_maxInstruction(collectionManager)).
+        // addInstruction(new Filter_contains_nameInstruction(this));
     }
 
-    private String[] inputInstructionArgs() {
+    private String[] inputInstructionArgs(Scanner in) {
         System.out.printf("-> ");
         String text = in.nextLine().strip();
         String[] input = text.split(" +");
         return input;
     }
 
-    private Instruction getInstruction(String[] text) throws IncorrectInstructionException {
-        if(text.length == 0) {throw new IncorrectInstructionException("Error! You have not entered the instructions");}
+    private Instruction getInstruction(String[] args) throws IncorrectInstructionException {
+        if(args.length == 0) {throw new IncorrectInstructionException("Error! You have not entered the instructions");}
 
         for(Instruction instruction : instructionStack) {
-            if(instruction.getName().equals(text[0])) {
+            if(instruction.getName().equals(args[0])) {
                 return instruction;
             }
         }

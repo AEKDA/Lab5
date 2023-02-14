@@ -1,8 +1,10 @@
 package logic.instruction;
 
 import logic.Instruction;
+import logic.CollectionManager;
 
 public class SaveInstruction implements Instruction {
+    public SaveInstruction(CollectionManager<?> collectionManager) {}
     @Override
     public void execute(String[] args) {
 

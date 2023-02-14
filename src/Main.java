@@ -18,8 +18,10 @@ public class Main {
         CollectionManager<Movie> collectionManager = new CollectionManager<>();
         // collectionManager.setData(loader.getData());
 
-        InstructionListener<Movie> instructionListener = new InstructionListener<>(collectionManager);
-        instructionListener.start();
+        InstructionListener instructionListener = new InstructionListener(collectionManager);
+
+
+        instructionListener.start(System.in);
     }
 
 }

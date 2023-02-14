@@ -12,7 +12,7 @@ public class Filter_contains_nameInstruction implements Instruction {
     @Override
     public void execute(String[] args) throws IllegalArgumentException {
         if(args.length < 2) {
-            throw new IllegalArgumentException("The arguments are not correct");
+            throw new IllegalArgumentException("Error! The arguments are not correct");
         }
         for(Movie movie: collectionManager.getData()) {
             if(movie.getName().contains(args[1])) {
