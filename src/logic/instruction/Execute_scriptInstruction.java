@@ -23,7 +23,7 @@ public class Execute_scriptInstruction implements Instruction {
         BaseReader br = new BaseReader(args[1]);
         script = br.read();
         instructionListener.start(new ByteArrayInputStream(script.getBytes(StandardCharsets.UTF_8)));
-        } catch(FileNotFoundException e) {
+        } catch(FileNotFoundException | IllegalArgumentException e) {
             System.out.println("Error! File not Found");
         }
     }

@@ -29,7 +29,7 @@ public class CollectionManager<T extends CollectionElement> {
         collectionStack = movieData;
     }
 
-    public void pushElement(T movie) {
-        collectionStack.push(movie);
+    public void pushElement(T t) {
+        collectionStack.push(t);
     }
 }

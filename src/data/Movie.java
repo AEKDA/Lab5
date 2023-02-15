@@ -4,8 +4,14 @@ import java.io.InputStream;
 import java.time.ZonedDateTime;
 import java.util.Scanner;
 
+import exception.IncorrectArgumentException;
 import logic.CollectionElement;
 import java.util.Objects;
+
+@FunctionalInterface
+interface Check {
+    void field(Object... args);
+}
 
 public class Movie implements CollectionElement {
     private int id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
@@ -113,11 +119,7 @@ public class Movie implements CollectionElement {
         if(is == System.in) {
             String input;
             
-            do{
-                System.out.println("Введите название фильма:"); 
-                input = scan.nextLine();
-            }while(input.matches("\s"));
-            this.setName(input);
+
 
             String[] input_arr;
             do {
@@ -139,13 +141,19 @@ public class Movie implements CollectionElement {
             } while(input.isEmpty() && Float.parseFloat(input) <= 0.0f);
             this.setBudget(Float.parseFloat(input));
 
+            boolean isDone = false;
             do {
-                System.out.println("Введите кассовые сборы фильма:");
+                System.out.println();
                 input = scan.nextLine();
-            } while(input.isEmpty() && Double.parseDouble(input) < 0.0d);
-            this.setTotalBoxOffice(Float.parseFloat(input));
+                try {
+                    this.setTotalBoxOffice(Float.parseFloat(input));
+                    isDone = true;
+                } catch(IncorrectArgumentException e) {}
+            } while(!isDone);
 
-            boolean isDone;
+            //set("Введите кассовые сборы фильма: ", this::setTotalBoxOffice);
+            
+            isDone=false;
             MovieGenre mg = null;
             do {
                 System.out.println("Введите Жанр фильма из следующих: DRAMA, COMEDY, ADVENTURE, THRILLER, SCIENCE_FICTION:");
@@ -162,7 +170,7 @@ public class Movie implements CollectionElement {
             do {
                 System.out.println("Введите имя режиссера:");
                 input = scan.nextLine();
-            } while(input.matches("\s"));
+            } while(input.matches("\n"));
             p.setName(input);
 
             do {
@@ -207,7 +215,7 @@ public class Movie implements CollectionElement {
                     isDone = true;
                 }
                 catch (IllegalArgumentException e) {}
-            } while(input_arr[3].matches("\s") && !isDone);
+            } while(input_arr[3].matches("\n") && !isDone);
             this.setDirector(p);
         }
         else {
@@ -216,6 +224,22 @@ public class Movie implements CollectionElement {
         
         scan.close();
     }
+    void set(String message,Check c, Scanner scan) {
+        int count = c.getClass().getDeclaredMethods()[0].getParameterCount();
+        boolean isDone = false;
+        do{
+            try {
+                System.out.println(message); 
+                if(count == 0) {
+                    c.field(); 
+                } else if(count > 1) {
+                String input = scan.nextLine();
+                }
+                    isDone = true;
+            } catch (IllegalArgumentException | NullPointerException e) {System.out.println(e.getMessage());}
+        }while(!isDone);
+    }
+
     @Override
     public String toString() {
         return "{\n id = " +        Integer.toString(getId()) + ":\n  " + 

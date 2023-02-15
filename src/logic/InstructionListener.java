@@ -61,8 +61,8 @@ public class InstructionListener {
         addInstruction(new ClearInstruction(collectionManager)).
         addInstruction(new InfoInstruction(collectionManager)).
         addInstruction(new ShowInstruction(collectionManager)).
-        addInstruction(new AddInstruction(System.in)).
-        addInstruction(new UpdateInstruction()).
+        addInstruction(new AddInstruction(collectionManager)).
+        addInstruction(new UpdateInstruction(collectionManager)).
         addInstruction(new ExitInstruction(this)).
         addInstruction(new ShuffleInstruction(collectionManager)).
         addInstruction(new Average_of_oscars_countInstruction(collectionManager)).
@@ -73,6 +73,7 @@ public class InstructionListener {
         addInstruction(new Filter_contains_nameInstruction(collectionManager));
         addInstruction(new Insert_adInstruction(collectionManager)).
         addInstruction(new Add_if_maxInstruction(collectionManager));
+    
     }
 
     private String[] inputInstructionArgs(Scanner in) {

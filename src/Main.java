@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 import data.Movie;
 import loader.JSONLoaer;
 import loader.Loader;
@@ -8,24 +10,25 @@ public class Main {
 
     public static void main(String[] args) 
     {    
-        // if(args.length != 1) {
-        //      System.err.println("Error! You didn't specify the path to the file");
-        //      return;
-        // }
-        // Loader<Movie> loader = new JSONLoaer<>();
-        // loader.read(args[0]);
+        Scanner in = new Scanner(System.in);
+        if(args.length != 1) {
+             System.err.println("Error! You didn't specify the path to the file");
+             System.out.println("Entered File path: ");
+             args = new String[1];
+             args[0] = in.nextLine();
+             in.close();
+        }
 
-        // CollectionManager<Movie> collectionManager = new CollectionManager<>();
-        // // collectionManager.setData(loader.getData());
+        Loader<Movie> loader = new JSONLoaer<>();
+        loader.read(args[0]);
 
-        // InstructionListener instructionListener = new InstructionListener(collectionManager);
+        CollectionManager<Movie> collectionManager = new CollectionManager<>();
+        // collectionManager.setData(loader.getData());
+
+        InstructionListener instructionListener = new InstructionListener(collectionManager);
 
 
-        // instructionListener.start(System.in);
-    
-        Movie m = new Movie();
-        m.getElement(System.in);
-        System.out.println(m.toString());
+        instructionListener.start(System.in);
     }
 
 }
