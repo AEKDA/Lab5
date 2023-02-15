@@ -12,10 +12,10 @@ public class InfoInstruction implements Instruction{
     }
     @Override
     public void execute(String[] args) {
-        System.out.println("Information about the collection:");
-        System.out.println("Type: " + collectionManager.getData().getClass().toString());
-        System.out.println("Date of creation: " + collectionManager.getInitDate().toString());
-        System.out.println("Elements count: " + Integer.toString(collectionManager.getData().size()));
+        System.out.println("--->Information about the collection:");
+        System.out.println("--->Type: " + collectionManager.getData().getClass().toString());
+        System.out.println("--->Date of creation: " + collectionManager.getInitDate().toString());
+        System.out.println("--->Elements count: " + Integer.toString(collectionManager.getData().size()));
     }
     @Override
     public String getName() {

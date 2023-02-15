@@ -1,10 +1,4 @@
-import data.Color;
-import data.Coordinates;
-import data.Country;
-import data.Location;
 import data.Movie;
-import data.MovieGenre;
-import data.Person;
 import loader.JSONLoaer;
 import loader.Loader;
 import logic.CollectionManager;
@@ -28,16 +22,9 @@ public class Main {
 
 
         // instructionListener.start(System.in);
+    
         Movie m = new Movie();
-        m.setCoordinates(new Coordinates(1234.4f, 123.5d));
-        m.setMovieGenre(MovieGenre.DRAMA);
-        Person p = new Person();
-        p.setEyeColor(Color.BROWN);
-        p.setHeight(123);
-        p.setLocation(new Location(132,133.2d,432.4f, "Russia"));
-        p.setName("null");
-        p.setNationality(Country.CHINA);
-        m.setDirector(p);
+        m.getElement(System.in);
         System.out.println(m.toString());
     }
 

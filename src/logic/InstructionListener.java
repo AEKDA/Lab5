@@ -70,9 +70,9 @@ public class InstructionListener {
         addInstruction(new Remove_by_idInstruction(collectionManager)).
         addInstruction(new Print_descendingInstruction(collectionManager));
         addInstruction(new Execute_scriptInstruction(this));
-        // addInstruction(new Insert_adInstruction(collectionManager)).
-        // addInstruction(new Add_if_maxInstruction(collectionManager)).
-        // addInstruction(new Filter_contains_nameInstruction(this));
+        addInstruction(new Filter_contains_nameInstruction(collectionManager));
+        addInstruction(new Insert_adInstruction(collectionManager)).
+        addInstruction(new Add_if_maxInstruction(collectionManager));
     }
 
     private String[] inputInstructionArgs(Scanner in) {

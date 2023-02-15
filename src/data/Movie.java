@@ -107,14 +107,17 @@ public class Movie implements CollectionElement {
         return director;
     }
     @Override
-    public Movie getElement(InputStream is) {
+    public void getElement(InputStream is) {
         Movie movie = new Movie();
         Scanner scan = new Scanner(is);
         if(is == System.in) {
             String input;
             
-            do{System.out.println("Введите название фильма:"); input = scan.nextLine();}while(input.matches("\s"));
-            movie.setName(input);
+            do{
+                System.out.println("Введите название фильма:"); 
+                input = scan.nextLine();
+            }while(input.matches("\s"));
+            this.setName(input);
 
             String[] input_arr;
             do {
@@ -122,25 +125,25 @@ public class Movie implements CollectionElement {
                 input = scan.nextLine(); 
                 input_arr = input.split(" +");
             } while(input_arr[0] == null || input_arr[1] == null || Double.parseDouble(input_arr[1]) > 777.0d);
-            movie.setCoordinates(new Coordinates(Float.parseFloat(input_arr[0]), Double.parseDouble(input_arr[1])));
+            this.setCoordinates(new Coordinates(Float.parseFloat(input_arr[0]), Double.parseDouble(input_arr[1])));
             
             do {
                 System.out.println("Введите количество оскаров:");
                 input = scan.nextLine();
             } while(input.isEmpty() || input == null || Long.parseLong(input) < 0);
-            movie.setOscarCount(Long.parseLong(input));
+            this.setOscarCount(Long.parseLong(input));
             
             do { 
                 System.out.println("Введите бюджет фильма:");
                 input = scan.nextLine();
-            } while(Float.parseFloat(input) > 0.0f);
-            movie.setBudget(Float.parseFloat(input));
+            } while(input.isEmpty() && Float.parseFloat(input) <= 0.0f);
+            this.setBudget(Float.parseFloat(input));
 
             do {
                 System.out.println("Введите кассовые сборы фильма:");
-                input = scan.nextLine(); MovieGenre.valueOf(input);
-            } while(Double.parseDouble(input) > 0.0d);
-            movie.setTotalBoxOffice(Float.parseFloat(input));
+                input = scan.nextLine();
+            } while(input.isEmpty() && Double.parseDouble(input) < 0.0d);
+            this.setTotalBoxOffice(Float.parseFloat(input));
 
             boolean isDone;
             MovieGenre mg = null;
@@ -152,15 +155,66 @@ public class Movie implements CollectionElement {
                     mg = MovieGenre.valueOf(input);
                     isDone = true;
                 } catch(IllegalCallerException | NullPointerException e) {}
-            } while(isDone);
-            movie.setMovieGenre(mg);
+            } while(!isDone);
+            this.setMovieGenre(mg);
+            
+            Person p = new Person();
+            do {
+                System.out.println("Введите имя режиссера:");
+                input = scan.nextLine();
+            } while(input.matches("\s"));
+            p.setName(input);
+
+            do {
+                System.out.println("Введите рост режиссера:");
+                input = scan.nextLine();
+            } while(input.isEmpty() && Integer.parseInt(input) <= 0);
+            p.setHeight(Integer.valueOf(input));
+
+            isDone = false;
+            Color c = null;
+            do {
+                System.out.println("Введите цвет глаз из следующих: RED,YELLOW, BROWN:");
+                input = scan.nextLine();
+                isDone = false;
+                try {
+                    c = Color.valueOf(input);
+                    isDone = true;
+                } catch(IllegalCallerException | NullPointerException e) {}
+            } while(!isDone);
+            p.setEyeColor(c);
+
+            isDone = false;
+            Country country = null;
+            do {
+                System.out.println("Введите страну, где родился режиссер: CHINA, INDIA, VATICAN, SOUTH_KOREA, NORTH_KOREA:");
+                input = scan.nextLine();
+                isDone = false;
+                try {
+                    country = Country.valueOf(input);
+                    isDone = true;
+                } catch(IllegalCallerException | NullPointerException e) {}
+            } while(!isDone);
+            p.setNationality(country);
+
+            do {
+                System.out.println("Введите локацию в формате - x y z name:");
+                input = scan.nextLine(); 
+                input_arr = input.split(" +");
+                isDone = false;
+                try {
+                    p.setLocation(new Location(Long.valueOf(input_arr[0]), Double.valueOf(input_arr[1]), Float.valueOf(input_arr[2]), input_arr[3]));
+                    isDone = true;
+                }
+                catch (IllegalArgumentException e) {}
+            } while(input_arr[3].matches("\s") && !isDone);
+            this.setDirector(p);
         }
         else {
 
         }
+        
         scan.close();
-
-        return movie;
     }
     @Override
     public String toString() {
