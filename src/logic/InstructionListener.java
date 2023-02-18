@@ -3,7 +3,7 @@ package logic;
 import java.util.Scanner;
 import java.io.InputStream;
 
-import exception.IncorrectArgumentException;
+
 import exception.IncorrectInstructionException;
 import java.util.Stack;
 import data.Movie;
@@ -45,7 +45,7 @@ public class InstructionListener {
             catch(NumberFormatException e) {
                 System.out.println("Error! The argument must be a number");
             }
-            catch(IncorrectArgumentException e) {
+            catch(IllegalArgumentException e) {
                 System.out.println(e);
             }
         }
@@ -77,9 +77,10 @@ public class InstructionListener {
     }
 
     private String[] inputInstructionArgs(Scanner in) {
+        String[] input = new String[3];
         System.out.printf("-> ");
         String text = in.nextLine().strip();
-        String[] input = text.split(" +");
+        input = text.split(" +");
         return input;
     }
 

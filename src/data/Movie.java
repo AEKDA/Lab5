@@ -4,7 +4,7 @@ import java.io.InputStream;
 import java.time.ZonedDateTime;
 import java.util.Scanner;
 
-import exception.IncorrectArgumentException;
+
 import logic.CollectionElement;
 import java.util.Objects;
 
@@ -114,7 +114,7 @@ public class Movie implements CollectionElement {
     }
     @Override
     public void getElement(InputStream is) {
-        Movie movie = new Movie();
+        
         Scanner scan = new Scanner(is);
         if(is == System.in) {
             String input;
@@ -148,7 +148,7 @@ public class Movie implements CollectionElement {
                 try {
                     this.setTotalBoxOffice(Float.parseFloat(input));
                     isDone = true;
-                } catch(IncorrectArgumentException e) {}
+                } catch(IllegalArgumentException e) {}
             } while(!isDone);
 
             //set("Введите кассовые сборы фильма: ", this::setTotalBoxOffice);
@@ -222,7 +222,6 @@ public class Movie implements CollectionElement {
 
         }
         
-        scan.close();
     }
     void set(String message,Check c, Scanner scan) {
         int count = c.getClass().getDeclaredMethods()[0].getParameterCount();

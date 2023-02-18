@@ -1,6 +1,6 @@
 package logic.instruction;
 
-import exception.IncorrectArgumentException;
+
 import logic.Instruction;
 import logic.CollectionManager;
 import data.Movie;
@@ -11,9 +11,9 @@ public class AddInstruction implements Instruction {
         this.collectionManager = collectionManager;
     }
     @Override
-    public void execute(String[] args) throws IncorrectArgumentException {
+    public void execute(String[] args) throws IllegalArgumentException {
         if(args.length != 1)
-            throw new IncorrectArgumentException("Error! input args incorrect!");
+            throw new IllegalArgumentException("Error! input args incorrect!");
         Movie m = new Movie();
         m.getElement(System.in);
 

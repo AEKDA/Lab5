@@ -1,10 +1,10 @@
 package logic;
 
-import exception.IncorrectArgumentException;
+
 
 public interface Instruction {
 
-    public void execute(String[] args) throws IncorrectArgumentException;
+    public void execute(String[] args) throws IllegalArgumentException;
 
     public String getName();
 

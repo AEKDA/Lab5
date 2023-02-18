@@ -8,18 +8,18 @@
         "oscarsCount": 1,
         "budget": 500000,
         "totalBoxOffice": 155760117,
+        "genre": "THRILLER",
         "director": {
             "name": "Quentin Tarantino",
             "height": 176,
-            "Color": "BROWN",
+            "eyeColor": "BROWN",
             "nationality": "North America",
             "location": {
                 "x": 123,
                 "y": 4231,
                 "z": 123.123,
                 "name": "USA"
-            },
-            "genre": "THRILLER"
+            }
         }
     },
     {
@@ -31,18 +31,18 @@
         "oscarsCount": 2,
         "budget": 8000000,
         "totalBoxOffice": 213928762,
+        "genre": "THRILLER",
         "director": {
             "name": "Quentin Tarantino",
             "height": 176,
-            "Color": "BROWN",
+            "eyeColor": "BROWN",
             "nationality": "North America",
             "location": {
                 "x": 112323,
                 "y": 423121,
                 "z": 154.2123,
                 "name": "USA"
-            },
-            "genre": "THRILLER"
+            }
         }
     }
 ]

@@ -61,12 +61,13 @@ public class Person {
 
     @Override
     public String toString() {
-        return "{\n  " + 
-                "  name = " + this.name + "\n  " +
-                "  height = " + this.height.toString() + "\n  " + 
-                "  eyeColor = " + this.eyeColor.toString() + "\n  " + 
-                "  nationality = " + this.nationality.toString() + "\n  " + 
-                "  location = " + this.location.toString() + "\n  }";
+        return "a";
+        //return "{\n  " + 
+          //      "  name = " + this.name + "\n  " +
+            //    "  height = " + this.height.toString() + "\n  " + 
+              //  "  eyeColor = " + this.eyeColor.toString() + "\n  " + 
+                //"  nationality = " + this.nationality.toString() + "\n  " + 
+                //"  location = " + this.location.toString() + "\n  }";
     }
 
     @Override
