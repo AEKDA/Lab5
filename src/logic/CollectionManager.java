@@ -3,6 +3,7 @@ package logic;
 import java.util.Stack;
 import java.util.Date;
 import java.time.Instant;
+import java.util.Collections;
 
 public class CollectionManager<T extends CollectionElement> {
     private Stack<T> collectionStack;
@@ -25,8 +26,8 @@ public class CollectionManager<T extends CollectionElement> {
         return initDate;
     }
 
-    public void setData(Stack<T> movieData) {
-        collectionStack = movieData;
+    public void setData(T[] movieData) {
+        Collections.addAll(collectionStack, movieData);
     }
 
     public void pushElement(T t) {

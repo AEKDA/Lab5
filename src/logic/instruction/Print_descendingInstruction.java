@@ -23,6 +23,9 @@ public class Print_descendingInstruction implements Instruction {
                 return t1.getName().compareTo(t2.getName()) * -1;
             }
         });
+        for(Object o : collectionManager.getData()) {
+            System.out.println(o.toString());
+        }
     }
     
     @Override 

@@ -22,7 +22,7 @@ public class ShowInstruction implements Instruction{
     @Override
     public void execute(String[] args) {
         for(Object element: collectionManager.getData()) {
-            element.toString();
+            System.out.println(element.toString());
         }
     }
 }

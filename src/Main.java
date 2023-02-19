@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
 import data.Movie;
-import loader.JSONLoaer;
-import loader.Loader;
+import io.JSONLoaer;
+import io.Loader;
 import logic.CollectionManager;
 import logic.InstructionListener;
 
@@ -20,11 +20,12 @@ public class Main {
             args[0] = in.nextLine();
         }
 
-        Loader<Movie[]> loader = new JSONLoaer<>(Movie[].class);
-        Movie[][] m = loader.read(args[0]);
-        System.out.println(m);
+        Loader<Movie[]> io = new JSONLoaer<>(Movie[].class);
+        Movie[] loadMovies = io.read(args[0]);
 
         CollectionManager<Movie> collectionManager = new CollectionManager<>();
+
+        collectionManager.setData(loadMovies);
 
         InstructionListener instructionListener = new InstructionListener(collectionManager);
 

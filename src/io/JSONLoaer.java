@@ -1,4 +1,4 @@
-package loader;
+package io;
 
 import java.io.FileNotFoundException;
 import java.time.ZonedDateTime;
@@ -35,17 +35,14 @@ public class JSONLoaer<T> extends Loader<T> {
         gson = gsonBuilder.create();
     }
     @Override
-    public T[] read(String path) {
+    public T read(String path) {
         try {
             // BaseReader bs;
             // bs = new BaseReader(path);
             // String json = bs.read();
             // System.out.println(json);
             FileReader fr = new FileReader(path);
-            Movie[] a = gson.fromJson(fr, Movie[].class);
-            for(Movie m : a) {
-                System.out.println(m.toString());
-            }
+            return (T)gson.fromJson(fr, Movie[].class);
         } catch(FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
@@ -53,7 +50,7 @@ public class JSONLoaer<T> extends Loader<T> {
         return null;
     }
     @Override
-    public void write(String path, T[] array) {
+    public void write(String path, T array) {
         
     }
 

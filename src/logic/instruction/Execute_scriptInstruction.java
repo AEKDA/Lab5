@@ -4,7 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
 import java.nio.charset.StandardCharsets;
 
-import loader.BaseReader;
+import io.BaseReader;
 import logic.Instruction;
 import logic.InstructionListener;
 
