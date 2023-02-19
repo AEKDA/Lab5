@@ -19,32 +19,37 @@ public class Logger {
     public void SwitchInputStream(InputStream is) {
         this.is = is;
     }
+
     public void SwitchOutputStream(OutputStream os) {
         this.os = os;
     }
+
     public InputStream getInputStream() {
         return is;
     }
+
     public OutputStream getOutputStream() {
         return os;
     }
+
     public void printLine(String s) {
         try {
-        os.write(s.getBytes());
-        } catch(IOException e) {
+            os.write(s.getBytes());
+        } catch (IOException e) {
             System.err.println("Error! Write to file is not available");
-            System.err.println(e.getMessage());   
+            System.err.println(e.getMessage());
         }
     }
+
     public String readLine(byte[] b) {
         try {
-        is.read(b);
-        } catch(IOException e) {
+            is.read(b);
+        } catch (IOException e) {
             System.err.println("Error! Read to file is not available");
-            System.err.println(e.getMessage());   
-        }catch(NullPointerException  e) {
+            System.err.println(e.getMessage());
+        } catch (NullPointerException e) {
             System.err.println("Error! array b is null");
-            System.err.println(e.getMessage());   
+            System.err.println(e.getMessage());
         }
         return new String(b, StandardCharsets.UTF_8);
     }

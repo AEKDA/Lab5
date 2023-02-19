@@ -5,23 +5,26 @@ import java.time.ZonedDateTime;
 import java.lang.reflect.Type;
 import java.time.format.DateTimeFormatter;
 import java.io.FileReader;
-
+import java.io.PrintWriter;
 
 import com.google.gson.*;
 
+import logic.Args;
 import models.Movie;
 
 class GsonLocalDateTime implements JsonSerializer<ZonedDateTime>, JsonDeserializer<ZonedDateTime> {
 
     @Override
-    public ZonedDateTime deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+    public ZonedDateTime deserialize(JsonElement jsonElement, Type type,
+            JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
         String ldtString = jsonElement.getAsString();
-        return ZonedDateTime.parse(ldtString,DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        return ZonedDateTime.parse(ldtString, DateTimeFormatter.ISO_ZONED_DATE_TIME);
     }
 
     @Override
-    public JsonElement serialize(ZonedDateTime localDateTime, Type type, JsonSerializationContext jsonSerializationContext) {
-        return new JsonPrimitive(localDateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+    public JsonElement serialize(ZonedDateTime localDateTime, Type type,
+            JsonSerializationContext jsonSerializationContext) {
+        return new JsonPrimitive(localDateTime.format(DateTimeFormatter.ISO_ZONED_DATE_TIME));
     }
 }
 
@@ -31,9 +34,11 @@ public class JSONLoaer<T> extends Loader<T> {
 
     public JSONLoaer(Class<?> t) {
         typeClass = t;
-        GsonBuilder gsonBuilder = new GsonBuilder().setLenient().setPrettyPrinting().registerTypeAdapter(ZonedDateTime.class, new GsonLocalDateTime());
+        GsonBuilder gsonBuilder = new GsonBuilder().setLenient().setPrettyPrinting()
+                .registerTypeAdapter(ZonedDateTime.class, new GsonLocalDateTime());
         gson = gsonBuilder.create();
     }
+
     @Override
     public T read(String path) {
         try {
@@ -42,16 +47,25 @@ public class JSONLoaer<T> extends Loader<T> {
             // String json = bs.read();
             // System.out.println(json);
             FileReader fr = new FileReader(path);
-            return (T)gson.fromJson(fr, Movie[].class);
-        } catch(FileNotFoundException e) {
+            return (T) gson.fromJson(fr, Movie[].class);
+        } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
-        
+
         return null;
     }
+
     @Override
-    public void write(String path, T array) {
-        
+    public void write(String path, Object array) {
+        try {
+            PrintWriter printWriter = new PrintWriter(Args.getPathToFile());
+            String json = gson.toJson(array);
+            printWriter.write(json);
+            printWriter.close();
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
 }

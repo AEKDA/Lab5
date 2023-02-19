@@ -1,6 +1,5 @@
 package logic.instruction;
 
-
 import logic.Instruction;
 import models.MovieCollection;
 
@@ -18,6 +17,7 @@ public class ClearInstruction implements Instruction {
     public String getName() {
         return "clear";
     }
+
     @Override
     public String about() {
         return "очистить коллекцию";

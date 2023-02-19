@@ -9,17 +9,19 @@ public class Add_if_maxInstruction implements Instruction {
     public void execute(String[] args) {
         Movie m = new Movie();
         m.getElement(System.in);
-        for(Movie movie: MovieCollection.getInstance().getData()) {
-            if(movie.getTotalBoxOffice() >= m.getTotalBoxOffice()) {
+        for (Movie movie : MovieCollection.getInstance().getData()) {
+            if (movie.getTotalBoxOffice() >= m.getTotalBoxOffice()) {
                 return;
             }
         }
         MovieCollection.getInstance().pushElement(m);
     }
-    @Override 
+
+    @Override
     public String getName() {
         return "add_if_max";
     }
+
     @Override
     public String about() {
         return "добавить новый элемент в коллекцию, если его значение превышает значение наибольшего элемента этой коллекции";

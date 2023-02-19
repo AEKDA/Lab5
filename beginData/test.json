@@ -1,48 +1,76 @@
 [
-    {
-        "name": "The Hateful Eight",
-        "coordinates": {
-            "x": 1, 
-            "y": 12
-        },
-        "oscarsCount": 1,
-        "budget": 500000,
-        "totalBoxOffice": 155760117,
-        "genre": "THRILLER",
-        "director": {
-            "name": "Quentin Tarantino",
-            "height": 176,
-            "eyeColor": "BROWN",
-            "nationality": "INDIA",
-            "location": {
-                "x": 123,
-                "y": 4231,
-                "z": 123.123,
-                "name": "USA"
-            }
-        }
+  {
+    "id": 1866004542,
+    "name": "The Hateful Eight",
+    "coordinates": {
+      "x": 1.0,
+      "y": 12.0
     },
-    {
-        "name": "Pulp Fiction",
-        "coordinates": {
-            "x": 5, 
-            "y": 1122
-        },
-        "oscarsCount": 2,
-        "budget": 8000000,
-        "totalBoxOffice": 213928762,
-        "genre": "THRILLER",
-        "director": {
-            "name": "Quentin Tarantino",
-            "height": 176,
-            "eyeColor": "BROWN",
-            "nationality": "INDIA",
-            "location": {
-                "x": 112323,
-                "y": 423121,
-                "z": 154.2123,
-                "name": "USA"
-            }
-        }
+    "creationDate": "2022-02-19T18:32:22.2062791+03:00[Europe/Moscow]",
+    "oscarsCount": 1,
+    "budget": 500000.0,
+    "totalBoxOffice": 1.55760117E8,
+    "genre": "THRILLER",
+    "director": {
+      "name": "Quentin Tarantino",
+      "height": 176,
+      "eyeColor": "BROWN",
+      "nationality": "INDIA",
+      "location": {
+        "x": 123,
+        "y": 4231.0,
+        "z": 123.123,
+        "name": "USA"
+      }
     }
+  },
+  {
+    "id": -25019862,
+    "name": "Pulp Fiction",
+    "coordinates": {
+      "x": 5.0,
+      "y": 1122.0
+    },
+    "creationDate": "2023-02-19T18:32:22.2272837+03:00[Europe/Moscow]",
+    "oscarsCount": 2,
+    "budget": 8000000.0,
+    "totalBoxOffice": 2.13928762E8,
+    "genre": "THRILLER",
+    "director": {
+      "name": "Quentin Tarantino",
+      "height": 176,
+      "eyeColor": "BROWN",
+      "nationality": "INDIA",
+      "location": {
+        "x": 112323,
+        "y": 423121.0,
+        "z": 154.2123,
+        "name": "USA"
+      }
+    }
+  },
+  {
+    "id": -1704202020,
+    "coordinates": {
+      "x": 123.0,
+      "y": 34.0
+    },
+    "creationDate": "2023-02-19T18:32:22.2272837+03:00[Europe/Moscow]",
+    "oscarsCount": 5,
+    "budget": 32432.0,
+    "totalBoxOffice": 4.3234324E7,
+    "genre": "DRAMA",
+    "director": {
+      "name": "176",
+      "height": 176,
+      "eyeColor": "RED",
+      "nationality": "CHINA",
+      "location": {
+        "x": 123,
+        "y": 123.0,
+        "z": 54.0,
+        "name": "R"
+      }
+    }
+  }
 ]

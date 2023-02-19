@@ -5,6 +5,7 @@ import logic.InstructionListener;
 
 public class ExitInstruction implements Instruction {
     InstructionListener instructionListener;
+
     public ExitInstruction(InstructionListener instructionListener) {
         this.instructionListener = instructionListener;
     }
@@ -13,10 +14,12 @@ public class ExitInstruction implements Instruction {
     public void execute(String[] args) {
         instructionListener.stop();
     }
-    @Override 
+
+    @Override
     public String getName() {
         return "exit";
     }
+
     @Override
     public String about() {
         return "завершить программу (без сохранения в файл)";

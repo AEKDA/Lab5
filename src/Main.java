@@ -1,38 +1,21 @@
-import java.util.Scanner;
-
-import models.Movie;
 import models.MovieCollection;
-import io.JSONLoaer;
-import io.Loader;
+
+import java.time.ZonedDateTime;
+
 import io.Logger;
-import logic.CollectionManager;
+import logic.Args;
 import logic.InstructionListener;
-
-
-//TODO: Create CollectionManager Interface
-//TODO: Create Singleton MovieManager
-
-
 
 public class Main {
 
-    public static void main(String[] args) 
-    {// TODO: fix system.out
-        if(args.length != 1) {
-            System.err.println("Error! You didn't specify the path to the file");
-            System.out.println("Entered File path: ");
-            args = new String[1];
-            Scanner in = new Scanner(System.in);
-            args[0] = in.nextLine();
-        }
-
+    public static void main(String[] args) {
+        // TODO: fix system.out
+        Args.setArgs(args);
         Logger logger = new Logger(System.in, System.out);
 
-        Loader<Movie[]> io = new JSONLoaer<>(Movie[].class);
-        Movie[] loadMovies = io.read(args[0]);
+        System.out.println(ZonedDateTime.now());
 
-        MovieCollection.getInstance().setData(loadMovies);
-
+        MovieCollection.getInstance().setStartData();
         InstructionListener instructionListener = new InstructionListener();
 
         instructionListener.start(System.in);
