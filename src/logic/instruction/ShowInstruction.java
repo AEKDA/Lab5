@@ -1,14 +1,9 @@
 package logic.instruction;
 
-import logic.CollectionManager;
+import models.MovieCollection;
 import logic.Instruction;
 
 public class ShowInstruction implements Instruction{
-    private CollectionManager<?> collectionManager;
-    public ShowInstruction(CollectionManager<?> collectionManager) {
-        this.collectionManager = collectionManager;
-    }
-
     @Override
     public String getName() {
         return "show";
@@ -21,7 +16,7 @@ public class ShowInstruction implements Instruction{
 
     @Override
     public void execute(String[] args) {
-        for(Object element: collectionManager.getData()) {
+        for(Object element: MovieCollection.getInstance().getData()) {
             System.out.println(element.toString());
         }
     }

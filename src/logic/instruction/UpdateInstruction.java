@@ -1,21 +1,18 @@
 package logic.instruction;
 
-import logic.CollectionManager;
+import models.MovieCollection;
 import logic.Instruction;
 
-import data.Movie;
+import models.Movie;
 
 public class UpdateInstruction implements Instruction {
-    private CollectionManager<Movie> collectionManager;
-    public UpdateInstruction(CollectionManager<Movie> collectionManager) {
-        this.collectionManager = collectionManager;
-    }
+
     @Override
     public void execute(String[] args) {
         Movie m = new Movie();
         m.getElement(System.in);
 
-        for(Movie movie: collectionManager.getData()) {
+        for(Movie movie: MovieCollection.getInstance().getData()) {
             if(movie.getId() == m.getId()) {
                 movie = m;
                 break;

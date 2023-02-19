@@ -1,24 +1,20 @@
 package logic.instruction;
 
 
-import data.Movie;
-import logic.CollectionManager;
+import models.MovieCollection;
+import models.Movie;
 import logic.Instruction;
 
 public class Average_of_oscars_countInstruction implements Instruction {
-    private CollectionManager<Movie> collectionManager;
-    public Average_of_oscars_countInstruction(CollectionManager<Movie> collectionManager) {
-        this.collectionManager = collectionManager;
-    }
 
     @Override
     public void execute(String[] args) {
         int oscarsCount = 0;
-        for (Object movie :collectionManager.getData()) {
-            oscarsCount += ((Movie)movie).getOscarCount();
+        for (Movie movie :MovieCollection.getInstance().getData()) {
+            oscarsCount += movie.getOscarCount();
         }
         try {
-            System.out.printf("Middle count Oscars:%.1f\n", (float)oscarsCount/(float)(collectionManager.getData().size()));
+            System.out.printf("Middle count Oscars:%.1f\n", (float)oscarsCount/(float)(MovieCollection.getInstance().getData().size()));
         } catch(ArithmeticException e) {
             System.out.printf("Middle count Oscars:%d\n", 0);
         }

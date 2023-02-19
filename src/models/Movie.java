@@ -1,4 +1,4 @@
-package data;
+package models;
 
 import java.io.InputStream;
 import java.time.ZonedDateTime;
@@ -114,7 +114,7 @@ public class Movie implements CollectionElement {
     }
     @Override
     public void getElement(InputStream is) {
-        
+        //TODO: fix system.out
         Scanner scan = new Scanner(is);
         if(is == System.in) {
             String input;
@@ -223,6 +223,7 @@ public class Movie implements CollectionElement {
         }
         
     }
+    //TODO: fix system.out
     void set(String message,Check c, Scanner scan) {
         int count = c.getClass().getDeclaredMethods()[0].getParameterCount();
         boolean isDone = false;

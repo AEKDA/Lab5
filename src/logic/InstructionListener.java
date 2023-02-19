@@ -3,23 +3,19 @@ package logic;
 import java.util.Scanner;
 import java.io.InputStream;
 
-
 import exception.IncorrectInstructionException;
 import java.util.Stack;
-import data.Movie;
+import models.Movie;
 import logic.instruction.*;
 
 public class InstructionListener {
-    
+
     private Stack<Instruction> instructionStack;
-    private CollectionManager<Movie> collectionManager;
     private boolean isWork;
 
-
-    public InstructionListener(CollectionManager<Movie> collectionManager) {
+    public InstructionListener() {
         isWork = true;
         instructionStack = new Stack<>();
-        this.collectionManager = collectionManager;
         setBaseInstruction();
     }
 
@@ -27,55 +23,55 @@ public class InstructionListener {
         instructionStack.push(instruction);
         return this;
     }
+
     public Stack<Instruction> getInstructionStack() {
         return instructionStack;
     }
 
+    // TODO: fix system.out
     public void start(InputStream is) {
         Scanner in = new Scanner(is);
-        while(isWork) {
+        while (isWork) {
             try {
                 String[] args = inputInstructionArgs(in);
                 Instruction current = getInstruction(args);
                 current.execute(args);
-            }
-            catch (IncorrectInstructionException e) {
+            } catch (IncorrectInstructionException e) {
                 System.out.println(e.getMessage());
-            }
-            catch(NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 System.out.println("Error! The argument must be a number");
-            }
-            catch(IllegalArgumentException e) {
+            } catch (IllegalArgumentException e) {
                 System.out.println(e);
             }
         }
         in.close();
     }
+
     public void stop() {
         isWork = false;
     }
 
-
     private void setBaseInstruction() {
-        addInstruction(new HelpInstruction(getInstructionStack())).
-        addInstruction(new ClearInstruction(collectionManager)).
-        addInstruction(new InfoInstruction(collectionManager)).
-        addInstruction(new ShowInstruction(collectionManager)).
-        addInstruction(new AddInstruction(collectionManager)).
-        addInstruction(new UpdateInstruction(collectionManager)).
-        addInstruction(new ExitInstruction(this)).
-        addInstruction(new ShuffleInstruction(collectionManager)).
-        addInstruction(new Average_of_oscars_countInstruction(collectionManager)).
-        addInstruction(new SaveInstruction(collectionManager)).
-        addInstruction(new Remove_by_idInstruction(collectionManager)).
-        addInstruction(new Print_descendingInstruction(collectionManager));
-        addInstruction(new Execute_scriptInstruction(this));
-        addInstruction(new Filter_contains_nameInstruction(collectionManager));
-        addInstruction(new Insert_adInstruction(collectionManager)).
-        addInstruction(new Add_if_maxInstruction(collectionManager));
-    
+        addInstruction(new HelpInstruction(getInstructionStack()))
+                .addInstruction(new ClearInstruction())
+                .addInstruction(new InfoInstruction())
+                .addInstruction(new ShowInstruction())
+                .addInstruction(new AddInstruction())
+                .addInstruction(new UpdateInstruction())
+                .addInstruction(new ExitInstruction(this))
+                .addInstruction(new ShuffleInstruction())
+                .addInstruction(new Average_of_oscars_countInstruction())
+                .addInstruction(new SaveInstruction())
+                .addInstruction(new Remove_by_idInstruction())
+                .addInstruction(new Print_descendingInstruction())
+                .addInstruction(new Execute_scriptInstruction(this))
+                .addInstruction(new Filter_contains_nameInstruction())
+                .addInstruction(new Insert_adInstruction())
+                .addInstruction(new Add_if_maxInstruction());
+
     }
 
+    // TODO: fix system.out
     private String[] inputInstructionArgs(Scanner in) {
         String[] input = new String[3];
         System.out.printf("-> ");
@@ -85,10 +81,12 @@ public class InstructionListener {
     }
 
     private Instruction getInstruction(String[] args) throws IncorrectInstructionException {
-        if(args.length == 0) {throw new IncorrectInstructionException("Error! You have not entered the instructions");}
+        if (args.length == 0) {
+            throw new IncorrectInstructionException("Error! You have not entered the instructions");
+        }
 
-        for(Instruction instruction : instructionStack) {
-            if(instruction.getName().equals(args[0])) {
+        for (Instruction instruction : instructionStack) {
+            if (instruction.getName().equals(args[0])) {
                 return instruction;
             }
         }

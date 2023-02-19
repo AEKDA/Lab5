@@ -1,33 +1,31 @@
 package logic.instruction;
 
-import logic.CollectionManager;
+import models.MovieCollection;
 import logic.Instruction;
 
 import java.util.function.Predicate;
 
-import data.Movie;
+import models.Movie;
 
 public class Remove_by_idInstruction implements Instruction {
-    private CollectionManager<Movie> collectionManager;
-    
-    public Remove_by_idInstruction(CollectionManager<Movie> collectionManager) {
-        this.collectionManager = collectionManager;
-    }
+
     @Override
     public void execute(String[] args) throws IllegalArgumentException {
-        if(args.length != 2) {
+        if (args.length != 2) {
             throw new IllegalArgumentException("");
         }
-        collectionManager.getData().removeIf(new Predicate<Movie>() {
+        MovieCollection.getInstance().getData().removeIf(new Predicate<Movie>() {
             public boolean test(Movie m) {
                 return m.getId() == Integer.parseInt(args[1]);
             }
         });
     }
-    @Override 
+
+    @Override
     public String getName() {
         return "remove_by_id";
     }
+
     @Override
     public String about() {
         return "удалить элемент из коллекции по его id";

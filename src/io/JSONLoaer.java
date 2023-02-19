@@ -9,7 +9,7 @@ import java.io.FileReader;
 
 import com.google.gson.*;
 
-import data.Movie;
+import models.Movie;
 
 class GsonLocalDateTime implements JsonSerializer<ZonedDateTime>, JsonDeserializer<ZonedDateTime> {
 

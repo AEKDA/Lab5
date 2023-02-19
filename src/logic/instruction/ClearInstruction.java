@@ -1,18 +1,17 @@
 package logic.instruction;
 
-import logic.CollectionManager;
+
 import logic.Instruction;
+import models.MovieCollection;
 
-public class ClearInstruction implements Instruction{
-    private CollectionManager<?> collectionManager;
+public class ClearInstruction implements Instruction {
 
-    public ClearInstruction(CollectionManager<?> collectionManager) {
-        this.collectionManager = collectionManager;
+    public ClearInstruction() {
     }
 
     @Override
     public void execute(String[] args) {
-        collectionManager.clear();
+        MovieCollection.getInstance().clear();
     }
 
     @Override

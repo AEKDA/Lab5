@@ -1,4 +1,4 @@
-package data;
+package models;
 
 public enum Country {
     CHINA,
