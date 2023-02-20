@@ -1,8 +1,8 @@
 package io;
 
-public abstract class Loader<T> {
+public interface Loader<T> {
 
-    public abstract T read(String path);
+    T read(String path);
 
-    public abstract void write(String path, Object array);
+    void write(String path, Object array);
 }

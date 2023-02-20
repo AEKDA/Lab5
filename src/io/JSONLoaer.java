@@ -3,14 +3,18 @@ package io;
 import java.io.FileNotFoundException;
 import java.time.ZonedDateTime;
 import java.lang.reflect.Type;
+import java.rmi.server.ObjID;
 import java.time.format.DateTimeFormatter;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Array;
 
 import com.google.gson.*;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonToken;
 
 import logic.Args;
-import models.Movie;
 
 class GsonLocalDateTime implements JsonSerializer<ZonedDateTime>, JsonDeserializer<ZonedDateTime> {
 
@@ -28,32 +32,41 @@ class GsonLocalDateTime implements JsonSerializer<ZonedDateTime>, JsonDeserializ
     }
 }
 
-public class JSONLoaer<T> extends Loader<T> {
-    Class<?> typeClass;
-    Gson gson;
+public abstract class JSONLoaer<T> implements Loader<T> {
+    protected Gson gson;
 
     public JSONLoaer(Class<?> t) {
-        typeClass = t;
         GsonBuilder gsonBuilder = new GsonBuilder().setLenient().setPrettyPrinting()
                 .registerTypeAdapter(ZonedDateTime.class, new GsonLocalDateTime());
         gson = gsonBuilder.create();
     }
 
     @Override
-    public T read(String path) {
+    public T[] read(String path) {
         try {
-            // BaseReader bs;
-            // bs = new BaseReader(path);
-            // String json = bs.read();
-            // System.out.println(json);
-            FileReader fr = new FileReader(path);
-            return (T) gson.fromJson(fr, Movie[].class);
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
+            FileReader f = new FileReader("beginData/test.json");
+            JsonReader jr = gson.newJsonReader(f);
+            JsonToken js = jr.peek();
+            if (js == JsonToken.BEGIN_ARRAY) {
+                Object[] o = new Object[1];
+                o[0] = readArray();
+                T[] tmp = (T[])o;
 
+                return tmp;
+            } else if (js == JsonToken.BEGIN_OBJECT) {
+                return readObject();
+            }
+        } catch (FileNotFoundException e) {
+
+        } catch (IOException e) {
+
+        }
         return null;
     }
+
+    protected abstract T readArray();
+
+    protected abstract T[] readObject();
 
     @Override
     public void write(String path, Object array) {
