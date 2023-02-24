@@ -2,6 +2,7 @@ package logic.instruction;
 
 import java.util.Stack;
 import logic.Instruction;
+import io.Logger;
 
 public class HelpInstruction implements Instruction {
     private String name;
@@ -15,7 +16,7 @@ public class HelpInstruction implements Instruction {
     @Override
     public void execute(String[] args) {
         for (Instruction inst : instructionStack) {
-            System.out.println("--->  " + inst.getName() + ": " + inst.about());
+            Logger.get().writeLine("--->  " + inst.getName() + ": " + inst.about());
         }
 
     }

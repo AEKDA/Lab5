@@ -1,0 +1,6 @@
+help
+final
+info
+show
+execute_script beginData/script2.txt
+show

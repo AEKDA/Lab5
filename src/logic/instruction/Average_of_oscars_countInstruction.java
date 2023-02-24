@@ -3,6 +3,7 @@ package logic.instruction;
 import models.MovieCollection;
 import models.Movie;
 import logic.Instruction;
+import io.Logger;
 
 public class Average_of_oscars_countInstruction implements Instruction {
 
@@ -13,10 +14,10 @@ public class Average_of_oscars_countInstruction implements Instruction {
             oscarsCount += movie.getOscarCount();
         }
         try {
-            System.out.printf("Middle count Oscars:%.1f\n",
+            Logger.get().write("Middle count Oscars:%.1f\n",
                     (float) oscarsCount / (float) (MovieCollection.getInstance().getData().size()));
         } catch (ArithmeticException e) {
-            System.out.printf("Middle count Oscars:%d\n", 0);
+            Logger.get().writeLine("Middle count Oscars: 0");
         }
     }
 

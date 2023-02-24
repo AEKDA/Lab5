@@ -2,6 +2,7 @@ package logic.instruction;
 
 import models.MovieCollection;
 import logic.Instruction;
+import io.Logger;
 
 public class ShowInstruction implements Instruction{
     @Override
@@ -17,7 +18,7 @@ public class ShowInstruction implements Instruction{
     @Override
     public void execute(String[] args) {
         for(Object element: MovieCollection.getInstance().getData()) {
-            System.out.println(element.toString());
+            Logger.get().writeLine(element.toString());
         }
     }
 }

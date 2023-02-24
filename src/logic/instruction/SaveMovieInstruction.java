@@ -6,11 +6,11 @@ import logic.Instruction;
 import models.MovieCollection;
 import models.Movie;
 
-public class SaveInstruction implements Instruction {
+public class SaveMovieInstruction implements Instruction {
 
     @Override
     public void execute(String[] args) {
-        JSONLoaer<Movie[]> loader = new JSONLoaer<>(Movie[].class);
+        JSONLoaer<Movie> loader = new JSONLoaer<>();
         loader.write(Args.getPathToFile(), MovieCollection.getInstance().getData().toArray());
     }
 

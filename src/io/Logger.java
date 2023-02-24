@@ -1,56 +1,30 @@
 package io;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.Scanner;
+import java.io.PrintWriter;
 
 public class Logger {
-    private InputStream is;
-    private Scanner system_scan = new Scanner(System.in);
-    private OutputStream os;
+    private PrintWriter pw = new PrintWriter(System.out);
 
-    public Logger(InputStream is, OutputStream os) {
-        this.is = is;
-        this.os = os;
+    private Logger() {
     }
 
-    public void SwitchInputStream(InputStream is) {
-        this.is = is;
-    }
+    private static Logger log = null;
 
-    public void SwitchOutputStream(OutputStream os) {
-        this.os = os;
-    }
-
-    public InputStream getInputStream() {
-        return is;
-    }
-
-    public OutputStream getOutputStream() {
-        return os;
-    }
-
-    public void printLine(String s) {
-        try {
-            os.write(s.getBytes());
-        } catch (IOException e) {
-            System.err.println("Error! Write to file is not available");
-            System.err.println(e.getMessage());
+    public static Logger get() {
+        if (log == null) {
+            log = new Logger();
         }
+        return log;
     }
 
-    public String readLine(byte[] b) {
-        try {
-            is.read(b);
-        } catch (IOException e) {
-            System.err.println("Error! Read to file is not available");
-            System.err.println(e.getMessage());
-        } catch (NullPointerException e) {
-            System.err.println("Error! array b is null");
-            System.err.println(e.getMessage());
-        }
-        return new String(b, StandardCharsets.UTF_8);
+    public void writeLine(String s) {
+        System.out.println(s);
+    }
+
+    public void write(String s) {
+        System.out.printf("%s", s);
+    }
+    public void write(String format, Object ...args) {
+        System.out.printf(format, args);
     }
 }

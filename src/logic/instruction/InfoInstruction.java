@@ -2,6 +2,7 @@ package logic.instruction;
 
 import logic.Instruction;
 import models.MovieCollection;
+import io.Logger;
 
 public class InfoInstruction implements Instruction {
 
@@ -10,10 +11,10 @@ public class InfoInstruction implements Instruction {
 
     @Override
     public void execute(String[] args) {
-        System.out.println("--->Information about the collection:");
-        System.out.println("--->Type: " + MovieCollection.getInstance().getData().getClass().toString());
-        System.out.println("--->Date of creation: " + MovieCollection.getInstance().getInitDate().toString());
-        System.out.println("--->Elements count: " + Integer.toString(MovieCollection.getInstance().getData().size()));
+        Logger.get().writeLine("--->Information about the collection:");
+        Logger.get().writeLine("--->Type: " + MovieCollection.getInstance().getData().getClass().toString());
+        Logger.get().writeLine("--->Date of creation: " + MovieCollection.getInstance().getInitDate().toString());
+        Logger.get().writeLine("--->Elements count: " + Integer.toString(MovieCollection.getInstance().getData().size()));
     }
 
     @Override

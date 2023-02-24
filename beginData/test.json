@@ -25,6 +25,31 @@
     }
   },
   {
+    "id": -1173725308,
+    "name": "House, which build Jack",
+    "coordinates": {
+      "x": 123.0,
+      "y": 234.0
+    },
+    "creationDate": "2023-02-24T02:14:18.4248902+03:00[Europe/Moscow]",
+    "oscarsCount": 4,
+    "budget": 1231.0,
+    "totalBoxOffice": 123333.0,
+    "genre": "DRAMA",
+    "director": {
+      "name": "Jn",
+      "height": 176,
+      "eyeColor": "RED",
+      "nationality": "CHINA",
+      "location": {
+        "x": 123,
+        "y": 123.0,
+        "z": 123.0,
+        "name": "Ru"
+      }
+    }
+  },
+  {
     "id": -25019862,
     "name": "Pulp Fiction",
     "coordinates": {
@@ -50,26 +75,27 @@
     }
   },
   {
-    "id": -1704202020,
+    "id": -1064729901,
+    "name": "Dad",
     "coordinates": {
-      "x": 123.0,
-      "y": 34.0
+      "x": 4.0,
+      "y": 234.0
     },
-    "creationDate": "2023-02-19T18:32:22.2272837+03:00[Europe/Moscow]",
-    "oscarsCount": 5,
-    "budget": 32432.0,
-    "totalBoxOffice": 4.3234324E7,
+    "creationDate": "2023-02-24T02:36:01.5829335+03:00[Europe/Moscow]",
+    "oscarsCount": 4,
+    "budget": 123.0,
+    "totalBoxOffice": 41434.0,
     "genre": "DRAMA",
     "director": {
-      "name": "176",
+      "name": "174",
       "height": 176,
       "eyeColor": "RED",
       "nationality": "CHINA",
       "location": {
         "x": 123,
-        "y": 123.0,
-        "z": 54.0,
-        "name": "R"
+        "y": 1234.0,
+        "z": 1243.0,
+        "name": "G"
       }
     }
   }

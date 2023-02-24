@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.nio.charset.StandardCharsets;
 
 import io.BaseReader;
+import io.Logger;
 import logic.Instruction;
 import logic.InstructionListener;
 
@@ -25,7 +26,7 @@ public class Execute_scriptInstruction implements Instruction {
             script = br.read();
             instructionListener.start(new ByteArrayInputStream(script.getBytes(StandardCharsets.UTF_8)));
         } catch (FileNotFoundException | IllegalArgumentException e) {
-            System.out.println("Error! File not Found");
+            Logger.get().writeLine("Error! File not Found");
         }
     }
 

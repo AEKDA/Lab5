@@ -12,7 +12,7 @@ public class Remove_by_idInstruction implements Instruction {
     @Override
     public void execute(String[] args) throws IllegalArgumentException {
         if (args.length != 2) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("Error! input args incorrect!");
         }
         MovieCollection.getInstance().getData().removeIf(new Predicate<Movie>() {
             public boolean test(Movie m) {

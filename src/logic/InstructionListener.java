@@ -4,8 +4,9 @@ import java.util.Scanner;
 import java.io.InputStream;
 
 import exception.IncorrectInstructionException;
+import io.Logger;
+
 import java.util.Stack;
-import models.Movie;
 import logic.instruction.*;
 
 public class InstructionListener {
@@ -28,23 +29,31 @@ public class InstructionListener {
         return instructionStack;
     }
 
-    // TODO: fix system.out
     public void start(InputStream is) {
         Scanner in = new Scanner(is);
         while (isWork) {
             try {
-                String[] args = inputInstructionArgs(in);
+                String[] args;
+                if (is == System.in) {
+                    args = inputInstructionArgs(in);
+                } else if (in.hasNextLine()) {
+                    args = inputFromFileInstructionArgs(in);
+                } else {
+                    break;
+                }
                 Instruction current = getInstruction(args);
                 current.execute(args);
             } catch (IncorrectInstructionException e) {
-                System.out.println(e.getMessage());
+                Logger.get().writeLine(e.getMessage());
             } catch (NumberFormatException e) {
-                System.out.println("Error! The argument must be a number");
+                Logger.get().writeLine("Error! The argument must be a number");
             } catch (IllegalArgumentException e) {
-                System.out.println(e);
+                Logger.get().writeLine(e.getMessage());
             }
         }
-        in.close();
+        if (is != System.in) {
+            in.close();
+        }
     }
 
     public void stop() {
@@ -61,7 +70,7 @@ public class InstructionListener {
                 .addInstruction(new ExitInstruction(this))
                 .addInstruction(new ShuffleInstruction())
                 .addInstruction(new Average_of_oscars_countInstruction())
-                .addInstruction(new SaveInstruction())
+                .addInstruction(new SaveMovieInstruction())
                 .addInstruction(new Remove_by_idInstruction())
                 .addInstruction(new Print_descendingInstruction())
                 .addInstruction(new Execute_scriptInstruction(this))
@@ -71,10 +80,16 @@ public class InstructionListener {
 
     }
 
-    // TODO: fix system.out
     private String[] inputInstructionArgs(Scanner in) {
         String[] input = new String[3];
-        System.out.printf("-> ");
+        Logger.get().write("-> ");
+        String text = in.nextLine().strip();
+        input = text.split(" +");
+        return input;
+    }
+
+    private String[] inputFromFileInstructionArgs(Scanner in) {
+        String[] input = new String[3];
         String text = in.nextLine().strip();
         input = text.split(" +");
         return input;

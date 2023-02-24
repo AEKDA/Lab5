@@ -3,6 +3,7 @@ package logic.instruction;
 import models.Movie;
 import models.MovieCollection;
 import logic.Instruction;
+import io.Logger;
 
 public class Filter_contains_nameInstruction implements Instruction {
 
@@ -13,7 +14,7 @@ public class Filter_contains_nameInstruction implements Instruction {
         }
         for (Movie movie : MovieCollection.getInstance().getData()) {
             if (movie.getName().contains(args[1])) {
-                System.out.println(movie.toString());
+                Logger.get().writeLine(movie.toString());
             }
         }
     }

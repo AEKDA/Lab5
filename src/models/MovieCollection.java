@@ -7,9 +7,9 @@ import java.util.Collections;
 import java.util.Scanner;
 
 import logic.CollectionManager;
-import models.Movie;
 import io.JSONLoaer;
 import io.Loader;
+import io.Logger;
 import logic.Args;
 
 public class MovieCollection implements CollectionManager<Movie> {
@@ -23,7 +23,7 @@ public class MovieCollection implements CollectionManager<Movie> {
         }
         return instance;
     }
-
+    
     private MovieCollection() {
         collectionStack = new Stack<>();
         initDate = Date.from(Instant.now());
@@ -32,15 +32,15 @@ public class MovieCollection implements CollectionManager<Movie> {
     public void setStartData() {
         String path = Args.getPathToFile();
         if (Args.getArgs().length != 1) {
-            System.err.println("Error! You didn't specify the path to the file");
-            System.out.println("Entered File path: ");
+            Logger.get().writeLine("Error! You didn't specify the path to the file");
+            Logger.get().writeLine("Entered File path: ");
             Scanner in = new Scanner(System.in);
             path = in.nextLine();
 
         } else {
             path = Args.getArgs()[0];
         }
-        Loader<Movie[]> io = new JSONLoaer<>(Movie[].class);
+        Loader<Movie> io = new JSONLoaer<>();
         Movie[] loadMovies = io.read(path);
         MovieCollection.getInstance().setData(loadMovies);
     }

@@ -6,6 +6,7 @@ import java.util.Comparator;
 import models.MovieCollection;
 import models.Movie;
 import logic.Instruction;
+import io.Logger;
 
 public class Print_descendingInstruction implements Instruction {
 
@@ -20,7 +21,7 @@ public class Print_descendingInstruction implements Instruction {
             }
         });
         for (Object o : MovieCollection.getInstance().getData()) {
-            System.out.println(o.toString());
+            Logger.get().writeLine(o.toString());
         }
     }
 
