@@ -1,9 +1,7 @@
 package io;
 
-import java.io.PrintWriter;
 
 public class Logger {
-    private PrintWriter pw = new PrintWriter(System.out);
 
     private Logger() {
     }

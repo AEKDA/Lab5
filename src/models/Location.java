@@ -1,5 +1,6 @@
 package models;
 
+
 public class Location {
     private long x;
     private double y;
@@ -12,6 +13,11 @@ public class Location {
         this.y = y;
         this.z = z;
         this.name = name;
+    }
+    public void setCoordinates(Vector3 v) {
+        setX(v.x);
+        setY(v.y);
+        setZ(v.z);
     }
     public void setX(long x) {
         this.x = x;

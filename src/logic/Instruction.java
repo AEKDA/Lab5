@@ -1,7 +1,5 @@
 package logic;
 
-
-
 public interface Instruction {
 
     public void execute(String[] args) throws IllegalArgumentException;

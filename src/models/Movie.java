@@ -3,15 +3,12 @@ package models;
 import java.io.InputStream;
 import java.time.ZonedDateTime;
 import java.util.Scanner;
+
 import java.util.Objects;
 
 import io.Logger;
 import logic.CollectionElement;
-
-@FunctionalInterface
-interface Check {
-    void field(Object... args);
-}
+import models.validators.*;
 
 public class Movie implements CollectionElement {
     private int id; // Значение поля должно быть больше 0, Значение этого поля должно быть
@@ -117,143 +114,35 @@ public class Movie implements CollectionElement {
 
     @Override
     public void getElement(InputStream is) {
-        // TODO: fix system.out
         Scanner scan = new Scanner(is);
-        if (is == System.in) {
-            String input;
+        name = get(new NameValidator(), scan);
+        coordinates = get(new CoordinatesValidator(), scan);
+        oscarsCount = get(new OscarCountValidator(), scan);
+        budget = get(new BudgetValidator(), scan);
+        totalBoxOffice = get(new TotalBoxOfficeValidator(), scan);
+        genre = get(new MovieGenreValidator(), scan);
 
-            do {
-                Logger.get().writeLine("Введите название фильма: ");
-                input = scan.nextLine();
-            } while (input.isEmpty() || input == null);
-            this.setName(input);
+        Person p = new Person();
+        p.setName(get(new DirectorNameValidator(), scan));
+        p.setHeight(get(new HeightValidator(), scan));
+        p.setEyeColor(get(new ColorValidator(), scan));
+        p.setNationality(get(new NationalityValidator(), scan));
 
-            String[] input_arr;
-            do {
-                Logger.get().writeLine("Введите координаты в формате - x y:");
-                input = scan.nextLine();
-                input_arr = input.split(" +");
-            } while (input_arr[0] == null || input_arr[1] == null || Double.parseDouble(input_arr[1]) > 777.0d);
-            this.setCoordinates(new Coordinates(Float.parseFloat(input_arr[0]), Double.parseDouble(input_arr[1])));
-
-            do {
-                Logger.get().writeLine("Введите количество оскаров:");
-                input = scan.nextLine();
-            } while (input.isEmpty() || input == null || Long.parseLong(input) < 0);
-            this.setOscarCount(Long.parseLong(input));
-
-            do {
-                Logger.get().writeLine("Введите бюджет фильма:");
-                input = scan.nextLine();
-            } while (input.isEmpty() && Float.parseFloat(input) <= 0.0f);
-            this.setBudget(Float.parseFloat(input));
-
-            boolean isDone = false;
-            do {
-                Logger.get().writeLine("Введите кассовые сборы фильма: ");
-                input = scan.nextLine();
-                try {
-                    this.setTotalBoxOffice(Float.parseFloat(input));
-                    isDone = true;
-                } catch (IllegalArgumentException e) {
-                }
-            } while (!isDone);
-
-            // set("Введите кассовые сборы фильма: ", this::setTotalBoxOffice);
-
-            isDone = false;
-            MovieGenre mg = null;
-            do {
-                Logger.get().writeLine(
-                        "Введите Жанр фильма из следующих: DRAMA, COMEDY, ADVENTURE, THRILLER, SCIENCE_FICTION:");
-                input = scan.nextLine();
-                isDone = false;
-                try {
-                    mg = MovieGenre.valueOf(input);
-                    isDone = true;
-                } catch (IllegalCallerException | NullPointerException e) {
-                }
-            } while (!isDone);
-            this.setMovieGenre(mg);
-
-            Person p = new Person();
-            do {
-                Logger.get().writeLine("Введите имя режиссера:");
-                input = scan.nextLine();
-            } while (input.matches("\n"));
-            p.setName(input);
-
-            do {
-                Logger.get().writeLine("Введите рост режиссера:");
-                input = scan.nextLine();
-            } while (input.isEmpty() && Integer.parseInt(input) <= 0);
-            p.setHeight(Integer.valueOf(input));
-
-            isDone = false;
-            Color c = null;
-            do {
-                Logger.get().writeLine("Введите цвет глаз из следующих: RED,YELLOW, BROWN:");
-                input = scan.nextLine();
-                isDone = false;
-                try {
-                    c = Color.valueOf(input);
-                    isDone = true;
-                } catch (IllegalCallerException | NullPointerException e) {
-                }
-            } while (!isDone);
-            p.setEyeColor(c);
-
-            isDone = false;
-            Country country = null;
-            do {
-                Logger.get().writeLine(
-                        "Введите страну, где родился режиссер: CHINA, INDIA, VATICAN, SOUTH_KOREA, NORTH_KOREA:");
-                input = scan.nextLine();
-                isDone = false;
-                try {
-                    country = Country.valueOf(input);
-                    isDone = true;
-                } catch (IllegalCallerException | NullPointerException e) {
-                }
-            } while (!isDone);
-            p.setNationality(country);
-
-            do {
-                Logger.get().writeLine("Введите локацию в формате - x y z name:");
-                input = scan.nextLine();
-                input_arr = input.split(" +");
-                isDone = false;
-                try {
-                    p.setLocation(new Location(Long.valueOf(input_arr[0]), Double.valueOf(input_arr[1]),
-                            Float.valueOf(input_arr[2]), input_arr[3]));
-                    isDone = true;
-                } catch (IllegalArgumentException e) {
-                }
-            } while (input_arr[3].matches("\n") && !isDone);
-            this.setDirector(p);
-        } else {
-
-        }
+        Location l = new Location();
+        l.setCoordinates(get(new LocationCoordsValidator(), scan));
+        l.setName(get(new LocationNameValidator(), scan));
+        p.setLocation(l);
+        director = p;
 
     }
 
-    // TODO: fix system.out
-    void set(String message, Check c, Scanner scan) {
-        int count = c.getClass().getDeclaredMethods()[0].getParameterCount();
-        boolean isDone = false;
+    private <T> T get(Validator<T> validator, Scanner scan) {
+        String args;
         do {
-            try {
-                Logger.get().writeLine(message);
-                if (count == 0) {
-                    c.field();
-                } else if (count > 1) {
-                    String input = scan.nextLine();
-                }
-                isDone = true;
-            } catch (IllegalArgumentException | NullPointerException e) {
-                Logger.get().writeLine(e.getMessage());
-            }
-        } while (!isDone);
+            Logger.get().writeLine(validator.getMessage());
+            args = scan.nextLine();
+        } while (!validator.check(args));
+        return validator.getValue();
     }
 
     @Override
