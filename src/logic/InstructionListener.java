@@ -1,9 +1,9 @@
 package logic;
 
-import java.util.Scanner;
 import java.io.InputStream;
 
 import exception.IncorrectInstructionException;
+import io.Cin;
 import io.Logger;
 
 import java.util.Stack;
@@ -30,14 +30,14 @@ public class InstructionListener {
     }
 
     public void start(InputStream is) {
-        Scanner in = new Scanner(is);
+        Cin.push(new Cin(is));
         while (isWork) {
             try {
                 String[] args;
                 if (is == System.in) {
-                    args = inputInstructionArgs(in);
-                } else if (in.hasNextLine()) {
-                    args = inputFromFileInstructionArgs(in);
+                    args = inputInstructionArgs(Cin.peek());
+                } else if (Cin.peek().getScanner().hasNextLine()) {
+                    args = inputFromFileInstructionArgs(Cin.peek());
                 } else {
                     break;
                 }
@@ -51,9 +51,10 @@ public class InstructionListener {
                 Logger.get().writeLine(e.getMessage());
             }
         }
-        if (is != System.in) {
-            in.close();
+        if (Cin.peek().getType() != Cin.Type.STD) {
+            Cin.peek().getScanner().close();
         }
+        Cin.pop();
     }
 
     public void stop() {
@@ -80,17 +81,17 @@ public class InstructionListener {
 
     }
 
-    private String[] inputInstructionArgs(Scanner in) {
-        String[] input = new String[3];
+    private String[] inputInstructionArgs(Cin in) {
+        String[] input;
         Logger.get().write("-> ");
-        String text = in.nextLine().strip();
+        String text = in.getScanner().nextLine().strip();
         input = text.split(" +");
         return input;
     }
 
-    private String[] inputFromFileInstructionArgs(Scanner in) {
-        String[] input = new String[3];
-        String text = in.nextLine().strip();
+    private String[] inputFromFileInstructionArgs(Cin in) {
+        String[] input;
+        String text = in.getScanner().nextLine().strip();
         input = text.split(" +");
         return input;
     }
@@ -105,6 +106,6 @@ public class InstructionListener {
                 return instruction;
             }
         }
-        throw new IncorrectInstructionException("Error! The entered instruction is undefined");
+        throw new IncorrectInstructionException("Error! The entered instruction is undefined: " + args[0]);
     }
 }

@@ -10,5 +10,6 @@ Name-it's name
 RED
 CHINA
 123 645 234 RUSSIA
+execute_script beginData/script1.txt
 shuffle
 average_of_oscars_count

@@ -98,5 +98,30 @@
         "name": "G"
       }
     }
+  },
+  {
+    "id": 1786798488,
+    "name": "Fuck",
+    "coordinates": {
+      "x": 123.0,
+      "y": 567.0
+    },
+    "creationDate": "2023-02-26T16:24:35.9143432+03:00[Europe/Moscow]",
+    "oscarsCount": 6,
+    "budget": 12344.0,
+    "totalBoxOffice": 5.4322543E7,
+    "genre": "DRAMA",
+    "director": {
+      "name": "Dadawdk",
+      "height": 167,
+      "eyeColor": "RED",
+      "nationality": "CHINA",
+      "location": {
+        "x": 321,
+        "y": 1354.0,
+        "z": 345.0,
+        "name": "Russia"
+      }
+    }
   }
 ]

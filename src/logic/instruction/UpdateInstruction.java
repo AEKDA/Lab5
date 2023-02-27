@@ -2,7 +2,7 @@ package logic.instruction;
 
 import models.MovieCollection;
 import logic.Instruction;
-
+import io.Cin;
 import models.Movie;
 
 public class UpdateInstruction implements Instruction {
@@ -10,19 +10,21 @@ public class UpdateInstruction implements Instruction {
     @Override
     public void execute(String[] args) {
         Movie m = new Movie();
-        m.getElement(System.in);
+        m.getElement(Cin.peek());
 
-        for(Movie movie: MovieCollection.getInstance().getData()) {
-            if(movie.getId() == m.getId()) {
+        for (Movie movie : MovieCollection.getInstance().getData()) {
+            if (movie.getId() == m.getId()) {
                 movie = m;
                 break;
             }
         }
     }
-    @Override 
+
+    @Override
     public String getName() {
         return "update";
     }
+
     @Override
     public String about() {
         return "обновить значение элемента коллекции, id которого равен заданному";

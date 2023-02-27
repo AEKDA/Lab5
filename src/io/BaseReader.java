@@ -33,20 +33,6 @@ public class BaseReader {
             Logger.get().writeLine(e.getMessage());
         }
 
-        // try {
-        // int res = 0;
-        // do {
-        // res = bufferedInputStream.read(byteData, 0, length);
-        // sb.append(new String(byteData, "UTF-8"));
-        // } while (sb.length() == 2 * length);
-        // if (res != -1) {
-        // byte[] lastData = new byte[res];
-        // res = bufferedInputStream.read(lastData, 0, res);
-        // sb.append(new String(lastData, "UTF-8"));
-        // }
-        // } catch (IOException e) {
-        // Logger.get().writeLine("Error! No access to the file");
-        // }
 
         return sb.toString();
 

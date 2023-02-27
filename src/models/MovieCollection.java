@@ -4,12 +4,10 @@ import java.util.Stack;
 import java.util.Date;
 import java.time.Instant;
 import java.util.Collections;
-import java.util.Scanner;
 
 import logic.CollectionManager;
 import io.JSONLoaer;
 import io.Loader;
-import io.Logger;
 import logic.Args;
 
 public class MovieCollection implements CollectionManager<Movie> {
@@ -29,17 +27,10 @@ public class MovieCollection implements CollectionManager<Movie> {
         initDate = Date.from(Instant.now());
     }
 
+
+    // TODO - fix Args - args need a singleton 
     public void setStartData() {
         String path = Args.getPathToFile();
-        if (Args.getArgs().length != 1) {
-            Logger.get().writeLine("Error! You didn't specify the path to the file");
-            Logger.get().writeLine("Entered File path: ");
-            Scanner in = new Scanner(System.in);
-            path = in.nextLine();
-
-        } else {
-            path = Args.getArgs()[0];
-        }
         Loader<Movie> io = new JSONLoaer<>();
         Movie[] loadMovies = io.read(path);
         MovieCollection.getInstance().setData(loadMovies);

@@ -5,6 +5,11 @@ import java.util.Scanner;
 
 import io.Logger;
 
+/**
+ * 
+ * 
+ */
+
 public class Args {
     private static String args[];
     private static String path;
@@ -18,13 +23,15 @@ public class Args {
         return args;
     }
 
+    @SuppressWarnings("all")
     private static void check() {
 
         if (getArgs().length != 1) {
             Logger.get().writeLine("Error! You didn't specify the path to the file");
             Logger.get().writeLine("Entered File path: ");
             Scanner in = new Scanner(System.in);
-            path = in.nextLine();
+            args = new String[1];
+            args[0] = in.nextLine();
 
         }
         path = Args.getArgs()[0];

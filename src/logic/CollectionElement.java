@@ -1,7 +1,7 @@
 package logic;
 
-import java.io.InputStream;
+import io.Cin;
 
 public interface CollectionElement {
-    void getElement(InputStream is);
+    void getElement(Cin is);
 }

@@ -1,6 +1,7 @@
 package logic.instruction;
 
 import logic.Instruction;
+import io.Cin;
 import models.MovieCollection;
 import models.Movie;
 
@@ -11,7 +12,7 @@ public class AddInstruction implements Instruction {
         if (args.length != 1)
             throw new IllegalArgumentException("Error! input args incorrect!");
         Movie m = new Movie();
-        m.getElement(System.in);
+        m.getElement(Cin.peek());
 
         MovieCollection.getInstance().pushElement(m);
     }

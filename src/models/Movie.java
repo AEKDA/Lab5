@@ -1,14 +1,13 @@
 package models;
 
-import java.io.InputStream;
 import java.time.ZonedDateTime;
-import java.util.Scanner;
 
 import java.util.Objects;
 
 import io.Logger;
 import logic.CollectionElement;
 import models.validators.*;
+import io.Cin;
 
 public class Movie implements CollectionElement {
     private int id; // Значение поля должно быть больше 0, Значение этого поля должно быть
@@ -113,8 +112,7 @@ public class Movie implements CollectionElement {
     }
 
     @Override
-    public void getElement(InputStream is) {
-        Scanner scan = new Scanner(is);
+    public void getElement(Cin scan) {
         name = get(new NameValidator(), scan);
         coordinates = get(new CoordinatesValidator(), scan);
         oscarsCount = get(new OscarCountValidator(), scan);
@@ -136,11 +134,17 @@ public class Movie implements CollectionElement {
 
     }
 
-    private <T> T get(Validator<T> validator, Scanner scan) {
-        String args;
+    private <T> T get(Validator<T> validator, Cin scan) {
+        String args = null;
         do {
             Logger.get().writeLine(validator.getMessage());
-            args = scan.nextLine();
+            if(Cin.peek().getType() == Cin.Type.STD) {
+                args = scan.getScanner().nextLine();
+            } else {
+                if(scan.getScanner().hasNextLine()) {
+                    args = scan.getScanner().nextLine();
+                }
+            }
         } while (!validator.check(args));
         return validator.getValue();
     }

@@ -41,6 +41,7 @@ public class JSONLoaer<T extends CollectionElement> implements Loader<T> {
         gson = gsonBuilder.create();
     }
 
+    @SuppressWarnings("all")
     @Override
     public T[] read(String path) {
         try {
