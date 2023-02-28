@@ -4,7 +4,9 @@ import logic.Instruction;
 import io.Cin;
 import models.MovieCollection;
 import models.Movie;
-
+/**
+ * Команда добавляет новый элемент в коллекцию
+ */
 public class AddInstruction implements Instruction {
 
     @Override

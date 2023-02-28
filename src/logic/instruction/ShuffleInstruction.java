@@ -6,6 +6,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Random;
 
+
+/**
+ * Команда случайным образом перемешивает все элементы коллекции
+ */
 public class ShuffleInstruction implements Instruction {
 
     @Override

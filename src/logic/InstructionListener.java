@@ -9,6 +9,10 @@ import io.Logger;
 import java.util.Stack;
 import logic.instruction.*;
 
+/**
+ * A class that receives instructions from a user or from a file and processes
+ * them by calling the appropriate instructions
+ */
 public class InstructionListener {
 
     private Stack<Instruction> instructionStack;
@@ -20,15 +24,30 @@ public class InstructionListener {
         setBaseInstruction();
     }
 
+    /**
+     * Adds the passed instruction to the instruction stack
+     * 
+     * @param instruction The instruction that will be added to the stack
+     * @return An instance of the same class, in order to be able to call functions
+     *         along the chain
+     */
     public InstructionListener addInstruction(Instruction instruction) {
         instructionStack.push(instruction);
         return this;
     }
 
+    /**
+     * @return {@link java.util.Stack} containing all instructions
+     */
     public Stack<Instruction> getInstructionStack() {
         return instructionStack;
     }
 
+    /**
+     * Starts the instruction listener
+     * 
+     * @param is the input stream from which the instructions are taken
+     */
     public void start(InputStream is) {
         Cin.push(new Cin(is));
         while (isWork) {
@@ -57,6 +76,9 @@ public class InstructionListener {
         Cin.pop();
     }
 
+    /**
+     * stops execution of all listeners
+     */
     public void stop() {
         isWork = false;
     }

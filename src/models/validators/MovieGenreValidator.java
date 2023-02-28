@@ -2,6 +2,10 @@ package models.validators;
 
 import models.MovieGenre;
 
+
+/**
+ * Класс проверяет верность ввода {@link models.MovieGenre}
+ */
 public class MovieGenreValidator implements Validator<MovieGenre> {
     private MovieGenre val;
 

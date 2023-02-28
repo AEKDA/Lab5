@@ -2,6 +2,10 @@ package models.validators;
 
 import models.Country;
 
+
+/**
+ * Класс проверяет верность ввода {@link models.Country}
+ */
 public class NationalityValidator implements Validator<Country> {
     private Country val;
 

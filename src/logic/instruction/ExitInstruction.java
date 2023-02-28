@@ -3,6 +3,9 @@ package logic.instruction;
 import logic.Instruction;
 import logic.InstructionListener;
 
+/**
+ * Комманда, которая заканчивает выполнение работы программы
+ */
 public class ExitInstruction implements Instruction {
     InstructionListener instructionListener;
 

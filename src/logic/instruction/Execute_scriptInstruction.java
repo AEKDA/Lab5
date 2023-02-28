@@ -10,6 +10,10 @@ import io.Logger;
 import logic.Instruction;
 import logic.InstructionListener;
 
+
+/**
+ * Комманда исполняет скрипт, который был передан ей
+ */
 public class Execute_scriptInstruction implements Instruction {
     private InstructionListener instructionListener;
     Stack<String> pathStack = new Stack<>();
@@ -33,8 +37,8 @@ public class Execute_scriptInstruction implements Instruction {
             instructionListener.start(new ByteArrayInputStream(script.getBytes(StandardCharsets.UTF_8)));
         } catch (FileNotFoundException | IllegalArgumentException e) {
             Logger.get().writeLine("Error! File not Found");
-            pathStack.pop();
         }
+        pathStack.pop();
     }
 
     public boolean pathCheck(String path) {

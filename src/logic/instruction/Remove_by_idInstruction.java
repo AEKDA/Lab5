@@ -7,6 +7,9 @@ import java.util.function.Predicate;
 
 import models.Movie;
 
+/**
+ * Команда удаляет элемент из коллекции, id которого равен заданному
+ */
 public class Remove_by_idInstruction implements Instruction {
 
     @Override

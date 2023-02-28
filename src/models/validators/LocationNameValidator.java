@@ -1,5 +1,9 @@
 package models.validators;
 
+
+/**
+ * Класс проверяет верность ввода Названия места
+ */
 public class LocationNameValidator extends NameValidator {
     @Override
     public String getMessage() {

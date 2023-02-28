@@ -13,7 +13,10 @@ import io.JSONCollectionInfoLoader;
 import io.JSONMovieLoaer;
 
 /**
- * Класс, реализующий {@link logic.CollectionManager#CollectionManager}
+ * Класс, реализующий интерфейс {@link logic.CollectionManager}
+ * Экземпляр класса может быть только один, к нему можно получить доступ с
+ * помощью {@link MovieCollection#getInstance()}
+ * 
  */
 public class MovieCollection implements CollectionManager<Movie> {
     private static MovieCollection instance = null;
@@ -21,6 +24,9 @@ public class MovieCollection implements CollectionManager<Movie> {
     private CollectionInfo collectionInfo;
     private int id = 1;
 
+    /**
+     * @return объект класса {@link MovieCollection}
+     */
     public static MovieCollection getInstance() {
         if (instance == null) {
             instance = new MovieCollection();
@@ -41,6 +47,9 @@ public class MovieCollection implements CollectionManager<Movie> {
         }
     }
 
+    /**
+     * Сохраняет данные о коллекции в файл
+     */
     @Override
     public void save() {
         String path = "data/CollectionInfo.json";
@@ -49,13 +58,16 @@ public class MovieCollection implements CollectionManager<Movie> {
         cl.write(path, collectionInfo);
     }
 
+    /**
+     * Устанавливает данные коллекции из файла, переданного в аргументы командной
+     * строки
+     */
     // TODO - fix Args - args need a singleton
     public void setStartData() {
         String path = Args.getPathToFile();
-        Loader<Movie> io = new JSONMovieLoaer<>();
+        Loader<Movie> io = new JSONMovieLoaer();
         Movie[] loadMovies = io.read(path);
         MovieCollection.getInstance().setData(loadMovies);
-        calcId();
     }
 
     private void calcId() {
@@ -67,26 +79,56 @@ public class MovieCollection implements CollectionManager<Movie> {
 
     }
 
+    /**
+     * Очищает коллекцию
+     */
     public void clear() {
         collectionStack.clear();
     }
 
+    /**
+     * Возвращает стек который содержит элементы типа {@link models.Movie}
+     * 
+     * @return {@link java.util.Stack}, который содержит элементы типа
+     *         {@link models.Movie}
+     */
     public Stack<Movie> getData() {
         return collectionStack;
     }
 
+    /**
+     * Возвращает данные о коллекции
+     * 
+     * @return {@link logic.CollectionInfo}
+     */
     public CollectionInfo getInfo() {
         return this.collectionInfo;
     }
 
+    /**
+     * Добавляет в коллекцию элементы из массива
+     * 
+     * @param movieData Массив элементов типа {@link models.Movie}
+     */
     public void setData(Movie[] movieData) {
         Collections.addAll(collectionStack, movieData);
+        calcId();
     }
 
-    public void pushElement(Movie t) {
-        collectionStack.push(t);
+    /**
+     * Добавляет элемент в коллекцию
+     * 
+     * @param movie Элемент, который будет добавлен в коллекцию
+     */
+    public void pushElement(Movie movie) {
+        collectionStack.push(movie);
     }
 
+    /**
+     * Возвращает уникальный индификатор для коллекцииы
+     * 
+     * @return уникальный для этой коллекции id
+     */
     public int getId() {
         return id++;
     }

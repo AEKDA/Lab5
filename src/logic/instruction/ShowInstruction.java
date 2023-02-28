@@ -4,6 +4,10 @@ import models.MovieCollection;
 import logic.Instruction;
 import io.Logger;
 
+
+/**
+ * Команда выводит все элементы коллекции в строковом представлении
+ */
 public class ShowInstruction implements Instruction{
     @Override
     public String getName() {

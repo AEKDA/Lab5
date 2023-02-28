@@ -4,6 +4,9 @@ import java.util.Stack;
 import logic.Instruction;
 import io.Logger;
 
+/**
+ * Команда, которая выводит информацию о всех остальных командах
+ */
 public class HelpInstruction implements Instruction {
     private String name;
     private Stack<Instruction> instructionStack;

@@ -5,6 +5,10 @@ import models.Movie;
 import logic.Instruction;
 import io.Logger;
 
+/**
+ * Команда, которая вяводит среднее значение оскаров среди всех элементов,
+ * находящихся в коллекции
+ */
 public class Average_of_oscars_countInstruction implements Instruction {
 
     @Override

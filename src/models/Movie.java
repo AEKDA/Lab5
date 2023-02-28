@@ -15,7 +15,7 @@ public class Movie implements CollectionElement {
     private String name; // Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; // Поле не может быть null
     private ZonedDateTime creationDate; // Поле не может быть null, Значение этого поля должно генерироваться
-                                                  // автоматически
+                                        // автоматически
     private long oscarsCount; // Значение поля должно быть больше 0
     private float budget; // Значение поля должно быть больше 0
     private double totalBoxOffice; // Значение поля должно быть больше 0
@@ -28,7 +28,7 @@ public class Movie implements CollectionElement {
     }
 
     private int genId() {
-        return (int)MovieCollection.getInstance().getId();
+        return (int) MovieCollection.getInstance().getId();
     }
 
     public void setName(String name) throws IllegalArgumentException {
@@ -140,16 +140,20 @@ public class Movie implements CollectionElement {
 
     private <T> T get(Validator<T> validator, Cin scan) {
         String args = null;
-        do {
-            if (Cin.peek().getType() == Cin.Type.STD) {
-                Logger.get().writeLine(validator.getMessage());
+        if (Cin.peek().getType() == Cin.Type.STD) {
+            Logger.get().writeLine(validator.getMessage());
+            args = scan.getScanner().nextLine();
+        } else {
+            if (scan.getScanner().hasNextLine()) {
                 args = scan.getScanner().nextLine();
-            } else {
-                if (scan.getScanner().hasNextLine()) {
-                    args = scan.getScanner().nextLine();
-                }
             }
-        } while (!validator.check(args));
+        }
+        while (!validator.check(args)) {
+            Logger.get().writeLine("Error! uncorrect data");
+            Logger.get().writeLine(validator.getMessage());
+            Cin cin = new Cin(System.in);
+            args = cin.getScanner().nextLine();
+        }
         return validator.getValue();
     }
 

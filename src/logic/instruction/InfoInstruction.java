@@ -4,6 +4,9 @@ import logic.Instruction;
 import models.MovieCollection;
 import io.Logger;
 
+/**
+ * Команда, которая выводит ифнормацию о коллекции
+ */
 public class InfoInstruction implements Instruction {
 
     public InfoInstruction() {

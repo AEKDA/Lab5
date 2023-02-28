@@ -1,5 +1,9 @@
 package models.validators;
 
+
+/**
+ * Класс проверяет верность ввода колличества оскаров
+ */
 public class OscarCountValidator implements Validator<Long> {
     private long val;
 

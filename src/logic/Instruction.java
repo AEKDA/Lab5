@@ -1,5 +1,9 @@
 package logic;
 
+
+/**
+ * Интерфейс, реализующий паттерн Команда
+ */
 public interface Instruction {
 
     public void execute(String[] args) throws IllegalArgumentException;

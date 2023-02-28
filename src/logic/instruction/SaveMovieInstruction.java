@@ -4,13 +4,16 @@ import io.JSONMovieLoaer;
 import logic.Args;
 import logic.Instruction;
 import models.MovieCollection;
-import models.Movie;
 
+
+/**
+ * Команда сохраняет всю коллекцию в файл
+ */
 public class SaveMovieInstruction implements Instruction {
 
     @Override
     public void execute(String[] args) {
-        JSONMovieLoaer<Movie> loader = new JSONMovieLoaer<>();
+        JSONMovieLoaer loader = new JSONMovieLoaer();
         loader.write(Args.getPathToFile(), MovieCollection.getInstance().getData().toArray());
     }
 

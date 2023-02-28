@@ -1,3 +1,4 @@
 *.class
 .vs
 .DS_Store
+docs

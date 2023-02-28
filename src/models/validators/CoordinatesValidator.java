@@ -2,6 +2,10 @@ package models.validators;
 
 import models.Coordinates;
 
+
+/**
+ * Класс проверяет верность ввода Координат
+ */
 public class CoordinatesValidator implements Validator<Coordinates> {
     private Coordinates val;
 

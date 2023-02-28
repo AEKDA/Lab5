@@ -1,5 +1,9 @@
 package models.validators;
 
+
+/**
+ * Класс проверяет верность ввода роста 
+ */
 public class HeightValidator implements Validator<Integer> {
     private Integer val;
 

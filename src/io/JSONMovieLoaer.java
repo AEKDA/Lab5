@@ -12,7 +12,6 @@ import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 
-import logic.CollectionElement;
 import models.Movie;
 
 class GsonLocalDateTime implements JsonSerializer<ZonedDateTime>, JsonDeserializer<ZonedDateTime> {
@@ -31,7 +30,11 @@ class GsonLocalDateTime implements JsonSerializer<ZonedDateTime>, JsonDeserializ
     }
 }
 
-public class JSONMovieLoaer<T extends CollectionElement> implements Loader<T> {
+/**
+ * Класс реализующий загрузку и записать из json файла в коллекцию содержащую
+ * элементы типа{@link models.Movie}
+ */
+public class JSONMovieLoaer implements Loader<Movie> {
     protected Gson gson;
 
     public JSONMovieLoaer() {
@@ -40,9 +43,12 @@ public class JSONMovieLoaer<T extends CollectionElement> implements Loader<T> {
         gson = gsonBuilder.create();
     }
 
-    @SuppressWarnings("all")
+    /**
+     * @param path Путь до json файла
+     * @return Массив элементов типа Movie
+     */
     @Override
-    public T[] read(String path) {
+    public Movie[] read(String path) {
         try {
             FileReader f = new FileReader(path);
             JsonReader jr = gson.newJsonReader(f);
@@ -50,9 +56,9 @@ public class JSONMovieLoaer<T extends CollectionElement> implements Loader<T> {
             if (js == JsonToken.BEGIN_OBJECT) {
                 Object[] o = new Object[1];
                 o[0] = gson.fromJson(jr, Movie.class);
-                return (T[])o;
+                return (Movie[]) o;
             } else if (js == JsonToken.BEGIN_ARRAY) {
-                return (T[]) gson.fromJson(jr, Movie[].class);
+                return (Movie[]) gson.fromJson(jr, Movie[].class);
             }
         } catch (FileNotFoundException e) {
             Logger.get().writeLine(e.getMessage());
@@ -62,6 +68,10 @@ public class JSONMovieLoaer<T extends CollectionElement> implements Loader<T> {
         return null;
     }
 
+    /**
+     * @param path путь до файла
+     * @param array Массив из которого будут взяты элементы типа Movie
+     */
     @Override
     public void write(String path, Object array) {
         try {

@@ -3,6 +3,9 @@ package logic.instruction;
 import logic.Instruction;
 import models.MovieCollection;
 
+/**
+ * Комманда очищает коллекцию
+ */
 public class ClearInstruction implements Instruction {
 
     public ClearInstruction() {

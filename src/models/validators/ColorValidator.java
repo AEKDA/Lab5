@@ -2,6 +2,9 @@ package models.validators;
 
 import models.Color;
 
+/**
+ * Класс проверяет верность ввода {@link models.Color}
+ */
 public class ColorValidator implements Validator<Color> {
     private Color val;
 

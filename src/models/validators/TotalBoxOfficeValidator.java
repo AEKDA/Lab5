@@ -1,5 +1,9 @@
 package models.validators;
 
+
+/**
+ * Класс проверяет верность ввода кассовых сборов
+ */
 public class TotalBoxOfficeValidator implements Validator<Double> {
     private Double val;
 

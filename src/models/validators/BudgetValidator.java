@@ -1,5 +1,8 @@
 package models.validators;
 
+/**
+ * Класс проверяет верность ввода бюджета
+ */
 public class BudgetValidator implements Validator<Float> {
     private float val;
 

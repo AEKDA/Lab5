@@ -1,5 +1,9 @@
 package models.validators;
 
+
+/**
+ * Класс проверяет верность ввода имени
+ */
 public class NameValidator implements Validator<String> {
     private String val;
 

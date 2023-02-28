@@ -2,6 +2,9 @@ package logic;
 
 import java.util.Stack;
 
+/**
+ * Интерфейс, который предоставляет абстрагированные методы для работы с коллекциями
+ */
 public interface CollectionManager<T extends CollectionElement> {
 
     void clear();

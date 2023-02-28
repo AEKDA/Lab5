@@ -7,6 +7,11 @@ import io.Cin;
 
 import logic.Instruction;
 
+/**
+ * Команда добавляющая элемент, если все значение
+ * {@link models.Movie#getTotalBoxOffice()} нового элемента больше значений всех
+ * осталых элементоа, находящихся в коллекции
+ */
 public class Add_if_maxInstruction implements Instruction {
     @Override
     public void execute(String[] args) {
