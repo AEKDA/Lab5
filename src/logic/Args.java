@@ -6,19 +6,25 @@ import java.util.Scanner;
 import io.Logger;
 
 /**
- * 
- * 
+ * Класс содерит аргумент командной строки, которые можно получить из любой
+ * точки в программе
  */
 
 public class Args {
     private static String args[];
     private static String path;
 
+    /**
+     * @param args
+     */
     public static void setArgs(String[] args) {
         Args.args = args;
         check();
     }
 
+    /**
+     * @return String, Возвращает аргументы командной строки
+     */
     public static String[] getArgs() {
         return args;
     }
@@ -47,6 +53,11 @@ public class Args {
 
     }
 
+    /**
+     * 
+     * @return Возвращает путь до файла, в котором хранятся данные о элементах
+     *         коллекции
+     */
     public static String getPathToFile() {
         return path;
     }

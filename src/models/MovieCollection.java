@@ -12,6 +12,9 @@ import io.Loader;
 import io.JSONCollectionInfoLoader;
 import io.JSONMovieLoaer;
 
+/**
+ * Класс, реализующий {@link logic.CollectionManager#CollectionManager}
+ */
 public class MovieCollection implements CollectionManager<Movie> {
     private static MovieCollection instance = null;
     private Stack<Movie> collectionStack;
@@ -56,8 +59,8 @@ public class MovieCollection implements CollectionManager<Movie> {
     }
 
     private void calcId() {
-        for(Movie m : collectionStack) {
-            if(m.getId() > id) {
+        for (Movie m : collectionStack) {
+            if (m.getId() > id) {
                 id = m.getId() + 1;
             }
         }
