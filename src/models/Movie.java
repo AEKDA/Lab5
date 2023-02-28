@@ -14,7 +14,7 @@ public class Movie implements CollectionElement {
                     // уникальным, Значение этого поля должно генерироваться автоматически
     private String name; // Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; // Поле не может быть null
-    private java.time.ZonedDateTime creationDate; // Поле не может быть null, Значение этого поля должно генерироваться
+    private ZonedDateTime creationDate; // Поле не может быть null, Значение этого поля должно генерироваться
                                                   // автоматически
     private long oscarsCount; // Значение поля должно быть больше 0
     private float budget; // Значение поля должно быть больше 0
@@ -24,7 +24,11 @@ public class Movie implements CollectionElement {
 
     {
         creationDate = ZonedDateTime.now();
-        id = hashCode();
+        id = genId();
+    }
+
+    private int genId() {
+        return (int)MovieCollection.getInstance().getId();
     }
 
     public void setName(String name) throws IllegalArgumentException {
@@ -137,11 +141,11 @@ public class Movie implements CollectionElement {
     private <T> T get(Validator<T> validator, Cin scan) {
         String args = null;
         do {
-            Logger.get().writeLine(validator.getMessage());
-            if(Cin.peek().getType() == Cin.Type.STD) {
+            if (Cin.peek().getType() == Cin.Type.STD) {
+                Logger.get().writeLine(validator.getMessage());
                 args = scan.getScanner().nextLine();
             } else {
-                if(scan.getScanner().hasNextLine()) {
+                if (scan.getScanner().hasNextLine()) {
                     args = scan.getScanner().nextLine();
                 }
             }

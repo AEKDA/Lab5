@@ -1,7 +1,6 @@
 package logic;
 
 import java.util.Stack;
-import java.util.Date;
 
 public interface CollectionManager<T extends CollectionElement> {
 
@@ -9,9 +8,13 @@ public interface CollectionManager<T extends CollectionElement> {
 
     Stack<T> getData();
 
-    Date getInitDate();
+    CollectionInfo getInfo();
 
     void setData(T[] movieData);
 
     void pushElement(T t);
+
+    void save();
+
+    int getId();
 }

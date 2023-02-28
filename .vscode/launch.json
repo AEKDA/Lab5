@@ -9,7 +9,7 @@
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}",
-            "args": "beginData/test.json"
+            "args": "data/test.json"
         },
         {
             "type": "java",
@@ -17,7 +17,7 @@
             "request": "launch",
             "mainClass": "Main",
             "projectName": "Lab5_5eaf8eb0",
-            "args": "beginData/test.json"
+            "args": "data/test.json"
         }
     ]
 }

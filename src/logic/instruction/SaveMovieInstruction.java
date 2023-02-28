@@ -1,6 +1,6 @@
 package logic.instruction;
 
-import io.JSONLoaer;
+import io.JSONMovieLoaer;
 import logic.Args;
 import logic.Instruction;
 import models.MovieCollection;
@@ -10,7 +10,7 @@ public class SaveMovieInstruction implements Instruction {
 
     @Override
     public void execute(String[] args) {
-        JSONLoaer<Movie> loader = new JSONLoaer<>();
+        JSONMovieLoaer<Movie> loader = new JSONMovieLoaer<>();
         loader.write(Args.getPathToFile(), MovieCollection.getInstance().getData().toArray());
     }
 
