@@ -1,4 +1,4 @@
-package logic.instruction;
+package instruction;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;

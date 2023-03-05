@@ -1,4 +1,4 @@
-package logic.instruction;
+package instruction;
 
 import models.MovieCollection;
 import models.Movie;

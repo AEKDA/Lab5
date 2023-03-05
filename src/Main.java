@@ -3,7 +3,7 @@ import models.MovieCollection;
 import logic.Args;
 import logic.InstructionFetch;
 import logic.InstructionListener;
-import logic.instruction.*;
+import instruction.*;
 
 public class Main {
     public static void main(String[] args) {

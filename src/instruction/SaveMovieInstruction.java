@@ -1,4 +1,4 @@
-package logic.instruction;
+package instruction;
 
 import io.JSONMovieLoaer;
 import logic.Args;

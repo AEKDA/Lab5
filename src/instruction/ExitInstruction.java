@@ -1,4 +1,4 @@
-package logic.instruction;
+package instruction;
 
 import logic.Instruction;
 import logic.InstructionListener;

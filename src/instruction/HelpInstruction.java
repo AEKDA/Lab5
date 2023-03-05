@@ -1,4 +1,4 @@
-package logic.instruction;
+package instruction;
 
 import java.util.Stack;
 import logic.Instruction;
