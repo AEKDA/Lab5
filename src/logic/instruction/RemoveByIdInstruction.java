@@ -10,7 +10,7 @@ import models.Movie;
 /**
  * Команда удаляет элемент из коллекции, id которого равен заданному
  */
-public class Remove_by_idInstruction implements Instruction {
+public class RemoveByIdInstruction implements Instruction {
 
     @Override
     public void execute(String[] args) throws IllegalArgumentException {

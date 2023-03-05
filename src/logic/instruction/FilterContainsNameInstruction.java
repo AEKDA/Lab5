@@ -9,7 +9,7 @@ import io.Logger;
  * Комманда, которая выводит все элементы, значение поля name которых содержит
  * заданную подстроку
  */
-public class Filter_contains_nameInstruction implements Instruction {
+public class FilterContainsNameInstruction implements Instruction {
 
     @Override
     public void execute(String[] args) throws IllegalArgumentException {

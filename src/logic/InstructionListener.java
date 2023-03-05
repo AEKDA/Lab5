@@ -7,7 +7,6 @@ import io.Cin;
 import io.Logger;
 
 import java.util.Stack;
-import logic.instruction.*;
 
 /**
  * A class that receives instructions from a user or from a file and processes
@@ -21,7 +20,6 @@ public class InstructionListener {
     public InstructionListener() {
         isWork = true;
         instructionStack = new Stack<>();
-        setBaseInstruction();
     }
 
     /**
@@ -81,26 +79,6 @@ public class InstructionListener {
      */
     public void stop() {
         isWork = false;
-    }
-
-    private void setBaseInstruction() {
-        addInstruction(new HelpInstruction(getInstructionStack()))
-                .addInstruction(new ClearInstruction())
-                .addInstruction(new InfoInstruction())
-                .addInstruction(new ShowInstruction())
-                .addInstruction(new AddInstruction())
-                .addInstruction(new UpdateInstruction())
-                .addInstruction(new ExitInstruction(this))
-                .addInstruction(new ShuffleInstruction())
-                .addInstruction(new Average_of_oscars_countInstruction())
-                .addInstruction(new SaveMovieInstruction())
-                .addInstruction(new Remove_by_idInstruction())
-                .addInstruction(new Print_descendingInstruction())
-                .addInstruction(new Execute_scriptInstruction(this))
-                .addInstruction(new Filter_contains_nameInstruction())
-                .addInstruction(new Insert_adInstruction())
-                .addInstruction(new Add_if_maxInstruction());
-
     }
 
     private String[] inputInstructionArgs(Cin in) {

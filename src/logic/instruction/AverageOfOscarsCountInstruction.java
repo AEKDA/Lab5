@@ -9,7 +9,7 @@ import io.Logger;
  * Команда, которая вяводит среднее значение оскаров среди всех элементов,
  * находящихся в коллекции
  */
-public class Average_of_oscars_countInstruction implements Instruction {
+public class AverageOfOscarsCountInstruction implements Instruction {
 
     @Override
     public void execute(String[] args) {

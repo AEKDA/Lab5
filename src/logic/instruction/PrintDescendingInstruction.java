@@ -12,7 +12,7 @@ import io.Logger;
 /**
  * Команда выводит элементы Коллекции в порядке убывания имени
  */
-public class Print_descendingInstruction implements Instruction {
+public class PrintDescendingInstruction implements Instruction {
 
     @SuppressWarnings("all")
     @Override

@@ -2,8 +2,6 @@ package io;
 
 import java.io.FileNotFoundException;
 import java.time.ZonedDateTime;
-import java.lang.reflect.Type;
-import java.time.format.DateTimeFormatter;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,22 +11,6 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 
 import models.Movie;
-
-class GsonLocalDateTime implements JsonSerializer<ZonedDateTime>, JsonDeserializer<ZonedDateTime> {
-
-    @Override
-    public ZonedDateTime deserialize(JsonElement jsonElement, Type type,
-            JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
-        String ldtString = jsonElement.getAsString();
-        return ZonedDateTime.parse(ldtString, DateTimeFormatter.ISO_ZONED_DATE_TIME);
-    }
-
-    @Override
-    public JsonElement serialize(ZonedDateTime localDateTime, Type type,
-            JsonSerializationContext jsonSerializationContext) {
-        return new JsonPrimitive(localDateTime.format(DateTimeFormatter.ISO_ZONED_DATE_TIME));
-    }
-}
 
 /**
  * Класс реализующий загрузку и записать из json файла в коллекцию содержащую

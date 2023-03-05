@@ -9,7 +9,7 @@ import models.Movie;
 /**
  * Команда добавляет элемент в заданную позицию в коллекции
  */
-public class Insert_adInstruction implements Instruction {
+public class InsertAtInstruction implements Instruction {
 
     @Override
     public void execute(String[] args) throws IllegalArgumentException {

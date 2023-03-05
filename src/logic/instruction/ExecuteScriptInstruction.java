@@ -14,11 +14,11 @@ import logic.InstructionListener;
 /**
  * Комманда исполняет скрипт, который был передан ей
  */
-public class Execute_scriptInstruction implements Instruction {
+public class ExecuteScriptInstruction implements Instruction {
     private InstructionListener instructionListener;
     Stack<String> pathStack = new Stack<>();
 
-    public Execute_scriptInstruction(InstructionListener instructionListener) {
+    public ExecuteScriptInstruction(InstructionListener instructionListener) {
         this.instructionListener = instructionListener;
     }
 
