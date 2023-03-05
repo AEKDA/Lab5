@@ -7,7 +7,7 @@ import instruction.*;
 
 public class Main {
     public static void main(String[] args) {
-        Args.setArgs(args);
+        Args.get().setArgs(args);
         MovieCollection.getInstance().setStartData();
         InstructionListener instructionListener = new InstructionListener();
 
@@ -28,10 +28,9 @@ public class Main {
                 .addInstruction(new FilterContainsNameInstruction())
                 .addInstruction(new InsertAtInstruction())
                 .addInstruction(new AddIfMaxInstruction());
-        instructionListener.registerObserver(instructionFetch);
 
+        instructionListener.registerObserver(instructionFetch);
         instructionListener.start(System.in);
-        MovieCollection.getInstance().save();
     }
 
 }

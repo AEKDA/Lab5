@@ -14,7 +14,7 @@ public class SaveMovieInstruction implements Instruction {
     @Override
     public void execute(String[] args) {
         JSONMovieLoaer loader = new JSONMovieLoaer();
-        loader.write(Args.getPathToFile(), MovieCollection.getInstance().getData().toArray());
+        loader.write(Args.get().getPathToFile(), MovieCollection.getInstance().getData().toArray());
     }
 
     @Override

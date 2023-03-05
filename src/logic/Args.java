@@ -11,27 +11,41 @@ import io.Logger;
  */
 
 public class Args {
-    private static String args[];
-    private static String path;
+    private String args[];
+    private String path;
+    private static Args instance = null;
+
+    private Args() {
+        path = new String();
+        args = new String[1];
+    }
+
+    public static Args get() {
+        if(instance == null) {
+            instance = new Args();
+        }
+        return instance;
+    }
 
     /**
      * @param args
      */
-    public static void setArgs(String[] args) {
-        Args.args = args;
+    public void setArgs(String[] args) {
+        this.args = args;
         check();
     }
 
     /**
      * Статический метод Который
+     * 
      * @return Возвращает аргументы командной строки
      */
-    public static String[] getArgs() {
+    public String[] getArgs() {
         return args;
     }
 
     @SuppressWarnings("all")
-    private static void check() {
+    private void check() {
 
         if (getArgs().length != 1) {
             Logger.get().writeLine("Error! You didn't specify the path to the file");
@@ -41,7 +55,7 @@ public class Args {
             args[0] = in.nextLine();
 
         }
-        path = Args.getArgs()[0];
+        path = getArgs()[0];
 
         File f = new File(path);
         while (!f.isFile()) {
@@ -59,7 +73,7 @@ public class Args {
      * @return Возвращает путь до файла, в котором хранятся данные о элементах
      *         коллекции
      */
-    public static String getPathToFile() {
+    public String getPathToFile() {
         return path;
     }
 }

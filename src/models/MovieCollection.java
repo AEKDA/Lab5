@@ -64,7 +64,7 @@ public class MovieCollection implements CollectionManager<Movie> {
      */
     // TODO - fix Args - args need a singleton
     public void setStartData() {
-        String path = Args.getPathToFile();
+        String path = Args.get().getPathToFile();
         Loader<Movie> io = new JSONMovieLoaer();
         Movie[] loadMovies = io.read(path);
         MovieCollection.getInstance().setData(loadMovies);
