@@ -54,7 +54,7 @@ public class JSONValidateDeserializer<T> implements JsonDeserializer<T> {
             throw new JsonParseException("Parse error! The NotNull fields is absent in json for object:" + type);
         }
         GsonBuilder gsonBuilder = new GsonBuilder().setLenient().setPrettyPrinting()
-        .registerTypeAdapter(ZonedDateTime.class, new GsonLocalDateTime());
+                .registerTypeAdapter(ZonedDateTime.class, new GsonLocalDateTime());
         return gsonBuilder.create().fromJson(json, type); // запускаем стандартный механизм обработки GSON
     }
 }

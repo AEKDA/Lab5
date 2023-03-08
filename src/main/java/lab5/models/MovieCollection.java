@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Stack;
 import java.time.ZonedDateTime;
 import java.io.File;
+import java.io.IOException;
 
 import lab5.logic.CollectionManager;
 import lab5.logic.FileManager;
@@ -38,11 +39,18 @@ public class MovieCollection implements CollectionManager<Movie> {
         collectionStack = new Stack<>();
         File file = new File(FileManager.get().getPathToInfo());
         JSONCollectionInfoLoader cl = new JSONCollectionInfoLoader();
-        if (file.exists()) {
+        if (file.isFile() && file.canRead() && file.canWrite()) {
             collectionInfo = cl.read(FileManager.get().getPathToInfo());
-        } else {
+        } else if (!file.isFile()) {
             collectionInfo = new CollectionInfo(ZonedDateTime.from(ZonedDateTime.now()));
-            cl.write(FileManager.get().getPathToInfo(), collectionInfo);
+            try {
+                if (file.getParentFile() != null) {
+                    file.getParentFile().mkdir();
+                }
+                file.createNewFile();
+                cl.write(FileManager.get().getPathToInfo(), collectionInfo);
+            } catch (IOException e) {
+            }
         }
     }
 
