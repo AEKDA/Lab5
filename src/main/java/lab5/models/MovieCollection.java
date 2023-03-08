@@ -6,7 +6,7 @@ import java.time.ZonedDateTime;
 import java.io.File;
 
 import lab5.logic.CollectionManager;
-import lab5.logic.Args;
+import lab5.logic.FileManager;
 import lab5.logic.CollectionInfo;
 import lab5.io.Loader;
 import lab5.io.JSONCollectionInfoLoader;
@@ -36,14 +36,13 @@ public class MovieCollection implements CollectionManager<Movie> {
 
     private MovieCollection() {
         collectionStack = new Stack<>();
-        String path = "data/CollectionInfo.json";
-        File file = new File(path);
+        File file = new File(FileManager.get().getPathToInfo());
         JSONCollectionInfoLoader cl = new JSONCollectionInfoLoader();
         if (file.exists()) {
-            collectionInfo = cl.read(path);
+            collectionInfo = cl.read(FileManager.get().getPathToInfo());
         } else {
             collectionInfo = new CollectionInfo(ZonedDateTime.from(ZonedDateTime.now()));
-            cl.write(path, collectionInfo);
+            cl.write(FileManager.get().getPathToInfo(), collectionInfo);
         }
     }
 
@@ -52,22 +51,22 @@ public class MovieCollection implements CollectionManager<Movie> {
      */
     @Override
     public void save() {
-        String path = "data/CollectionInfo.json";
         JSONCollectionInfoLoader cl = new JSONCollectionInfoLoader();
         collectionInfo = new CollectionInfo(ZonedDateTime.from(ZonedDateTime.now()));
-        cl.write(path, collectionInfo);
+        cl.write(FileManager.get().getPathToInfo(), collectionInfo);
     }
 
     /**
      * Устанавливает данные коллекции из файла, переданного в аргументы командной
      * строки
      */
-    // TODO - fix Args - args need a singleton
     public void setStartData() {
-        String path = Args.get().getPathToFile();
+        String path = FileManager.get().getPathToCollection();
         Loader<Movie> io = new JSONMovieLoaer();
         Movie[] loadMovies = io.read(path);
-        MovieCollection.getInstance().setData(loadMovies);
+        if (loadMovies != null) {
+            MovieCollection.getInstance().setData(loadMovies);
+        }
     }
 
     private void calcId() {
@@ -76,7 +75,6 @@ public class MovieCollection implements CollectionManager<Movie> {
                 id = m.getId() + 1;
             }
         }
-
     }
 
     /**

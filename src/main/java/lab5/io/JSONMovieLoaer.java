@@ -20,8 +20,9 @@ public class JSONMovieLoaer implements Loader<Movie> {
     protected Gson gson;
 
     public JSONMovieLoaer() {
-        GsonBuilder gsonBuilder = new GsonBuilder().setLenient().setPrettyPrinting()
-                .registerTypeAdapter(ZonedDateTime.class, new GsonLocalDateTime());
+        GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting()
+                .registerTypeAdapter(ZonedDateTime.class, new GsonLocalDateTime())
+                .registerTypeAdapter(Movie.class, new JSONValidateDeserializer<Movie>());
         gson = gsonBuilder.create();
     }
 
@@ -36,22 +37,19 @@ public class JSONMovieLoaer implements Loader<Movie> {
             JsonReader jr = gson.newJsonReader(f);
             JsonToken js = jr.peek();
             if (js == JsonToken.BEGIN_OBJECT) {
-                Object[] o = new Object[1];
+                Movie[] o = new Movie[1];
                 o[0] = gson.fromJson(jr, Movie.class);
-                return (Movie[]) o;
+                return o;
             } else if (js == JsonToken.BEGIN_ARRAY) {
                 return (Movie[]) gson.fromJson(jr, Movie[].class);
             }
-        } catch (FileNotFoundException e) {
-            Logger.get().writeLine(e.getMessage());
         } catch (IOException e) {
-            Logger.get().writeLine(e.getMessage());
         }
         return null;
     }
 
     /**
-     * @param path путь до файла
+     * @param path  путь до файла
      * @param array Массив из которого будут взяты элементы типа Movie
      */
     @Override

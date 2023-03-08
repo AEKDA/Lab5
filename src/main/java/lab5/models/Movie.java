@@ -8,18 +8,24 @@ import lab5.io.Logger;
 import lab5.logic.CollectionElement;
 import lab5.models.validators.*;
 import lab5.io.Cin;
+import lab5.annotation.NotNull;
 
 public class Movie implements CollectionElement {
     private int id; // Значение поля должно быть больше 0, Значение этого поля должно быть
                     // уникальным, Значение этого поля должно генерироваться автоматически
+    @NotNull
     private String name; // Поле не может быть null, Строка не может быть пустой
+    @NotNull
     private Coordinates coordinates; // Поле не может быть null
+    @NotNull
     private ZonedDateTime creationDate; // Поле не может быть null, Значение этого поля должно генерироваться
                                         // автоматически
     private long oscarsCount; // Значение поля должно быть больше 0
     private float budget; // Значение поля должно быть больше 0
     private double totalBoxOffice; // Значение поля должно быть больше 0
+    @NotNull
     private MovieGenre genre; // Поле не может быть null
+    @NotNull
     private Person director; // Поле может быть null
 
     {

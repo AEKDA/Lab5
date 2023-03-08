@@ -1,10 +1,12 @@
 package lab5.models;
 
+import lab5.annotation.NotNull;
 
 public class Location {
     private long x;
     private double y;
     private float z;
+    @NotNull
     private String name; //Строка не может быть пустой, Поле не может быть null
 
     public Location() {}

@@ -6,7 +6,11 @@ import java.time.ZonedDateTime;
  * Класс предоставляющий информацию о коллекции
  */
 public class CollectionInfo {
-    private final ZonedDateTime initDate;
+    private ZonedDateTime initDate;
+
+    public CollectionInfo() {
+        this.initDate = ZonedDateTime.now();
+    }
 
     public CollectionInfo(ZonedDateTime date) {
         this.initDate = date;

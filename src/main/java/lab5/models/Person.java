@@ -2,11 +2,18 @@ package lab5.models;
 
 import java.util.Objects;
 
+import lab5.annotation.NotNull;
+
 public class Person {
+    @NotNull
     private String name; //Поле не может быть null, Строка не может быть пустой
+    @NotNull
     private Integer height; //Поле не может быть null, Значение поля должно быть больше 0
+    @NotNull
     private Color eyeColor; //Поле может быть null
+    @NotNull
     private Country nationality; //Поле может быть null
+    @NotNull
     private Location location; //Поле не может быть null
 
     public void setName(String name) throws IllegalArgumentException {

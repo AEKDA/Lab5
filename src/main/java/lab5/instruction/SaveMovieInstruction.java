@@ -1,7 +1,7 @@
 package lab5.instruction;
 
 import lab5.io.JSONMovieLoaer;
-import lab5.logic.Args;
+import lab5.logic.FileManager;
 import lab5.logic.Instruction;
 import lab5.models.MovieCollection;
 
@@ -14,7 +14,7 @@ public class SaveMovieInstruction implements Instruction {
     @Override
     public void execute(String[] args) {
         JSONMovieLoaer loader = new JSONMovieLoaer();
-        loader.write(Args.get().getPathToFile(), MovieCollection.getInstance().getData().toArray());
+        loader.write(FileManager.get().getPathToCollection(), MovieCollection.getInstance().getData().toArray());
     }
 
     @Override
