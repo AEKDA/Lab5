@@ -9,7 +9,7 @@ import java.io.IOException;
 import lab5.logic.CollectionManager;
 import lab5.logic.FileManager;
 import lab5.logic.CollectionInfo;
-import lab5.io.Loader;
+import lab5.io.CollectionLoader;
 import lab5.io.JSONCollectionInfoLoader;
 import lab5.io.JSONMovieLoaer;
 
@@ -70,7 +70,7 @@ public class MovieCollection implements CollectionManager<Movie> {
      */
     public void setStartData() {
         String path = FileManager.get().getPathToCollection();
-        Loader<Movie> io = new JSONMovieLoaer();
+        CollectionLoader<Movie> io = new JSONMovieLoaer();
         Movie[] loadMovies = io.read(path);
         if (loadMovies != null) {
             MovieCollection.getInstance().setData(loadMovies);

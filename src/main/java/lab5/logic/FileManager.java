@@ -27,14 +27,13 @@ public class FileManager {
     }
 
     /**
-     * @param args
+     * Проверка на корректность путя к файлу, если путь не правельный, просит ввести
+     * новый путь вручную
+     * 
+     * @param p путь к файлу
+     * @return возращает корректный путь
      */
-    public void setStandartPathFromArgs(String[] args) {
-        if (args.length != 1) {
-            path = checkInputPath("You didn't specify the path to the file");
-        } else {
-            path = args[0];
-        }
+    public void getAvailablePath() {
         try {
             while (true) {
                 File f = new File(path);
@@ -67,6 +66,18 @@ public class FileManager {
         Logger.get().write("Enter the path to the Collection\n-> ");
         Cin in = new Cin(System.in);
         return in.getScanner().nextLine();
+    }
+
+    /**
+     * @param args
+     */
+    public void setStandartPathFromArgs(String[] args) {
+        if (args.length != 1) {
+            path = checkInputPath("You didn't specify the path to the file");
+        } else {
+            path = args[0];
+        }
+        getAvailablePath();
     }
 
     /**

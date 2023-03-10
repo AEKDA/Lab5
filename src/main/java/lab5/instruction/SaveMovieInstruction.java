@@ -5,7 +5,6 @@ import lab5.logic.FileManager;
 import lab5.logic.Instruction;
 import lab5.models.MovieCollection;
 
-
 /**
  * Команда сохраняет всю коллекцию в файл
  */
@@ -13,6 +12,7 @@ public class SaveMovieInstruction implements Instruction {
 
     @Override
     public void execute(String[] args) {
+        FileManager.get().getAvailablePath();
         JSONMovieLoaer loader = new JSONMovieLoaer();
         loader.write(FileManager.get().getPathToCollection(), MovieCollection.getInstance().getData().toArray());
     }

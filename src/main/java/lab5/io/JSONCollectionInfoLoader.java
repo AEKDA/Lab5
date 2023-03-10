@@ -1,27 +1,27 @@
 package lab5.io;
 
 import java.time.ZonedDateTime;
-import java.io.PrintWriter;
-import java.io.FileReader;
-import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.File;
+
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lab5.logic.CollectionInfo;
-
-import com.google.gson.*;
-import com.google.gson.stream.*;
-
 
 /**
  * Класс, абстрагирующий парсер json'а, с помощью которго можно считать
  * {@link logic.CollectionInfo}
  */
 public class JSONCollectionInfoLoader {
-    private Gson gson;
+    private ObjectMapper objectMapper;
 
     public JSONCollectionInfoLoader() {
-        GsonBuilder gsonBuilder = new GsonBuilder().setLenient().setPrettyPrinting()
-                .registerTypeAdapter(ZonedDateTime.class, new GsonLocalDateTime());
-        gson = gsonBuilder.create();
+        SimpleModule simpleModule = new SimpleModule();
+        simpleModule.addDeserializer(ZonedDateTime.class, new JaksonZonedDateTimeDeserializer());
+        simpleModule.addSerializer(ZonedDateTime.class, new JaksonZonedDateTimeSerializer());
+        objectMapper = new ObjectMapper();
+        objectMapper.registerModule(simpleModule);
     }
 
     /**
@@ -31,27 +31,24 @@ public class JSONCollectionInfoLoader {
      */
     public CollectionInfo read(String path) {
         try {
-            FileReader f = new FileReader(path);
-            JsonReader jr = gson.newJsonReader(f);
-            return gson.fromJson(jr, CollectionInfo.class);
-        } catch (FileNotFoundException e) {
+            return objectMapper.readValue(new File(path), CollectionInfo.class);
+        } catch (IOException e) {
             Logger.get().writeLine(e.getMessage());
         }
         return null;
     }
 
     /**
-     * Метод, который записывает в в файл данные из объекта типа {@link logic.CollectionInfo}
+     * Метод, который записывает в в файл данные из объекта типа
+     * {@link logic.CollectionInfo}
+     * 
      * @param path  путь до файла
      * @param array объект, который будет серриализован
      */
-    public void write(String path, CollectionInfo array) {
+    public void write(String path, CollectionInfo val) {
         try {
-            PrintWriter printWriter = new PrintWriter(path);
-            String json = gson.toJson(array);
-            printWriter.write(json);
-            printWriter.close();
-        } catch (FileNotFoundException e) {
+            objectMapper.writeValue(new File(path), val);
+        } catch (IOException e) {
             Logger.get().writeLine(e.getMessage());
         }
     }

@@ -1,31 +1,29 @@
 package lab5.models;
 
-import java.time.ZonedDateTime;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 import lab5.io.Logger;
 import lab5.logic.CollectionElement;
 import lab5.models.validators.*;
 import lab5.io.Cin;
-import lab5.annotation.NotNull;
 
 public class Movie implements CollectionElement {
+    @JsonIgnore
     private int id; // Значение поля должно быть больше 0, Значение этого поля должно быть
                     // уникальным, Значение этого поля должно генерироваться автоматически
-    @NotNull
     private String name; // Поле не может быть null, Строка не может быть пустой
-    @NotNull
-    private Coordinates coordinates; // Поле не может быть null
-    @NotNull
+    private Coordinates coordinates; // Поле не может быть nulls
     private ZonedDateTime creationDate; // Поле не может быть null, Значение этого поля должно генерироваться
                                         // автоматически
     private long oscarsCount; // Значение поля должно быть больше 0
     private float budget; // Значение поля должно быть больше 0
     private double totalBoxOffice; // Значение поля должно быть больше 0
-    @NotNull
     private MovieGenre genre; // Поле не может быть null
-    @NotNull
     private Person director; // Поле может быть null
 
     {
@@ -37,86 +35,95 @@ public class Movie implements CollectionElement {
         return (int) MovieCollection.getInstance().getId();
     }
 
+    @JsonSetter("name")
     public void setName(String name) throws IllegalArgumentException {
         if (name == null)
             throw new IllegalArgumentException("Error! Name is empty!");
         this.name = name;
     }
 
+    @JsonGetter("name")
     public String getName() {
         return this.name;
     }
 
+    @JsonSetter("coordinates")
     public void setCoordinates(Coordinates coordinates) throws IllegalArgumentException {
         if (coordinates == null)
             throw new IllegalArgumentException("Error! coordinates is empty!");
         this.coordinates = coordinates;
     }
 
+    @JsonGetter("coordinates")
     public Coordinates getCoordinates() {
         return this.coordinates;
     }
 
+    @JsonSetter("oscarsCount")
     public void setOscarCount(long oscarsCount) throws IllegalArgumentException {
         if (oscarsCount < 1)
             throw new IllegalArgumentException("Error! oscar count must be greater than zero");
         this.oscarsCount = oscarsCount;
     }
 
+    @JsonGetter("oscarsCount")
     public long getOscarCount() {
         return this.oscarsCount;
-    }
-
-    public void setId(int id) throws IllegalArgumentException {
-        if (id < 1)
-            throw new IllegalArgumentException("Error! id must be greater than zero");
-        this.id = id;
     }
 
     public int getId() {
         return this.id;
     }
 
+    @JsonGetter("creationDate")
     public java.time.ZonedDateTime getCreationDate() {
         return this.creationDate;
     }
 
+    @JsonSetter("budget")
     public void setBudget(float budget) throws IllegalArgumentException {
         if (budget < 1)
             throw new IllegalArgumentException("Error! budget must be greater than zero");
         this.budget = budget;
     }
 
+    @JsonGetter("budget")
     public float getBudget() {
         return this.budget;
     }
 
+    @JsonSetter("genre")
     public void setMovieGenre(MovieGenre genre) throws IllegalArgumentException {
         if (genre == null)
             throw new IllegalArgumentException("Error! genre must not be a zero value");
         this.genre = genre;
     }
 
+    @JsonGetter("genre")
     public MovieGenre getMovieGenre() {
         return genre;
     }
 
+    @JsonSetter("totalBoxOffice")
     public void setTotalBoxOffice(double totalBoxOffice) throws IllegalArgumentException {
         if (totalBoxOffice < 1)
             throw new IllegalArgumentException("Error! total box office must be greater than zero");
         this.totalBoxOffice = totalBoxOffice;
     }
 
+    @JsonGetter("totalBoxOffice")
     public double getTotalBoxOffice() {
         return this.totalBoxOffice;
     }
 
+    @JsonSetter("director")
     public void setDirector(Person direction) throws IllegalArgumentException {
         if (direction == null)
             throw new IllegalArgumentException("Error! direction must not be a zero value");
         this.director = direction;
     }
 
+    @JsonGetter("director")
     public Person getDirector() {
         return director;
     }
