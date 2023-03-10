@@ -32,7 +32,7 @@ public class JSONMovieLoaer implements CollectionLoader<Movie> {
         try {
             return objectMapper.readValue(new File(path), Movie[].class);
         } catch (IOException e) {
-            Logger.get().writeLine(e.getMessage());
+            Logger.get().writeLine("Указанный Json некорректен");
         }
         return null;
     }

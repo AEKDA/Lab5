@@ -33,7 +33,6 @@ public class JSONCollectionInfoLoader {
         try {
             return objectMapper.readValue(new File(path), CollectionInfo.class);
         } catch (IOException e) {
-            Logger.get().writeLine(e.getMessage());
         }
         return null;
     }
