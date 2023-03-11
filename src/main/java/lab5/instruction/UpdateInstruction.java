@@ -18,12 +18,15 @@ public class UpdateInstruction implements Instruction {
         Movie m = new Movie();
         m.getElement(Cin.peek());
 
-        for (Movie movie : MovieCollection.getInstance().getData()) {
-            if (movie.getId() == Integer.parseInt(args[1])) {
-                movie = m;
+        for (int i = 0; i < MovieCollection.getInstance().getData().size(); i++) {
+            if (MovieCollection.getInstance().getData().get(i).getId() == Integer.parseInt(args[1])) {
+                m.setId(Integer.parseInt(args[1]));
+                MovieCollection.getInstance().getData().set(i, m);
                 break;
             }
         }
+
+
     }
 
     @Override

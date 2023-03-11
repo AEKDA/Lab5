@@ -1,0 +1,47 @@
+[ {
+  "name" : "Wow",
+  "coordinates" : {
+    "x" : 123.0,
+    "y" : 544.0
+  },
+  "creationDate" : "2023-03-10T19:43:51.202503700+03:00[Europe/Moscow]",
+  "budget" : 1235.0,
+  "totalBoxOffice" : 3676534.0,
+  "director" : {
+    "name" : "Name-it's name",
+    "height" : 175,
+    "eyeColor" : "RED",
+    "nationality" : "CHINA",
+    "location" : {
+      "x" : 123,
+      "y" : 645.0,
+      "z" : 234.0,
+      "name" : "RUSSIA"
+    }
+  },
+  "oscarsCount" : 4,
+  "genre" : "DRAMA"
+}, {
+  "name" : "ads",
+  "coordinates" : {
+    "x" : 123.0,
+    "y" : 321.0
+  },
+  "creationDate" : "2023-03-10T19:42:17.896500700+03:00[Europe/Moscow]",
+  "budget" : 213.0,
+  "totalBoxOffice" : 3241.0,
+  "director" : {
+    "name" : "d",
+    "height" : 123,
+    "eyeColor" : "RED",
+    "nationality" : "CHINA",
+    "location" : {
+      "x" : 123,
+      "y" : 321.0,
+      "z" : 132.0,
+      "name" : "R"
+    }
+  },
+  "oscarsCount" : 321,
+  "genre" : "DRAMA"
+} ]

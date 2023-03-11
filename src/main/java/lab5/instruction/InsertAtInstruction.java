@@ -14,7 +14,7 @@ public class InsertAtInstruction implements Instruction {
     @Override
     public void execute(String[] args) throws IllegalArgumentException {
         if (args.length != 2) {
-            throw new IllegalArgumentException("Error! ...");
+            throw new IllegalArgumentException("Error! You didn't enter the index");
         }
         Movie m = new Movie();
         m.getElement(Cin.peek());

@@ -2,7 +2,6 @@ package lab5.models.validators;
 
 import lab5.models.Vector3;
 
-
 /**
  * Класс проверяет верность ввода {@link models.Vector3}
  */
@@ -22,6 +21,9 @@ public class LocationCoordsValidator implements Validator<Vector3> {
             return false;
         }
         String[] input = args.split(" +");
+        if (input.length != 3) {
+            return false;
+        }
         try {
             val.x = (Long.parseLong(input[0]));
             val.y = (Double.parseDouble(input[1]));

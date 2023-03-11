@@ -75,6 +75,10 @@ public class Movie implements CollectionElement {
         return this.id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @JsonGetter("creationDate")
     public java.time.ZonedDateTime getCreationDate() {
         return this.creationDate;

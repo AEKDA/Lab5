@@ -7,6 +7,9 @@ import lab5.io.Logger;
 
 import java.util.LinkedList;
 
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
 /**
  * A class that receives instructions from a user or from a file and processes
  * them by calling the appropriate instructions
@@ -73,17 +76,33 @@ public class InstructionListener implements Observable {
     }
 
     private String[] inputInstructionArgs(Cin in) {
-        String[] input;
         Logger.get().write("-> ");
         String text = in.getScanner().nextLine().strip();
-        input = text.split(" +");
-        return input;
+        return splitArgs(text);
     }
 
     private String[] inputFromFileInstructionArgs(Cin in) {
-        String[] input;
         String text = in.getScanner().nextLine().strip();
-        input = text.split(" +");
-        return input;
+        return splitArgs(text);
     }
+
+    private Pattern pattern = Pattern.compile("(\"[^\"]+\"|[^\\s\"]+)");
+
+    private String[] splitArgs(String input) {
+        Matcher matcher = pattern.matcher(input);
+        LinkedList<String> arr = new LinkedList<>();
+        while (matcher.find()) {
+            String s = matcher.group(1);
+            if (s.startsWith("\"")) {
+                s = s.substring(1);
+            }
+            if (s.endsWith("\"")) {
+                s = s.substring(0, s.length() - 1);
+            }
+            arr.add(s);
+        }
+        String[] array = new String[arr.size()];
+        return arr.toArray(array);
+    }
+
 }

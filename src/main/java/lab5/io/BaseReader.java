@@ -18,15 +18,11 @@ public class BaseReader {
      * @param path путь до файлв
      * @throws FileNotFoundException
      */
-    public BaseReader(String path) throws FileNotFoundException {
+    public BaseReader(String path) throws FileNotFoundException, IOException {
         FileInputStream fileInputStream = new FileInputStream(path);
-        try {
-            length = fileInputStream.available();
-            if (length == 0) {
-                throw new IOException("Файл пуст");
-            }
-        } catch (IOException e) {
-            Logger.get().writeLine(e.getMessage());
+        length = fileInputStream.available();
+        if (length == 0) {
+            throw new IOException("Файл пуст");
         }
         bufferedInputStream = new BufferedInputStream(fileInputStream);
     }

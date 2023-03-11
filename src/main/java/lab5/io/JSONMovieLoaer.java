@@ -3,6 +3,8 @@ package lab5.io;
 import java.io.File;
 import java.time.ZonedDateTime;
 import java.io.IOException;
+
+import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
@@ -30,9 +32,14 @@ public class JSONMovieLoaer implements CollectionLoader<Movie> {
     @Override
     public Movie[] read(String path) {
         try {
+            BaseReader bReader = new BaseReader(path);
+            if (bReader.read().isEmpty()) {
+                return null;
+            }
             return objectMapper.readValue(new File(path), Movie[].class);
-        } catch (IOException e) {
+        } catch (DatabindException e) {
             Logger.get().writeLine("Указанный Json некорректен");
+        } catch (IOException e) {
         }
         return null;
     }

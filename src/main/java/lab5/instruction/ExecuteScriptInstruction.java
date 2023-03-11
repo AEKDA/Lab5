@@ -1,7 +1,7 @@
 package lab5.instruction;
 
 import java.io.ByteArrayInputStream;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Stack;
 
@@ -35,7 +35,7 @@ public class ExecuteScriptInstruction implements Instruction {
             BaseReader br = new BaseReader(args[1]);
             script = br.read();
             instructionListener.start(new ByteArrayInputStream(script.getBytes(StandardCharsets.UTF_8)));
-        } catch (FileNotFoundException | IllegalArgumentException e) {
+        } catch (IOException e) {
             Logger.get().writeLine("Error! File not Found");
         }
         pathStack.pop();

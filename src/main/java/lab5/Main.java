@@ -7,8 +7,6 @@ import lab5.logic.InstructionListener;
 import lab5.instruction.*;
 
 public class Main {
-    // TODO - Запуск с неправильным json файлом
-    // TODO - Сохранение json в файл без доступа
     public static void main(String[] args) {
         FileManager.get().setStandartPathFromArgs(args);
         MovieCollection.getInstance().setStartData();
