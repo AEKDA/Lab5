@@ -3,7 +3,7 @@ package lab5.models.validators;
 import lab5.models.Color;
 
 /**
- * Класс проверяет верность ввода {@link models.Color}
+ * Класс проверяет верность ввода {@link lab5.models.Color}
  */
 public class ColorValidator implements Validator<Color> {
     private Color val;

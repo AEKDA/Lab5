@@ -14,9 +14,9 @@ import lab5.io.JSONCollectionInfoLoader;
 import lab5.io.JSONMovieLoaer;
 
 /**
- * Класс, реализующий интерфейс {@link logic.CollectionManager}
+ * Класс, реализующий интерфейс {@link lab5.logic.CollectionManager}
  * Экземпляр класса может быть только один, к нему можно получить доступ с
- * помощью {@link MovieCollection#getInstance()}
+ * помощью {@link lab5.MovieCollection#getInstance()}
  * 
  */
 public class MovieCollection implements CollectionManager<Movie> {
@@ -26,7 +26,7 @@ public class MovieCollection implements CollectionManager<Movie> {
     private int id = 1;
 
     /**
-     * @return объект класса {@link MovieCollection}
+     * @return объект класса {@link lab5.MovieCollection}
      */
     public static MovieCollection getInstance() {
         if (instance == null) {
@@ -42,7 +42,6 @@ public class MovieCollection implements CollectionManager<Movie> {
         if (file.isFile() && file.canRead() && file.canWrite()) {
             collectionInfo = cl.read(FileManager.get().getPathToInfo());
         } else if (!file.isFile()) {
-            collectionInfo = new CollectionInfo(ZonedDateTime.from(ZonedDateTime.now()));
             try {
                 if (file.getParentFile() != null) {
                     file.getParentFile().mkdir();
@@ -93,10 +92,10 @@ public class MovieCollection implements CollectionManager<Movie> {
     }
 
     /**
-     * Возвращает стек который содержит элементы типа {@link models.Movie}
+     * Возвращает стек который содержит элементы типа {@link lab5.models.Movie}
      * 
-     * @return {@link java.util.Stack}, который содержит элементы типа
-     *         {@link models.Movie}
+     * @return {@link lab5.java.util.Stack}, который содержит элементы типа
+     *         {@link lab5.models.Movie}
      */
     public Stack<Movie> getData() {
         return collectionStack;
@@ -105,7 +104,7 @@ public class MovieCollection implements CollectionManager<Movie> {
     /**
      * Возвращает данные о коллекции
      * 
-     * @return {@link logic.CollectionInfo}
+     * @return {@link lab5.logic.CollectionInfo}
      */
     public CollectionInfo getInfo() {
         return this.collectionInfo;
@@ -114,7 +113,7 @@ public class MovieCollection implements CollectionManager<Movie> {
     /**
      * Добавляет в коллекцию элементы из массива
      * 
-     * @param movieData Массив элементов типа {@link models.Movie}
+     * @param movieData Массив элементов типа {@link lab5.models.Movie}
      */
     public void setData(Movie[] movieData) {
         Collections.addAll(collectionStack, movieData);

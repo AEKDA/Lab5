@@ -11,7 +11,7 @@ import lab5.logic.CollectionInfo;
 
 /**
  * Класс, абстрагирующий парсер json'а, с помощью которго можно считать
- * {@link logic.CollectionInfo}
+ * {@link lab5.logic.CollectionInfo}
  */
 public class JSONCollectionInfoLoader {
     private ObjectMapper objectMapper;
@@ -31,22 +31,28 @@ public class JSONCollectionInfoLoader {
      */
     public CollectionInfo read(String path) {
         try {
-            return objectMapper.readValue(new File(path), CollectionInfo.class);
+            File file = new File(path);
+            if (file.isFile() && file.canRead()) {
+                return objectMapper.readValue(new File(path), CollectionInfo.class);
+            }
         } catch (IOException e) {
         }
-        return null;
+        return new CollectionInfo();
     }
 
     /**
      * Метод, который записывает в в файл данные из объекта типа
-     * {@link logic.CollectionInfo}
+     * {@link lab5.logic.CollectionInfo}
      * 
      * @param path  путь до файла
      * @param array объект, который будет серриализован
      */
     public void write(String path, CollectionInfo val) {
         try {
-            objectMapper.writeValue(new File(path), val);
+            File file = new File(path);
+            if (file.isFile() && file.canWrite()) {
+                objectMapper.writeValue(new File(path), val);
+            }
         } catch (IOException e) {
             Logger.get().writeLine(e.getMessage());
         }

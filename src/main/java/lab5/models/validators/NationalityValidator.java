@@ -4,7 +4,7 @@ import lab5.models.Country;
 
 
 /**
- * Класс проверяет верность ввода {@link models.Country}
+ * Класс проверяет верность ввода {@link lab5.models.Country}
  */
 public class NationalityValidator implements Validator<Country> {
     private Country val;

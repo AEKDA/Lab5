@@ -1,6 +1,6 @@
 package lab5.logic;
 
-import java.util.Stack;
+import java.util.Collection;
 
 /**
  * Интерфейс, который предоставляет абстрагированные методы для работы с коллекциями
@@ -9,7 +9,7 @@ public interface CollectionManager<T extends CollectionElement> {
 
     void clear();
 
-    Stack<T> getData();
+    Collection<T> getData();
 
     CollectionInfo getInfo();
 

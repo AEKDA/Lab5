@@ -9,7 +9,7 @@ import lab5.logic.Instruction;
 
 /**
  * Команда добавляющая элемент, если все значение
- * {@link models.Movie#getTotalBoxOffice()} нового элемента больше значений всех
+ * {@link lab5.models.Movie#getTotalBoxOffice()} нового элемента больше значений всех
  * осталых элементоа, находящихся в коллекции
  */
 public class AddIfMaxInstruction implements Instruction {

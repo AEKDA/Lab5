@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.Stack;
 
 /**
- * Класс, содержащий {@link java.util.Scanner} и {@link Cin.Type}, реализующий
+ * Класс, содержащий {@link lab5.java.util.Scanner} и {@link lab5.io.Cin.Type}, реализующий
  * очередь, с помощью которой можно получать последний созданный экземпляр
  */
 public class Cin {
@@ -14,7 +14,7 @@ public class Cin {
 
     /**
      * @param is создает сканнер с этим источником и устанавливает в зависимости от
-     *           источника {@link Cin.Type}
+     *           источника {@link lab5.io.Cin.Type}
      */
     public Cin(InputStream is) {
         if (is == System.in) {
@@ -60,14 +60,14 @@ public class Cin {
     }
 
     /**
-     * Возвращает последний объект типа {@link Cin} находящий в стеке, но не удаляет
+     * Возвращает последний объект типа {@link lab5.io.Cin} находящий в стеке, но не удаляет
      * его из стека
      */
     public static Cin peek() {
         return cinStack.peek();
     }
     /**
-     * Возвращает последний объект типа {@link Cin} находящий в стеке и удаляет его
+     * Возвращает последний объект типа {@link lab5.io.Cin} находящий в стеке и удаляет его
      * его из стека
      */
     public static Cin pop() {

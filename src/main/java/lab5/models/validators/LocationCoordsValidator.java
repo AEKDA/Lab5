@@ -3,7 +3,7 @@ package lab5.models.validators;
 import lab5.models.Vector3;
 
 /**
- * Класс проверяет верность ввода {@link models.Vector3}
+ * Класс проверяет верность ввода {@link lab5.models.Vector3}
  */
 public class LocationCoordsValidator implements Validator<Vector3> {
     private Vector3 val = new Vector3();

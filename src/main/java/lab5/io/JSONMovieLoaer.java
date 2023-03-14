@@ -12,7 +12,7 @@ import lab5.models.Movie;
 
 /**
  * Класс реализующий загрузку и записать из json файла в коллекцию содержащую
- * элементы типа{@link models.Movie}
+ * элементы типа{@link lab5.models.Movie}
  */
 public class JSONMovieLoaer implements CollectionLoader<Movie> {
     private ObjectMapper objectMapper;

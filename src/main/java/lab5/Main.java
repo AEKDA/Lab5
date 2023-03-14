@@ -32,5 +32,6 @@ public class Main {
 
         instructionListener.registerObserver(instructionFetch);
         instructionListener.start(System.in);
+
     }
 }

@@ -48,7 +48,7 @@ public class InstructionFetch implements Observer {
     }
 
     /**
-     * @return {@link java.util.Stack} containing all instructions
+     * @return {@link lab5.java.util.Stack} containing all instructions
      */
     public Stack<Instruction> getInstructionStack() {
         return instructionStack;

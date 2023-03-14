@@ -4,7 +4,7 @@ import lab5.models.MovieGenre;
 
 
 /**
- * Класс проверяет верность ввода {@link models.MovieGenre}
+ * Класс проверяет верность ввода {@link lab5.models.MovieGenre}
  */
 public class MovieGenreValidator implements Validator<MovieGenre> {
     private MovieGenre val;

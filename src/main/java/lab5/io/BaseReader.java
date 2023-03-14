@@ -7,7 +7,7 @@ import java.io.IOException;
 
 /**
  * Класс, для чтения и записи файлов, реализованный с помощью
- * {@link java.io.BufferedInputStream}
+ * {@link lab5.java.io.BufferedInputStream}
  */
 public class BaseReader {
     private BufferedInputStream bufferedInputStream;
