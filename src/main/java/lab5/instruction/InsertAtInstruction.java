@@ -16,7 +16,13 @@ public class InsertAtInstruction implements Instruction {
         if (args.length != 2) {
             throw new IllegalArgumentException("Error! You didn't enter the index");
         }
-        int at = Integer.parseInt(args[1]);
+        int at;
+        try {
+            at = Integer.parseInt(args[1]);
+        } catch (NumberFormatException e) {
+            Logger.get().writeLine("Некорректный индекс");
+            return;
+        }
         if (at < 1 || at > MovieCollection.getInstance().getData().size()) {
             Logger.get().writeLine("Некорректный индекс");
             return;

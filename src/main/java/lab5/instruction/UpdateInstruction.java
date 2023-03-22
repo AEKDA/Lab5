@@ -20,7 +20,7 @@ public class UpdateInstruction implements Instruction {
         try {
             update_id = Integer.parseInt(args[1]);
         } catch (NumberFormatException e) {
-            Logger.get().writeLine("Не корректный аргумент");
+            Logger.get().writeLine("Некорректный аргумент");
             return;
         }
 

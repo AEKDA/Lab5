@@ -21,7 +21,11 @@ public class RemoveByIdInstruction implements Instruction {
     }
 
     public static boolean test(Movie m) {
-        return m.getId() == Integer.parseInt(id);
+        try {
+            return m.getId() == Integer.parseInt(id);
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     @Override
