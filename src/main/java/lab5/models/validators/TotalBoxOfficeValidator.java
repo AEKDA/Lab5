@@ -19,7 +19,7 @@ public class TotalBoxOfficeValidator implements Validator<Double> {
     }
 
     public String getMessage() {
-        return "Введите кассовые сборы фильма:";
+        return "Введите кассовые сборы фильма (число с плавающей запятой):";
     }
 
     public Double getValue() {

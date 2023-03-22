@@ -13,7 +13,7 @@ public class LocationCoordsValidator implements Validator<Vector3> {
     }
 
     public String getMessage() {
-        return "Введите местоположение съемок в формате x y z";
+        return "Введите местоположение съемок в формате x y z (x: целое, y и z число с плавающей запятой)";
     }
 
     public boolean check(String args) {

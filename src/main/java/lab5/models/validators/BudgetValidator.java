@@ -20,7 +20,7 @@ public class BudgetValidator implements Validator<Float> {
 
     @Override
     public String getMessage() {
-        return "Введите бюджет фильма: ";
+        return "Введите бюджет фильма (число с плавающей запятой): ";
     }
 
     @Override

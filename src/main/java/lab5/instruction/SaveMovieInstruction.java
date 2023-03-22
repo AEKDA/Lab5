@@ -12,9 +12,15 @@ public class SaveMovieInstruction implements Instruction {
 
     @Override
     public void execute(String[] args) {
-        FileManager.get().getAvailablePath();
         JSONMovieLoaer loader = new JSONMovieLoaer();
-        loader.write(FileManager.get().getPathToCollection(), MovieCollection.getInstance().getData().toArray());
+        // String s = FileManager.get().getPath("Collection");
+        // if (s == null) {
+        // if (!FileManager.get().getPath()) {
+        // return;
+        // }
+        // }
+        loader.write(FileManager.get().getPath("Collection").toFile().getPath(),
+                MovieCollection.getInstance().getData().toArray());
     }
 
     @Override

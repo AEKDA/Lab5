@@ -27,6 +27,6 @@ public class OscarCountValidator implements Validator<Long> {
 
     @Override
     public String getMessage() {
-        return "Введите количество оскаров:";
+        return "Введите количество оскаров (целое число):";
     }
 }

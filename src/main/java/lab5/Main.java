@@ -1,15 +1,18 @@
 package lab5;
 
 import lab5.models.MovieCollection;
-import lab5.logic.FileManager;
 import lab5.logic.InstructionFetch;
 import lab5.logic.InstructionListener;
 import lab5.instruction.*;
 
 public class Main {
     public static void main(String[] args) {
-        FileManager.get().setStandartPathFromArgs(args);
-        MovieCollection.getInstance().setStartData();
+        if (args.length == 1) {
+            MovieCollection.getInstance().setStartData(args[1]);
+        } else {
+            MovieCollection.getInstance().setStartData();
+        }
+
         InstructionListener instructionListener = new InstructionListener();
 
         InstructionFetch instructionFetch = new InstructionFetch();

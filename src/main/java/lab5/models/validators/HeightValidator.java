@@ -12,7 +12,7 @@ public class HeightValidator implements Validator<Integer> {
     }
 
     public String getMessage() {
-        return "Введите рост режиссера";
+        return "Введите рост режиссера (целое число):";
     }
 
     public boolean check(String args) {

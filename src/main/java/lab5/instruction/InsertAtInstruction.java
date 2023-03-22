@@ -16,10 +16,15 @@ public class InsertAtInstruction implements Instruction {
         if (args.length != 2) {
             throw new IllegalArgumentException("Error! You didn't enter the index");
         }
+        int at = Integer.parseInt(args[1]);
+        if (at < 1 || at > MovieCollection.getInstance().getData().size()) {
+            Logger.get().writeLine("Некорректный индекс");
+            return;
+        }
         Movie m = new Movie();
         m.getElement(Cin.peek());
         try {
-        MovieCollection.getInstance().getData().insertElementAt(m, Integer.parseInt(args[1]));
+            MovieCollection.getInstance().getData().insertElementAt(m, Integer.parseInt(args[1]));
         } catch (ArrayIndexOutOfBoundsException e) {
             Logger.get().writeLine("Error! this index doesn't exist");
         }

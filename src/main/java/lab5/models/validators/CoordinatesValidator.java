@@ -25,7 +25,7 @@ public class CoordinatesValidator implements Validator<Coordinates> {
 
     @Override
     public String getMessage() {
-        return "Ведите координаты x и y через пробел:";
+        return "Ведите координаты x и y через пробел (x, y числа с плавающей запятой, y <= 777):";
     }
 
     @Override

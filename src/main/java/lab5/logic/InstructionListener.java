@@ -77,12 +77,12 @@ public class InstructionListener implements Observable {
 
     private String[] inputInstructionArgs(Cin in) {
         Logger.get().write("-> ");
-        String text = in.getScanner().nextLine().strip();
+        String text = in.nextLine().strip();
         return splitArgs(text);
     }
 
     private String[] inputFromFileInstructionArgs(Cin in) {
-        String text = in.getScanner().nextLine().strip();
+        String text = in.nextLine().strip();
         return splitArgs(text);
     }
 

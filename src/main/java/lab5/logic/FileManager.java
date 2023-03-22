@@ -1,22 +1,23 @@
 package lab5.logic;
 
-import java.io.File;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.io.IOException;
+import java.util.LinkedHashMap;
 
-import lab5.io.Logger;
-import lab5.io.Cin;
+import lab5.exception.IncorrectPathException;
 
 /**
  * Класс содерит аргумент командной строки, которые можно получить из любой
  * точки программы
  */
-
 public class FileManager {
     private static FileManager instance = null;
-    private String path;
-    private String pathInfo = "data/CollectionInfo.json";
+    private LinkedHashMap<String, Path> pathMap;
 
     private FileManager() {
+        pathMap = new LinkedHashMap<>();
     }
 
     public static FileManager get() {
@@ -33,67 +34,46 @@ public class FileManager {
      * @param p путь к файлу
      * @return возращает корректный путь
      */
-    public void getAvailablePath() {
-        try {
-            while (true) {
-                File f = new File(path);
-                if (f.isFile() && f.canRead() && f.canWrite()) {
-                    break;
-                } else if (f.isDirectory()) {
-                    path = checkInputPath("You have entered a directory");
-                    continue;
-                } else {
-                    try {
-                        f.getParentFile().mkdirs();
-                    } catch (NullPointerException e) {
+    public Path getAvailablePath(String path) throws IncorrectPathException {
+        boolean exist, notExist;
+        Path basePath = Paths.get(path);
+        exist = Files.exists(basePath);
+        notExist = Files.notExists(basePath);
 
-                    }
-                    if (f.createNewFile() && f.canRead() && f.canWrite()) {
-                        break;
-                    } else {
-                        path = checkInputPath("The file cannot be created or used");
-                        continue;
-                    }
-                }
+        if (!exist && !notExist) {
+            throw new IncorrectPathException("Нет доступа к файлу");
+        }
+        if (Files.isDirectory(basePath)) {
+            throw new IncorrectPathException("Вы ввели путь к директории");
+        }
+        if (exist && Files.isRegularFile(basePath)) {
+            boolean canRead = Files.isReadable(basePath);
+            boolean canWrite = Files.isWritable(basePath);
+            if (canRead && canWrite) {
+                return basePath;
+            } else {
+                throw new IncorrectPathException("Нет доступа к файлу");
             }
-        } catch (IOException e) {
-            Logger.get().writeLine(e.getMessage());
         }
-    }
-
-    private String checkInputPath(String errorMessage) {
-        Logger.get().writeLine(errorMessage);
-        Logger.get().write("Enter the path to the Collection\n-> ");
-        Cin in = new Cin(System.in);
-        return in.getScanner().nextLine();
-    }
-
-    /**
-     * @param args
-     */
-    public void setStandartPathFromArgs(String[] args) {
-        if (args.length != 1) {
-            path = checkInputPath("You didn't specify the path to the file");
-        } else {
-            path = args[0];
+        if (notExist) {
+            try {
+                Files.createFile(basePath);
+            } catch (IOException e) {
+                throw new IncorrectPathException("Файл не был создан");
+            }
         }
-        getAvailablePath();
+        return basePath;
     }
 
-    /**
-     * 
-     * @return Возвращает путь до файла, в котором хранятся данные о элементах
-     *         коллекции
-     */
-    public String getPathToCollection() {
-        return path;
+    public void pushPath(String key, String path) throws IncorrectPathException {
+        pathMap.put(key, getAvailablePath(path));
     }
 
-    /**
-     * 
-     * @return Возвращает путь до файла, в котором хранится информация о коллекции
-     */
-    public String getPathToInfo() {
-        return pathInfo;
+    public Path getPath(String key) {
+        return pathMap.get(key);
+    }
+
+    public void removePath(String key) {
+        pathMap.remove(key);
     }
 }

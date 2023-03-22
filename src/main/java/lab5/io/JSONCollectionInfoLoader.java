@@ -31,13 +31,10 @@ public class JSONCollectionInfoLoader {
      */
     public CollectionInfo read(String path) {
         try {
-            File file = new File(path);
-            if (file.isFile() && file.canRead()) {
-                return objectMapper.readValue(new File(path), CollectionInfo.class);
-            }
+            return objectMapper.readValue(new File(path), CollectionInfo.class);
         } catch (IOException e) {
+            return null;
         }
-        return new CollectionInfo();
     }
 
     /**
@@ -49,10 +46,7 @@ public class JSONCollectionInfoLoader {
      */
     public void write(String path, CollectionInfo val) {
         try {
-            File file = new File(path);
-            if (file.isFile() && file.canWrite()) {
-                objectMapper.writeValue(new File(path), val);
-            }
+            objectMapper.writeValue(new File(path), val);
         } catch (IOException e) {
             Logger.get().writeLine(e.getMessage());
         }

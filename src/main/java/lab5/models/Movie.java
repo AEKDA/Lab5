@@ -159,17 +159,19 @@ public class Movie implements CollectionElement {
         String args = null;
         if (Cin.peek().getType() == Cin.Type.STD) {
             Logger.get().writeLine(validator.getMessage());
-            args = scan.getScanner().nextLine();
+            Logger.get().write("->");
+            args = scan.nextLine();
         } else {
             if (scan.getScanner().hasNextLine()) {
-                args = scan.getScanner().nextLine();
+                args = scan.nextLine();
             }
         }
         while (!validator.check(args)) {
             Logger.get().writeLine("Error! uncorrect data");
             Logger.get().writeLine(validator.getMessage());
             Cin cin = new Cin(System.in);
-            args = cin.getScanner().nextLine();
+            Logger.get().write("->");
+            args = cin.nextLine();
         }
         return validator.getValue();
     }

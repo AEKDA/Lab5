@@ -3,21 +3,22 @@ package lab5.models;
 import java.util.Collections;
 import java.util.Stack;
 import java.time.ZonedDateTime;
-import java.io.File;
-import java.io.IOException;
+import java.nio.file.Path;
 
 import lab5.logic.CollectionManager;
 import lab5.logic.FileManager;
 import lab5.logic.CollectionInfo;
+import lab5.exception.IncorrectPathException;
+import lab5.io.Cin;
 import lab5.io.CollectionLoader;
 import lab5.io.JSONCollectionInfoLoader;
 import lab5.io.JSONMovieLoaer;
+import lab5.io.Logger;
 
 /**
  * Класс, реализующий интерфейс {@link lab5.logic.CollectionManager}
  * Экземпляр класса может быть только один, к нему можно получить доступ с
  * помощью {@link lab5.MovieCollection#getInstance()}
- * 
  */
 public class MovieCollection implements CollectionManager<Movie> {
     private static MovieCollection instance = null;
@@ -37,19 +38,18 @@ public class MovieCollection implements CollectionManager<Movie> {
 
     private MovieCollection() {
         collectionStack = new Stack<>();
-        File file = new File(FileManager.get().getPathToInfo());
-        JSONCollectionInfoLoader cl = new JSONCollectionInfoLoader();
-        if (file.isFile() && file.canRead() && file.canWrite()) {
-            collectionInfo = cl.read(FileManager.get().getPathToInfo());
-        } else if (!file.isFile()) {
-            try {
-                if (file.getParentFile() != null) {
-                    file.getParentFile().mkdir();
-                }
-                file.createNewFile();
-                cl.write(FileManager.get().getPathToInfo(), collectionInfo);
-            } catch (IOException e) {
+        try {
+            FileManager.get().pushPath("CollectionInfo", "data/CollectionInfo.json");
+            String pathToInfo = FileManager.get().getPath("CollectionInfo").toFile().getPath();
+            JSONCollectionInfoLoader cl = new JSONCollectionInfoLoader();
+            collectionInfo = cl.read(pathToInfo);
+            if (collectionInfo == null) {
+                cl.write(pathToInfo, new CollectionInfo());
+                this.collectionInfo = new CollectionInfo();
             }
+        } catch (IncorrectPathException e) {
+            Logger.get().writeLine("Файл содержащий информацию о коллекции не может быть прочитан и записан");
+            this.collectionInfo = new CollectionInfo();
         }
     }
 
@@ -60,17 +60,47 @@ public class MovieCollection implements CollectionManager<Movie> {
     public void save() {
         JSONCollectionInfoLoader cl = new JSONCollectionInfoLoader();
         collectionInfo = new CollectionInfo(ZonedDateTime.from(ZonedDateTime.now()));
-        cl.write(FileManager.get().getPathToInfo(), collectionInfo);
+        cl.write(FileManager.get().getPath("CollectionInfo").toFile().getPath(), collectionInfo);
     }
 
     /**
      * Устанавливает данные коллекции из файла, переданного в аргументы командной
      * строки
      */
-    public void setStartData() {
-        String path = FileManager.get().getPathToCollection();
+    public void setStartData(String pathToCollectiion) {
+        try {
+            FileManager.get().pushPath("Collection", pathToCollectiion);
+            Logger.get().writeLine("Файл открыт");
+        } catch (IncorrectPathException e) {
+            Logger.get().writeLine(e.getMessage());
+            return;
+        }
+        Path path = FileManager.get().getPath("Collection");
+        if (path == null) {
+            return;
+        }
         CollectionLoader<Movie> io = new JSONMovieLoaer();
-        Movie[] loadMovies = io.read(path);
+        Movie[] loadMovies = io.read(path.toFile().getPath());
+        if (loadMovies != null) {
+            MovieCollection.getInstance().setData(loadMovies);
+        }
+    }
+
+    public void setStartData() {
+        Cin cin = new Cin(System.in);
+        Logger.get().writeLine("Введите путь к файлу, содержащему коллекцию");
+        String path = cin.nextLine();
+        try {
+            FileManager.get().pushPath("Collection", path);
+            Logger.get().writeLine("Файл открыт");
+        } catch (IncorrectPathException e) {
+            Logger.get().writeLine(e.getMessage());
+        }
+        if (path == null) {
+            return;
+        }
+        CollectionLoader<Movie> io = new JSONMovieLoaer();
+        Movie[] loadMovies = io.read(FileManager.get().getPath("Collection").toFile().getPath());
         if (loadMovies != null) {
             MovieCollection.getInstance().setData(loadMovies);
         }

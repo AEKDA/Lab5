@@ -1,11 +1,13 @@
 package lab5.io;
 
 import java.io.InputStream;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.Stack;
 
 /**
- * Класс, содержащий {@link lab5.java.util.Scanner} и {@link lab5.io.Cin.Type}, реализующий
+ * Класс, содержащий {@link lab5.java.util.Scanner} и {@link lab5.io.Cin.Type},
+ * реализующий
  * очередь, с помощью которой можно получать последний созданный экземпляр
  */
 public class Cin {
@@ -34,6 +36,17 @@ public class Cin {
         return scanner;
     }
 
+    public String nextLine() {
+        try {
+            return scanner.nextLine();
+        } catch (NoSuchElementException e) {
+            if (type == Type.STD) {
+                scanner = new Scanner(System.in);
+            }
+            return "\n";
+        }
+    }
+
     /**
      * Возвращает тип источника
      * 
@@ -60,14 +73,17 @@ public class Cin {
     }
 
     /**
-     * Возвращает последний объект типа {@link lab5.io.Cin} находящий в стеке, но не удаляет
+     * Возвращает последний объект типа {@link lab5.io.Cin} находящий в стеке, но не
+     * удаляет
      * его из стека
      */
     public static Cin peek() {
         return cinStack.peek();
     }
+
     /**
-     * Возвращает последний объект типа {@link lab5.io.Cin} находящий в стеке и удаляет его
+     * Возвращает последний объект типа {@link lab5.io.Cin} находящий в стеке и
+     * удаляет его
      * его из стека
      */
     public static Cin pop() {

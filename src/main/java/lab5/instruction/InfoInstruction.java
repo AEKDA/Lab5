@@ -2,6 +2,7 @@ package lab5.instruction;
 
 import lab5.logic.Instruction;
 import lab5.models.MovieCollection;
+
 import lab5.io.Logger;
 
 /**
