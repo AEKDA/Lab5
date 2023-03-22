@@ -2,4 +2,4 @@ help
 final
 info
 show
-execute_script data/script2.txt
+execute_script scrip3.txt

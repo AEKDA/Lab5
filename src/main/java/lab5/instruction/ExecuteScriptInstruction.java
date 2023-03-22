@@ -3,20 +3,22 @@ package lab5.instruction;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.Path;
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 import lab5.io.BaseReader;
-import lab5.io.Logger;
 import lab5.logic.Instruction;
 import lab5.logic.InstructionListener;
-
 
 /**
  * Комманда исполняет скрипт, который был передан ей
  */
 public class ExecuteScriptInstruction implements Instruction {
     private InstructionListener instructionListener;
-    Stack<String> pathStack = new Stack<>();
+    Stack<Path> recursiveStack = new Stack<>();
 
     public ExecuteScriptInstruction(InstructionListener instructionListener) {
         this.instructionListener = instructionListener;
@@ -24,26 +26,50 @@ public class ExecuteScriptInstruction implements Instruction {
 
     @Override
     public void execute(String[] args) throws IllegalArgumentException {
-        if (args.length != 2)
+        if (args.length != 2) {
             throw new IllegalArgumentException("Error! The arguments are not correct");
+        }
         try {
-            if (!pathCheck(args[1])) {
+            Path path;
+            try {
+                if (!Paths.get(args[1]).isAbsolute()) {
+                    path = Paths.get(recursiveStack.peek().normalize().getParent().toString(), args[1]);
+                } else {
+                    path = Paths.get(args[1]);
+                }
+            } catch (EmptyStackException e) {
+                path = Paths.get(args[1]);
+            }
+            boolean exist = Files.exists(path);
+            boolean notExist = Files.notExists(path);
+            if (!exist && !notExist) {
+                throw new IllegalArgumentException("Нет доступа к файлу");
+            }
+            if (Files.isDirectory(path)) {
+                throw new IllegalArgumentException("Вы ввели путь к директории");
+            }
+            if (!pathCheck(path)) {
                 return;
             }
-            pathStack.push(args[1]);
-            String script;
-            BaseReader br = new BaseReader(args[1]);
-            script = br.read();
-            instructionListener.start(new ByteArrayInputStream(script.getBytes(StandardCharsets.UTF_8)));
+            if (!exist) {
+                throw new IllegalArgumentException("Error! File not Found");
+            }
+            if (exist && Files.isReadable(path)) {
+                String script;
+                BaseReader br = new BaseReader(path.toString());
+                script = br.read();
+                recursiveStack.push(path.toAbsolutePath());
+                instructionListener.start(new ByteArrayInputStream(script.getBytes(StandardCharsets.UTF_8)));
+                recursiveStack.pop();
+            }
         } catch (IOException e) {
-            Logger.get().writeLine("Error! File not Found");
+            throw new IllegalArgumentException("Error! File not Found");
         }
-        pathStack.pop();
     }
 
-    public boolean pathCheck(String path) {
-        for (String string : this.pathStack) {
-            if (string.equals(path)) {
+    public boolean pathCheck(Path path) throws IOException {
+        for (Path string : this.recursiveStack) {
+            if (Files.isSameFile(path, string)) {
                 return false;
             }
         }

@@ -30,10 +30,10 @@ public class UpdateInstruction implements Instruction {
                 m.getElement(Cin.peek());
                 m.setId(update_id);
                 MovieCollection.getInstance().getData().set(i, m);
-                break;
+                return;
             }
         }
-
+        throw new IllegalArgumentException("Элемента в введеным id несуществует");
     }
 
     @Override

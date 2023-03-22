@@ -4,7 +4,6 @@ import java.util.Stack;
 import lab5.exception.IncorrectInstructionException;
 import lab5.io.Logger;
 
-
 /**
  * a class that contains data about instructions and calls them
  */
@@ -17,8 +16,10 @@ public class InstructionFetch implements Observer {
         try {
             Instruction i = getInstruction(args);
             i.execute(args);
-        } catch (IncorrectInstructionException | IllegalArgumentException e) {
+        } catch (IncorrectInstructionException e) {
             Logger.get().writeLine(e.getMessage());
+        } catch (IllegalArgumentException e) {
+            Logger.get().writeLine(args[0] + ": " + e.getMessage());
         }
     }
 
