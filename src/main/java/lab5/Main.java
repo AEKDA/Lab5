@@ -8,7 +8,7 @@ import lab5.instruction.*;
 public class Main {
     public static void main(String[] args) {
         if (args.length == 1) {
-            MovieCollection.getInstance().setStartData(args[1]);
+            MovieCollection.getInstance().setStartData(args[0]);
         } else {
             MovieCollection.getInstance().setStartData();
         }

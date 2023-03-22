@@ -9,6 +9,7 @@ import lab5.logic.CollectionManager;
 import lab5.logic.FileManager;
 import lab5.logic.CollectionInfo;
 import lab5.exception.IncorrectPathException;
+import lab5.exception.KeyNotFoundException;
 import lab5.io.Cin;
 import lab5.io.CollectionLoader;
 import lab5.io.JSONCollectionInfoLoader;
@@ -47,7 +48,7 @@ public class MovieCollection implements CollectionManager<Movie> {
                 cl.write(pathToInfo, new CollectionInfo());
                 this.collectionInfo = new CollectionInfo();
             }
-        } catch (IncorrectPathException e) {
+        } catch (IncorrectPathException | KeyNotFoundException e) {
             Logger.get().writeLine("Файл содержащий информацию о коллекции не может быть прочитан и записан");
             this.collectionInfo = new CollectionInfo();
         }
@@ -60,7 +61,23 @@ public class MovieCollection implements CollectionManager<Movie> {
     public void save() {
         JSONCollectionInfoLoader cl = new JSONCollectionInfoLoader();
         collectionInfo = new CollectionInfo(ZonedDateTime.from(ZonedDateTime.now()));
-        cl.write(FileManager.get().getPath("CollectionInfo").toFile().getPath(), collectionInfo);
+        try {
+            cl.write(FileManager.get().getPath("CollectionInfo").toFile().getPath(), collectionInfo);
+        } catch (KeyNotFoundException e) {
+        }
+    }
+
+    public void getPathToCollection() {
+        Cin cin = new Cin(System.in);
+        Logger.get().writeLine("Введите путь к файлу, содержащему коллекцию");
+        String path = cin.nextLine();
+        try {
+            FileManager.get().pushPath("Collection", path);
+            Logger.get().writeLine("Файл открыт");
+        } catch (IncorrectPathException e) {
+            Logger.get().writeLine(e.getMessage());
+        }
+
     }
 
     /**
@@ -75,34 +92,30 @@ public class MovieCollection implements CollectionManager<Movie> {
             Logger.get().writeLine(e.getMessage());
             return;
         }
-        Path path = FileManager.get().getPath("Collection");
-        if (path == null) {
-            return;
-        }
-        CollectionLoader<Movie> io = new JSONMovieLoaer();
-        Movie[] loadMovies = io.read(path.toFile().getPath());
-        if (loadMovies != null) {
-            MovieCollection.getInstance().setData(loadMovies);
+        try {
+            Path path = FileManager.get().getPath("Collection");
+            if (path == null) {
+                return;
+            }
+            CollectionLoader<Movie> io = new JSONMovieLoaer();
+            Movie[] loadMovies = io.read(path.toFile().getPath());
+            if (loadMovies != null) {
+                MovieCollection.getInstance().setData(loadMovies);
+            }
+        } catch (KeyNotFoundException e) {
         }
     }
 
     public void setStartData() {
-        Cin cin = new Cin(System.in);
-        Logger.get().writeLine("Введите путь к файлу, содержащему коллекцию");
-        String path = cin.nextLine();
-        try {
-            FileManager.get().pushPath("Collection", path);
-            Logger.get().writeLine("Файл открыт");
-        } catch (IncorrectPathException e) {
-            Logger.get().writeLine(e.getMessage());
-        }
-        if (path == null) {
-            return;
-        }
+        getPathToCollection();
         CollectionLoader<Movie> io = new JSONMovieLoaer();
-        Movie[] loadMovies = io.read(FileManager.get().getPath("Collection").toFile().getPath());
-        if (loadMovies != null) {
-            MovieCollection.getInstance().setData(loadMovies);
+        try {
+            Movie[] loadMovies = io.read(FileManager.get().getPath("Collection").toFile().getPath());
+            if (loadMovies != null) {
+                MovieCollection.getInstance().setData(loadMovies);
+            }
+        } catch (KeyNotFoundException e) {
+
         }
     }
 

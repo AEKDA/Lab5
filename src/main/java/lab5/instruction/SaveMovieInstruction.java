@@ -1,5 +1,6 @@
 package lab5.instruction;
 
+import lab5.exception.KeyNotFoundException;
 import lab5.io.JSONMovieLoaer;
 import lab5.logic.FileManager;
 import lab5.logic.Instruction;
@@ -13,14 +14,13 @@ public class SaveMovieInstruction implements Instruction {
     @Override
     public void execute(String[] args) {
         JSONMovieLoaer loader = new JSONMovieLoaer();
-        // String s = FileManager.get().getPath("Collection");
-        // if (s == null) {
-        // if (!FileManager.get().getPath()) {
-        // return;
-        // }
-        // }
-        loader.write(FileManager.get().getPath("Collection").toFile().getPath(),
-                MovieCollection.getInstance().getData().toArray());
+        try {
+            loader.write(FileManager.get().getPath("Collection").toFile().getPath(),
+                    MovieCollection.getInstance().getData().toArray());
+        } catch (KeyNotFoundException e) {
+            MovieCollection.getInstance().getPathToCollection();
+            this.execute(args);
+        }
     }
 
     @Override

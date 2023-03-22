@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 
 import lab5.exception.IncorrectPathException;
+import lab5.exception.KeyNotFoundException;
 
 /**
  * Класс содерит аргумент командной строки, которые можно получить из любой
@@ -57,6 +58,9 @@ public class FileManager {
         }
         if (notExist) {
             try {
+                if (basePath.getParent() != null) {
+                    Files.createDirectories(basePath.getParent());
+                }
                 Files.createFile(basePath);
             } catch (IOException e) {
                 throw new IncorrectPathException("Файл не был создан");
@@ -69,8 +73,12 @@ public class FileManager {
         pathMap.put(key, getAvailablePath(path));
     }
 
-    public Path getPath(String key) {
-        return pathMap.get(key);
+    public Path getPath(String key) throws KeyNotFoundException {
+        Path p = pathMap.get(key);
+        if (p == null) {
+            throw new KeyNotFoundException("Ключ: " + key + " не был найден");
+        }
+        return p;
     }
 
     public void removePath(String key) {
